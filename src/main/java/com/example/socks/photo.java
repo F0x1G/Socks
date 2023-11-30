@@ -34,6 +34,14 @@ public class photo {
         }
     }
 
+    public int getN() {
+        return n;
+    }
+
+    public int getM() {
+        return m;
+    }
+
     public int getRed(int n, int m) {
         return Red[n][m];
     }
