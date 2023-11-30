@@ -20,14 +20,14 @@ public class RGB {
     public void setB(com.example.socks.RGB rgb,int b){
         rgb.b = b;
     }
-    public int getR(com.example.socks.RGB rgb){
-        return rgb.r;
+    public int getR(){
+        return r;
     }
-    public int getG(com.example.socks.RGB rgb){
-        return rgb.g;
+    public int getG(){
+        return g;
     }
-    public int getB(com.example.socks.RGB rgb){
-        return rgb.b;
+    public int getB(){
+        return b;
     }
 
 
