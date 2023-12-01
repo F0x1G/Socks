@@ -1,62 +1,82 @@
 package com.example.socks;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 
 public class photo {
+    private int[][] red;
+    private int[][] green;
+    private int[][] blue;
+    private int n; // висота
+    private int m; // ширина
 
-    public photo(int n, int m){
+    // Конструктор
+    public photo(int n, int m) {
         this.n = n;
         this.m = m;
-        Red = new int[n][m];
-        Green = new int[n][m];
-        Blue = new int[n][m];
+        this.red = new int[n][m];
+        this.green = new int[n][m];
+        this.blue = new int[n][m];
     }
 
-    public photo Photo(BufferedImage image, int n, int m){
-        {
-                photo phot = new photo(n,m);
+    // Методи get і set для Red
+    public int getRed(int i, int j) {
+        return red[i][j];
+    }
 
-                for (int i = 0; i < n; i++) {
-                    for (int j = 0; j < m; j++) {
-                        int rgb = image.getRGB(i, j);
+    public void setRed(int i, int j, int value) {
+        red[i][j] = value;
+    }
 
-                        int red = (rgb >> 16) & 0xFF;
-                        int green = (rgb >> 8) & 0xFF;
-                        int blue = rgb & 0xFF;
+    // Методи get і set для Green
+    public int getGreen(int i, int j) {
+        return green[i][j];
+    }
 
-                        phot.Red[i][j] = red;
-                        phot.Green[i][j] = green;
-                        phot.Blue[i][j] = blue;
-                    }
-                }
-                return phot;
+    public void setGreen(int i, int j, int value) {
+        green[i][j] = value;
+    }
+
+    // Методи get і set для Blue
+    public int getBlue(int i, int j) {
+        return blue[i][j];
+    }
+
+    public void setBlue(int i, int j, int value) {
+        blue[i][j] = value;
+    }
+
+    // Метод для конвертації з BufferedImage в Photo
+    public static photo fromBufferedImage(BufferedImage image) {
+        int height = image.getHeight();
+        int width = image.getWidth();
+        photo photo = new photo(height, width);
+
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                int rgb = image.getRGB(j, i);
+                photo.setRed(i, j, (rgb >> 16) & 0xFF);
+                photo.setGreen(i, j, (rgb >> 8) & 0xFF);
+                photo.setBlue(i, j, rgb & 0xFF);
+            }
         }
+
+        return photo;
     }
 
-    public int getN() {
-        return n;
-    }
+    // Метод для конвертації з Photo в BufferedImage
+    public BufferedImage toBufferedImage() {
+        BufferedImage image = new BufferedImage(m, n, BufferedImage.TYPE_INT_RGB);
 
-    public int getM() {
-        return m;
-    }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                int rgb = new Color(getRed(i,j),getGreen(i,j),getBlue(i,j)).getRGB();
+                image.setRGB(j, i, rgb);
+            }
+        }
 
-    public int getRed(int n, int m) {
-        return Red[n][m];
+        return image;
     }
-    public int getGreen(int n, int m) {
-        return Green[n][m];
-    }
-    public int getBlue(int n, int m) {
-        return Blue[n][m];
-    }
-
-
-    private int [][] Red;
-    private int [][] Green;
-    private int [][] Blue;
-    private int n;
-    private int m;
 }
 
