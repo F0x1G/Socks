@@ -24,14 +24,28 @@ public class photo {
     public int getRed(int i, int j) {
         return red[i][j];
     }
+    public int[][] getRedMatrix() {
+        return red;
+    }
 
     public void setRed(int i, int j, int value) {
         red[i][j] = value;
     }
 
+    public int getN() {
+        return n;
+    }
+
+    public int getM() {
+        return m;
+    }
+
     // Методи get і set для Green
     public int getGreen(int i, int j) {
         return green[i][j];
+    }
+    public int[][] getGreenMatrix() {
+        return green;
     }
 
     public void setGreen(int i, int j, int value) {
@@ -41,6 +55,10 @@ public class photo {
     // Методи get і set для Blue
     public int getBlue(int i, int j) {
         return blue[i][j];
+    }
+
+    public int[][] getBlueMatrix() {
+        return blue;
     }
 
     public void setBlue(int i, int j, int value) {
