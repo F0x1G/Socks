@@ -24,22 +24,18 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) throws IOException {
-        String inputPath = "445.bmp";
-        String outPath = "out.bmp";
-        BufferedImage image = ImageIO.read(new File(inputPath));
-        int n = 200;
-        int m = 400;
-        BufferedImage image1 = PhotoEdit.resize(image, n, m);
+        String inputImagePath = "445.jpg";
+        String outputImagePath = "image.bmp";
 
-        photo phot = photo.fromBufferedImage(image1);
-        Color c1 = new Color(255,255,255);
-        Color c2 = new Color(0,255,128);
-        PhotoEdit.bucket(phot, c1,c2);
-        BufferedImage phottobuf = phot.toBufferedImage();
-        PhotoEdit.saveImage(phottobuf, outPath);
+        try {
+            int originalBitDepth = Converter.getBitDepth(inputImagePath);
+            System.out.println("Original Bit Depth: " + originalBitDepth + " bits");
 
-
-
+            Converter.convertTo16BitBMP(inputImagePath, outputImagePath);
+            System.out.println("Conversion to 16-bit BMP completed successfully.");
+        } catch (IOException e) {
+            System.err.println("Error during conversion: " + e.getMessage());
+        }
         launch();
     }
 }
