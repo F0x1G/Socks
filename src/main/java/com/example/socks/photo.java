@@ -5,9 +5,7 @@ import java.awt.image.BufferedImage;
 
 
 public class photo {
-    private int[][] red;
-    private int[][] green;
-    private int[][] blue;
+    private Color[][] pixels;
     private int n; // висота
     private int m; // ширина
 
@@ -15,21 +13,80 @@ public class photo {
     public photo(int n, int m) {
         this.n = n;
         this.m = m;
-        this.red = new int[n][m];
-        this.green = new int[n][m];
-        this.blue = new int[n][m];
+        this.pixels = new Color[n][m];
+    }
+
+    // Метод get і set для Pixels
+    public Color getPixel(int i, int j) {
+        return pixels[i][j];
+    }
+
+    public Color[][] getPixelMatrix() {
+        return pixels;
+    }
+
+    public void setPixel(int i, int j, Color value) {
+        pixels[i][j] = value;
     }
 
     // Методи get і set для Red
     public int getRed(int i, int j) {
-        return red[i][j];
+        return pixels[i][j].getRed();
     }
+
     public int[][] getRedMatrix() {
-        return red;
+        int[][] redMatrix = new int[n][m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                redMatrix[i][j] = pixels[i][j].getRed();
+            }
+        }
+        return redMatrix;
     }
 
     public void setRed(int i, int j, int value) {
-        red[i][j] = value;
+        Color currentColor = pixels[i][j];
+        pixels[i][j] = new Color(value, currentColor.getGreen(), currentColor.getBlue());
+    }
+
+    // Методи get і set для Green
+    public int getGreen(int i, int j) {
+        return pixels[i][j].getGreen();
+    }
+
+    public int[][] getGreenMatrix() {
+        int[][] greenMatrix = new int[n][m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                greenMatrix[i][j] = pixels[i][j].getGreen();
+            }
+        }
+        return greenMatrix;
+    }
+
+    public void setGreen(int i, int j, int value) {
+        Color currentColor = pixels[i][j];
+        pixels[i][j] = new Color(currentColor.getRed(), value, currentColor.getBlue());
+    }
+
+    // Методи get і set для Blue
+    public int getBlue(int i, int j) {
+        return pixels[i][j].getBlue();
+    }
+
+    public int[][] getBlueMatrix() {
+        int[][] blueMatrix = new int[n][m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                blueMatrix[i][j] = pixels[i][j].getBlue();
+            }
+        }
+        return blueMatrix;
+    }
+
+    public void setBlue(int i, int j, int value) {
+        Color currentColor = pixels[i][j];
+        pixels[i][j] = new Color(currentColor.getRed(), currentColor.getGreen(), value);
     }
 
     public int getN() {
@@ -38,31 +95,6 @@ public class photo {
 
     public int getM() {
         return m;
-    }
-
-    // Методи get і set для Green
-    public int getGreen(int i, int j) {
-        return green[i][j];
-    }
-    public int[][] getGreenMatrix() {
-        return green;
-    }
-
-    public void setGreen(int i, int j, int value) {
-        green[i][j] = value;
-    }
-
-    // Методи get і set для Blue
-    public int getBlue(int i, int j) {
-        return blue[i][j];
-    }
-
-    public int[][] getBlueMatrix() {
-        return blue;
-    }
-
-    public void setBlue(int i, int j, int value) {
-        blue[i][j] = value;
     }
 
     // Метод для конвертації з BufferedImage в Photo
@@ -74,9 +106,7 @@ public class photo {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 int rgb = image.getRGB(j, i);
-                photo.setRed(i, j, (rgb >> 16) & 0xFF);
-                photo.setGreen(i, j, (rgb >> 8) & 0xFF);
-                photo.setBlue(i, j, rgb & 0xFF);
+                photo.setPixel(i, j, new Color((rgb >> 16) & 0xFF, (rgb >> 8) & 0xFF, rgb & 0xFF));
             }
         }
 
@@ -89,7 +119,8 @@ public class photo {
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                int rgb = new Color(getRed(i,j),getGreen(i,j),getBlue(i,j)).getRGB();
+                Color pixel = getPixel(i, j);
+                int rgb = pixel.getRGB();
                 image.setRGB(j, i, rgb);
             }
         }
