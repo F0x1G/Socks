@@ -6,8 +6,8 @@ import java.awt.image.BufferedImage;
 
 public class photo {
     private Color[][] pixels;
-    private int n; // висота
-    private int m; // ширина
+    private int n;
+    private int m;
 
     // Конструктор
     public photo(int n, int m) {
