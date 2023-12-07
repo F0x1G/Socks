@@ -3,6 +3,19 @@ package com.example.socks;
 import java.awt.*;
 
 public class AbstraktSelection {
+
+    public static photo ReplaceColor(photo image){
+        int n = image.getN();
+        int m = image.getM();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                Color thiscolor = image.getPixel(i,j);
+                thiscolor = findClosestColor(thiscolor);
+                image.setPixel(i,j,thiscolor);
+            }
+        }
+        return image;
+    }
     public static Color findClosestColor(Color targetColor) {
         Color[] colorScheme = getColorScheme();
         Color closestColor = null;
@@ -39,17 +52,22 @@ public class AbstraktSelection {
                 new Color(255, 127, 127),
                 new Color(255, 0, 0),
                 new Color(127, 0, 0),
+                new Color(50,30,0),
+                new Color(100,60,0),
+                new Color(255,160,0),
+                new Color(255,255,0),
+                new Color(255,255,127),
                 new Color(127, 255, 127),
                 new Color(0, 255, 0),
                 new Color(0, 127, 0),
+                new Color(0, 127, 127),
+                new Color(0, 255, 255),
                 new Color(127, 127, 255),
                 new Color(0, 0, 255),
                 new Color(0, 0, 127),
-                new Color(255,165,0),
-                new Color(255,255,0),
-                new Color(255,255,127),
                 new Color(138,43,226),
                 new Color(255,100,226),
+                new Color(255, 160, 200),
                 new Color(255,255,255),
                 new Color(127, 127, 127),
                 new Color(0, 0, 0)

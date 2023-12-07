@@ -26,13 +26,21 @@ public class HelloApplication extends Application {
     public static void main(String[] args) throws IOException {
         String inputImagePath = "445.jpg";
         String outputImagePath = "image.bmp";
+        String outputImagePath1 = "out.bmp";
 
         try {
             int originalBitDepth = Converter.getBitDepth(inputImagePath);
             System.out.println("Original Bit Depth: " + originalBitDepth + " bits");
-
             Converter.convertTo16BitBMP(inputImagePath, outputImagePath);
-            System.out.println("Conversion to 16-bit BMP completed successfully.");
+
+            BufferedImage img = ImageIO.read(new File(outputImagePath));
+            img = PhotoEdit.resize(img,200,200);
+
+            photo image = photo.fromBufferedImage(img);
+            AbstraktSelection.ReplaceColor(image);
+            BufferedImage img1 = image.toBufferedImage();
+            PhotoEdit.saveImage(img1,outputImagePath1);
+
         } catch (IOException e) {
             System.err.println("Error during conversion: " + e.getMessage());
         }
