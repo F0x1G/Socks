@@ -24,7 +24,7 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) throws IOException {
-        String inputImagePath = "445.jpg";
+        String inputImagePath = "187071_2D0qx4QWjJ_zelda.jpg";
         String outputImagePath = "image.bmp";
         String outputImagePath1 = "out.bmp";
 
@@ -34,10 +34,11 @@ public class HelloApplication extends Application {
             Converter.convertTo16BitBMP(inputImagePath, outputImagePath);
 
             BufferedImage img = ImageIO.read(new File(outputImagePath));
-            img = PhotoEdit.resize(img,200,200);
+            img = PhotoEdit.resize(img,715,323);
 
             photo image = photo.fromBufferedImage(img);
             AbstraktSelection.ReplaceColor(image);
+            image = AbstraktSelection.EasySimplifier(image);
             BufferedImage img1 = image.toBufferedImage();
             PhotoEdit.saveImage(img1,outputImagePath1);
 

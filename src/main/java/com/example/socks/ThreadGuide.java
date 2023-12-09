@@ -24,10 +24,14 @@ public class ThreadGuide {
     public void setColor(int position, Color color){
         ColorList[position] = color;
     }
-    public int getUsingColor(){
+    public int getIntUsingColor(){
         return usingColor;
     }
     public void setUsingColor(int i){
         usingColor = i;
+    }
+    public Color getUsingColor(){
+        Color img = getColor(usingColor);
+        return img;
     }
 }

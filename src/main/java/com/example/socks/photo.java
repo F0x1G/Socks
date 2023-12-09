@@ -109,7 +109,6 @@ public class photo {
                 photo.setPixel(i, j, new Color((rgb >> 16) & 0xFF, (rgb >> 8) & 0xFF, rgb & 0xFF));
             }
         }
-
         return photo;
     }
 
@@ -124,7 +123,6 @@ public class photo {
                 image.setRGB(j, i, rgb);
             }
         }
-
         return image;
     }
 }
