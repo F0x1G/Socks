@@ -8,6 +8,13 @@ import java.util.Map;
 
 public class AbstraktSelection {
 
+    public static photo main(photo image){
+        image = ReplaceColor(image);
+        image = EasySimplifier(image);
+        return image;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public static photo EasySimplifier(photo image){
         int[][] indexmatrix = convertToColorIndices(image);
         int[][] cout = createElementCountMatrix(indexmatrix);
@@ -323,8 +330,10 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
                 new Color(138,43,226), // 16
                 new Color(255,100,226), // 17
                 new Color(255, 160, 200), // 18
-                new Color(255,255,255), // 19
-                new Color(127, 127, 127), // 20
+                new Color(255,255,255),
+                new Color(190,190,190),// 19
+                new Color(127, 127, 127),// 20
+                new Color(63, 63, 63),
                 new Color(0, 0, 0) // 21
         };
     }

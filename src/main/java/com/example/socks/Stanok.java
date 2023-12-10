@@ -38,5 +38,9 @@ public class Stanok {
     public boolean IsF1Work(){return f1.isWork();}
     public void setF1Work(boolean b){f1.setWork(b);}
     public Color getF1Color(int pos){return f1.getColor(pos);}
+    public photo WorkProces (photo image){
+        int[][] imgMath = AbstraktSelection.convertToColorIndices(image);
+
+    }
 
 }
