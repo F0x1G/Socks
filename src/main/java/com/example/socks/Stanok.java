@@ -1,7 +1,9 @@
 package com.example.socks;
-
-import java.awt.*;
-
+//GitHub\Socks\src\main\java\com\example\socks\Stanok.java:8:13
+//java: cannot find symbol
+//  symbol:   class ThreadGuide
+//  location: class com.example.socks.Stanok
+/*
 public class Stanok {
     private int SizeA = 2;
     private int SizeB = 3;
@@ -44,3 +46,4 @@ public class Stanok {
     }
 
 }
+*/

@@ -41,4 +41,51 @@ public class Converter {
         // Save the 16-bit BMP file
         ImageIO.write(outputImage, "BMP", new File(outputImagePath));
     }
+
+    public static void applyStitchTexture(BufferedImage baseImage, BufferedImage textureImage) {
+        int baseWidth = baseImage.getWidth();
+        int baseHeight = baseImage.getHeight();
+
+        int textureWidth = textureImage.getWidth();
+        int textureHeight = textureImage.getHeight();
+
+        for (int y = 0; y < baseHeight; y++) {
+            for (int x = 0; x < baseWidth; x++) {
+                // Використовуємо залишок від ділення для повторення текстури
+                int textureX = x % textureWidth;
+                int textureY = y % textureHeight;
+
+                if (textureX < textureWidth && textureY < textureHeight) {
+                    int baseColor = baseImage.getRGB(x, y);
+                    int textureColor = textureImage.getRGB(textureX, textureY);
+
+                    // перемноження кольорів
+                    int newColor = multiplyColors(baseColor, textureColor);
+
+                    baseImage.setRGB(x, y, newColor);
+                } else {
+                    // Встановлюємо білий колір для пікселів поза межами текстурного зображення
+                    baseImage.setRGB(x, y, 0xFFFFFFFF);
+                }
+            }
+        }
+    }
+    private static int multiplyColors(int baseColor, int textureColor) {
+        int baseAlpha = (baseColor >> 24) & 0xFF;
+        int baseRed = (baseColor >> 16) & 0xFF;
+        int baseGreen = (baseColor >> 8) & 0xFF;
+        int baseBlue = baseColor & 0xFF;
+
+        int textureAlpha = (textureColor >> 24) & 0xFF;
+        int textureRed = (textureColor >> 16) & 0xFF;
+        int textureGreen = (textureColor >> 8) & 0xFF;
+        int textureBlue = textureColor & 0xFF;
+
+        int newAlpha = (baseAlpha * textureAlpha) / 255;
+        int newRed = (baseRed * textureRed) / 255;
+        int newGreen = (baseGreen * textureGreen) / 255;
+        int newBlue = (baseBlue * textureBlue) / 255;
+
+        return (newAlpha << 24) | (newRed << 16) | (newGreen << 8) | newBlue;
+    }
 }

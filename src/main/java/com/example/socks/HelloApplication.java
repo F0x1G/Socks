@@ -4,12 +4,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-
 import java.io.IOException;
 
 public class HelloApplication extends Application {
@@ -24,9 +22,12 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) throws IOException {
-        String inputImagePath = "Screenshot_98.png";
+        String inputImagePath = "445.jpg";
         String outputImagePath = "image.bmp";
         String outputImagePath1 = "out.bmp";
+
+        String textureImagePath = "StitchTexture.jpg";
+        String outputImagePathStitch = "outStitch.bmp";
 
         try {
             int originalBitDepth = Converter.getBitDepth(inputImagePath);
@@ -42,6 +43,14 @@ public class HelloApplication extends Application {
 
             BufferedImage img1 = image.toBufferedImage();
             PhotoEdit.saveImage(img1,outputImagePath1);
+
+            // Накладання текстури
+            BufferedImage texture = ImageIO.read(new File(textureImagePath));
+            Converter.applyStitchTexture(img, texture);
+
+            // Збереження обробленої фотографії
+            PhotoEdit.saveImage(img, outputImagePathStitch);
+
 
         } catch (IOException e) {
             System.err.println("Error during conversion: " + e.getMessage());
