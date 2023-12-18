@@ -8,16 +8,44 @@ import java.util.Comparator;
 
 public class Stanok {
 
-    public static photo main(photo image,boolean optimathe) {
+    public static int[][] ThisRejim(int rejim){
+        int[][] Sta = new int[6][3];
+        for (int i = 0; i < Sta.length; i++) {
+            for (int j = 0; j < Sta[i].length; j++) {
+                Sta[i][j] = -1;
+            }
+        }
+        Sta[0][2]=-2;
+        Sta[1][2]=-2;
+        Sta[5][2]=-2;
+        Sta[5][1]=-2;
+
+        if (rejim==2){
+            Sta[0][1]=-2;
+            Sta[0][0]=-2;
+        } else if (rejim==3) {
+            Sta[0][1]=-2;
+            Sta[0][0]=-2;
+
+            Sta[1][1]=-2;
+            Sta[1][0]=-2;
+        }
+        return Sta;
+    }
+
+    public static photo main(photo image,boolean optimathe,int rejim) {
         int[][] imageMat = AbstraktSelection.convertToColorIndices(image);
         int m = image.getM();
         int n = image.getN();
+
+        int[][] Sta = ThisRejim(rejim);
+
         if(optimathe){
-            imageMat=MatrixOptimither(imageMat,m,n);
+            imageMat=MatrixOptimither(imageMat,m,n,Sta);
             image = AbstraktSelection.fromIntMatrix(imageMat);
-            image.setStanokScheme(StanokSchemeCheck(imageMat,m,n));
+            image.setStanokScheme(StanokSchemeCheck(imageMat,m,n,Sta));
         }else {
-            imageMat = MatrixCheck(imageMat, m, n);
+            imageMat = MatrixCheck(imageMat, m, n,Sta);
             imageMat = FindContrast(imageMat);
             image = AbstraktSelection.fromIntMatrix(imageMat);
         }
@@ -54,11 +82,11 @@ public class Stanok {
         return sum / array.length;
     }
 
-    public static int[][] MatrixOptimither(int[][] Image, int m,int n){
+    public static int[][] MatrixOptimither(int[][] Image, int m,int n,int[][] Sta){
         boolean selection = false;
         while (selection) {
             selection = contains99(Image);
-            Image = MatrixCheck(Image, m, n);
+            Image = MatrixCheck(Image, m, n,Sta);
             Image = replace99WithLeftElement(Image);
         }
         return Image;
@@ -86,18 +114,8 @@ public class Stanok {
         return matrix;
     }
 
-    public static int[][] MatrixCheck(int[][] StartImg, int m, int n) {
+    public static int[][] MatrixCheck(int[][] StartImg, int m, int n,int[][] Sta) {
         int[][] FinishImg = StartImg;
-        int[][] Sta = new int[6][3];
-        for (int i = 0; i < Sta.length; i++) {
-            for (int j = 0; j < Sta[i].length; j++) {
-                Sta[i][j] = -1;
-            }
-        }
-        Sta[0][2]=-2;
-        Sta[1][2]=-2;
-        Sta[5][2]=-2;
-        Sta[5][1]=-2;
         boolean[] StanokWork = new boolean[6];
         int[] WorkColor = new int[6];
         for (int j = 0; j < WorkColor.length; j++) {
@@ -211,18 +229,9 @@ public class Stanok {
         return FinishImg;
     }
 
-    public static int[][] StanokSchemeCheck(int[][] StartImg, int m, int n) {
+
+    public static int[][] StanokSchemeCheck(int[][] StartImg, int m, int n,int[][] Sta) {
         int[][] FinishImg = StartImg;
-        int[][] Sta = new int[6][3];
-        for (int i = 0; i < Sta.length; i++) {
-            for (int j = 0; j < Sta[i].length; j++) {
-                Sta[i][j] = -1;
-            }
-        }
-        Sta[0][2]=-2;
-        Sta[1][2]=-2;
-        Sta[5][2]=-2;
-        Sta[5][1]=-2;
         boolean[] StanokWork = new boolean[6];
         int[] WorkColor = new int[6];
         for (int j = 0; j < WorkColor.length; j++) {
