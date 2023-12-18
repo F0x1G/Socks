@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 public class photo {
     private Color[][] pixels;
+    private int[][] StanokScheme;
     private int n;
     private int m;
 
@@ -14,7 +15,11 @@ public class photo {
         this.n = n;
         this.m = m;
         this.pixels = new Color[n][m];
+        this.StanokScheme = new int[6][3];
     }
+
+    public int[][] getStanokScheme(){return StanokScheme;}
+    public void setStanokScheme(int[][] StanokSheme){StanokScheme=StanokSheme;}
 
     // Метод get і set для Pixels
     public Color getPixel(int i, int j) {

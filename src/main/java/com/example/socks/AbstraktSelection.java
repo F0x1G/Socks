@@ -19,7 +19,7 @@ public class AbstraktSelection {
         int[][] indexmatrix = convertToColorIndices(image);
         int[][] cout = createElementCountMatrix(indexmatrix);
         double[] percentages = PercentageVisualization(cout);
-        int repid = notOptimal(percentages);
+        int repid = notOptimal(percentages, 2);
         for(int i=0;i<repid;i++){
             cout = createElementCountMatrix(indexmatrix);
             int[] mincout =  rowWithMinSecondElement(cout);
@@ -98,11 +98,11 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
         }
     }
 
-    public static int notOptimal(double[] array) {
+    public static int notOptimal(double[] array,int target) {
         int count = 0;
         // Рахуємо кількість елементів менше 10
         for (double value : array) {
-            if (value < 2) {
+            if (value < target) {
                 count++;
             }
         }return count;

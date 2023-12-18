@@ -41,7 +41,8 @@ public class HelloApplication extends Application {
 
             image = AbstraktSelection.main(image);
 
-            image = Stanok.main(image);
+            image = Stanok.main(image, true);
+            AbstraktSelection.printMatrix(image.getStanokScheme());
 
             BufferedImage img1 = image.toBufferedImage();
             PhotoEdit.saveImage(img1,outputImagePath1);

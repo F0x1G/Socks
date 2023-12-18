@@ -8,13 +8,19 @@ import java.util.Comparator;
 
 public class Stanok {
 
-    public static photo main(photo image) {
+    public static photo main(photo image,boolean optimathe) {
         int[][] imageMat = AbstraktSelection.convertToColorIndices(image);
         int m = image.getM();
         int n = image.getN();
-        imageMat = MatrixCheck(imageMat,m,n);
-        imageMat = FindContrast(imageMat);
-        image = AbstraktSelection.fromIntMatrix(imageMat);
+        if(optimathe){
+            imageMat=MatrixOptimither(imageMat,m,n);
+            image = AbstraktSelection.fromIntMatrix(imageMat);
+            image.setStanokScheme(StanokSchemeCheck(imageMat,m,n));
+        }else {
+            imageMat = MatrixCheck(imageMat, m, n);
+            imageMat = FindContrast(imageMat);
+            image = AbstraktSelection.fromIntMatrix(imageMat);
+        }
 
         return image;
     }
@@ -46,6 +52,38 @@ public class Stanok {
             sum += value;
         }
         return sum / array.length;
+    }
+
+    public static int[][] MatrixOptimither(int[][] Image, int m,int n){
+        boolean selection = false;
+        while (selection) {
+            selection = contains99(Image);
+            Image = MatrixCheck(Image, m, n);
+            Image = replace99WithLeftElement(Image);
+        }
+        return Image;
+    }
+
+
+    public static boolean contains99(int[][] matrix) {
+        for (int[] row : matrix) {
+            for (int value : row) {
+                if (value == 99) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public static int[][] replace99WithLeftElement(int[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 1; j < matrix[i].length; j++) {
+                if (matrix[i][j] == 99) {
+                    matrix[i][j] = matrix[i][j - 1];
+                }
+            }
+        }
+        return matrix;
     }
 
     public static int[][] MatrixCheck(int[][] StartImg, int m, int n) {
@@ -171,6 +209,130 @@ public class Stanok {
         }
         FinishImg = StartImg;
         return FinishImg;
+    }
+
+    public static int[][] StanokSchemeCheck(int[][] StartImg, int m, int n) {
+        int[][] FinishImg = StartImg;
+        int[][] Sta = new int[6][3];
+        for (int i = 0; i < Sta.length; i++) {
+            for (int j = 0; j < Sta[i].length; j++) {
+                Sta[i][j] = -1;
+            }
+        }
+        Sta[0][2]=-2;
+        Sta[1][2]=-2;
+        Sta[5][2]=-2;
+        Sta[5][1]=-2;
+        boolean[] StanokWork = new boolean[6];
+        int[] WorkColor = new int[6];
+        for (int j = 0; j < WorkColor.length; j++) {
+            WorkColor[j] = -1;
+        }
+        Sta[5][0] = backGround(StartImg);
+        for (int i = 0; i < n; i++) {
+
+            for (int q = 0; q < StanokWork.length; q++) {
+                StanokWork[q] = false;
+            }
+
+            for (int j = 0; j < WorkColor.length; j++) {
+                WorkColor[j] = -1;
+            }
+
+            for (int j = 0; j < m; j++) {
+                int s = StartImg[i][j];
+                int[][] kordi = searchMatrix(Sta, s);
+                if (kordi != null) {
+                    int k = kordi.length;
+                    if(k==1){
+                        int g =0;
+                        if(!isNowUsing(s,WorkColor,kordi, g)){
+                            if(WorkColor[kordi[0][0]] == -1){
+                                WorkColor[kordi[0][0]] = Sta[kordi[0][0]][kordi[0][1]];
+                                StanokWork[kordi[0][0]] = true;
+                            }else {
+                                int[] notWork = findFalseIndices(StanokWork);
+                                if (notWork != null) {
+                                    for (int q = 0; q < notWork.length; q++) {
+                                        int[] serchFool = Sta[g];
+                                        if (!isFool(serchFool)) {
+                                            serchFool = replaceElement(serchFool,s);
+                                            Sta[g] = serchFool;
+                                            break;
+                                        }else {
+                                            StartImg[i][j] = 99;
+                                        }
+                                    }
+                                } else {
+                                    StartImg[i][j] = 99;
+                                }
+                            }
+                        }else {
+                            if(!StanokWork[kordi[0][0]]){
+                                StanokWork[kordi[0][0]] = true;
+                            }
+                        }
+                    }else {
+                        boolean stop = false;
+                        for(int y=0;y<kordi.length-1;y++){
+                            if(!isNowUsing(s,WorkColor,kordi, y)){
+                                if(WorkColor[kordi[0][0]] == -1){
+                                    WorkColor[kordi[0][0]] = Sta[kordi[0][0]][kordi[0][1]];
+                                    StanokWork[kordi[0][0]] = true;
+                                    stop = true;
+                                }
+                            }else {
+                                if(!StanokWork[kordi[0][0]]){
+                                    StanokWork[kordi[0][0]] = true;
+                                    stop = true;
+                                }else {
+                                    stop = true;
+                                }
+                            }
+
+                            if(stop){
+                                break;
+                            }
+                        }
+                        if(!stop){
+                            int[] notWork = findFalseIndices(StanokWork);
+                            if (notWork != null) {
+                                for (int g = 0; g < notWork.length; g++) {
+                                    int[] serchFool = Sta[g];
+                                    if (isFool(serchFool)) {
+                                        serchFool = replaceElement(serchFool,s);
+                                        Sta[g] = serchFool;
+                                        break;
+                                    }else {
+                                        StartImg[i][j] = 99;
+                                    }
+                                }
+                            } else {
+                                StartImg[i][j] = 99;
+                            }
+                        }
+
+                    }
+                } else {
+                    int[] notWork = findFalseIndices(StanokWork);
+                    if (notWork != null) {
+                        for (int g = 0; g < notWork.length; g++) {
+                            int[] serchFool = Sta[g];
+                            if (isFool(serchFool)) {
+                                serchFool = replaceElement(serchFool,s);
+                                Sta[g] = serchFool;
+                                break;
+                            }else {
+                                StartImg[i][j] = 99;
+                            }
+                        }
+                    } else {
+                        StartImg[i][j] = 99;
+                    }
+                }
+            }
+        }
+        return Sta;
     }
 
     public static int[] replaceElement(int[] array, int replacementValue){
