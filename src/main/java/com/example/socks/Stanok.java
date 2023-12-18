@@ -1,46 +1,263 @@
 package com.example.socks;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class Stanok {
-    private int SizeA = 2;
-    private int SizeB = 3;
-    private ThreadGuide c1;
-    private ThreadGuide c2;
-    private ThreadGuide c3;
-    private ThreadGuide c4;
-    private ThreadGuide c5;
-    private ThreadGuide f1;
 
-    public Stanok(){
-        this.c1 = new ThreadGuide(SizeA);
-        this.c2 = new ThreadGuide(SizeA);
-        this.c3 = new ThreadGuide(SizeB);
-        this.c4 = new ThreadGuide(SizeB);
-        this.c5 = new ThreadGuide(SizeB);
-        this.f1 = new ThreadGuide(1);
+    public static photo main(photo image) {
+        int[][] imageMat = AbstraktSelection.convertToColorIndices(image);
+        int m = image.getM();
+        int n = image.getN();
+        imageMat = MatrixCheck(imageMat,m,n);
+        imageMat = FindContrast(imageMat);
+        image = AbstraktSelection.fromIntMatrix(imageMat);
+
+        return image;
     }
-    public boolean IsC1Work(){return c1.isWork();}
-    public void setC1Work(boolean b){c1.setWork(b);}
-    public Color getC1Color(int pos){return c1.getColor(pos);}
-    public boolean IsC2Work(){return c2.isWork();}
-    public void setC2Work(boolean b){c2.setWork(b);}
-    public Color getC2Color(int pos){return c2.getColor(pos);}
-    public boolean IsC3Work(){return c3.isWork();}
-    public void setC3Work(boolean b){c3.setWork(b);}
-    public Color getC3Color(int pos){return c3.getColor(pos);}
-    public boolean IsC4Work(){return c4.isWork();}
-    public void setC4Work(boolean b){c4.setWork(b);}
-    public Color getC4Color(int pos){return c4.getColor(pos);}
-    public boolean IsC5Work(){return c5.isWork();}
-    public void setC5Work(boolean b){c5.setWork(b);}
-    public Color getC5Color(int pos){return c5.getColor(pos);}
-    public boolean IsF1Work(){return f1.isWork();}
-    public void setF1Work(boolean b){f1.setWork(b);}
-    public Color getF1Color(int pos){return f1.getColor(pos);}
-    public photo WorkProces (photo image){
-        int[][] imgMath = AbstraktSelection.convertToColorIndices(image);
 
+
+    public static int[][] FindContrast(int[][] imageMat){
+        int[][] cout = AbstraktSelection.createElementCountMatrix(imageMat);
+        Color[] Schema = AbstraktSelection.getColorScheme();
+        Color[] thisSchema = new Color[cout.length];
+        for(int i = 0;i< cout.length;i++){
+                thisSchema[i] = Schema[cout[i][0]];
+        }
+        for(int j=0;j< thisSchema.length-1;j++) {
+            thisSchema[j] = Schema[AbstraktSelection.findMostContrastingColorIndex(thisSchema[j])];
+        }
+        int[] ColorsIndex = new int[thisSchema.length];
+        for(int g =0;g<ColorsIndex.length;g++){
+            ColorsIndex[g]=AbstraktSelection.findColorIndex(thisSchema[g]);
+        }
+        int res = calculateAverage(ColorsIndex);
+        System.out.println("контнрасний колір: "+res);
+        imageMat = AbstraktSelection.replaceValue(imageMat,99,res);
+        return imageMat;
+    }
+
+    public static int calculateAverage(int[] array) {
+        int sum = 0;
+        for (int value : array) {
+            sum += value;
+        }
+        return sum / array.length;
+    }
+
+    public static int[][] MatrixCheck(int[][] StartImg, int m, int n) {
+        int[][] FinishImg = StartImg;
+        int[][] Sta = new int[6][3];
+        for (int i = 0; i < Sta.length; i++) {
+            for (int j = 0; j < Sta[i].length; j++) {
+                Sta[i][j] = -1;
+            }
+        }
+        Sta[0][2]=-2;
+        Sta[1][2]=-2;
+        Sta[5][2]=-2;
+        Sta[5][1]=-2;
+        boolean[] StanokWork = new boolean[6];
+        int[] WorkColor = new int[6];
+        for (int j = 0; j < WorkColor.length; j++) {
+            WorkColor[j] = -1;
+        }
+        Sta[5][0] = backGround(StartImg);
+        for (int i = 0; i < n; i++) {
+
+            for (int q = 0; q < StanokWork.length; q++) {
+                StanokWork[q] = false;
+            }
+
+            for (int j = 0; j < WorkColor.length; j++) {
+                WorkColor[j] = -1;
+            }
+
+            for (int j = 0; j < m; j++) {
+                int s = StartImg[i][j];
+                int[][] kordi = searchMatrix(Sta, s);
+                if (kordi != null) {
+                    int k = kordi.length;
+                    if(k==1){
+                        int g =0;
+                        if(!isNowUsing(s,WorkColor,kordi, g)){
+                            if(WorkColor[kordi[0][0]] == -1){
+                                WorkColor[kordi[0][0]] = Sta[kordi[0][0]][kordi[0][1]];
+                                StanokWork[kordi[0][0]] = true;
+                            }else {
+                                int[] notWork = findFalseIndices(StanokWork);
+                                if (notWork != null) {
+                                    for (int q = 0; q < notWork.length; q++) {
+                                        int[] serchFool = Sta[g];
+                                        if (!isFool(serchFool)) {
+                                            serchFool = replaceElement(serchFool,s);
+                                            Sta[g] = serchFool;
+                                            break;
+                                        }else {
+                                            StartImg[i][j] = 99;
+                                        }
+                                    }
+                                } else {
+                                    StartImg[i][j] = 99;
+                                }
+                            }
+                        }else {
+                            if(!StanokWork[kordi[0][0]]){
+                                StanokWork[kordi[0][0]] = true;
+                            }
+                        }
+                    }else {
+                        boolean stop = false;
+                        for(int y=0;y<kordi.length-1;y++){
+                            if(!isNowUsing(s,WorkColor,kordi, y)){
+                                if(WorkColor[kordi[0][0]] == -1){
+                                    WorkColor[kordi[0][0]] = Sta[kordi[0][0]][kordi[0][1]];
+                                    StanokWork[kordi[0][0]] = true;
+                                    stop = true;
+                                }
+                            }else {
+                                if(!StanokWork[kordi[0][0]]){
+                                    StanokWork[kordi[0][0]] = true;
+                                    stop = true;
+                                }else {
+                                    stop = true;
+                                }
+                            }
+
+                            if(stop){
+                                break;
+                            }
+                        }
+                        if(!stop){
+                            int[] notWork = findFalseIndices(StanokWork);
+                            if (notWork != null) {
+                                for (int g = 0; g < notWork.length; g++) {
+                                    int[] serchFool = Sta[g];
+                                    if (isFool(serchFool)) {
+                                        serchFool = replaceElement(serchFool,s);
+                                        Sta[g] = serchFool;
+                                        break;
+                                    }else {
+                                        StartImg[i][j] = 99;
+                                    }
+                                }
+                            } else {
+                                StartImg[i][j] = 99;
+                            }
+                        }
+
+                    }
+                } else {
+                    int[] notWork = findFalseIndices(StanokWork);
+                    if (notWork != null) {
+                        for (int g = 0; g < notWork.length; g++) {
+                            int[] serchFool = Sta[g];
+                            if (isFool(serchFool)) {
+                                serchFool = replaceElement(serchFool,s);
+                                Sta[g] = serchFool;
+                                break;
+                            }else {
+                                StartImg[i][j] = 99;
+                            }
+                        }
+                    } else {
+                        StartImg[i][j] = 99;
+                    }
+                }
+            }
+        }
+        FinishImg = StartImg;
+        return FinishImg;
+    }
+
+    public static int[] replaceElement(int[] array, int replacementValue){
+        int targetValue = -1;
+        for (int i=0;i<array.length;i++){
+            if(array[i]==targetValue){
+                array[i] = replacementValue;
+                return array;
+            }
+        }
+        return array;
+}
+
+    public static boolean isNowUsing(int s, int[] WorkColor, int[][] kordi, int g){
+        if(s == WorkColor[kordi[g][0]]){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public static boolean isFool(int[] mas){
+        for (int i=0;i< mas.length;i++){
+            if (mas[i]==-1){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static int backGround(int[][] image){
+        int[][] procent = AbstraktSelection.createElementCountMatrix(image);
+        sortMatrixBySecondColumn(procent);
+        AbstraktSelection.printMatrix(procent);
+        int b = procent[procent.length-1][0];
+        return b;
+    }
+
+    public static int[] findFalseIndices(boolean[] array) {
+        List<Integer> falseIndicesList = new ArrayList<>();
+
+        for (int i = 0; i < array.length; i++) {
+            if (!array[i]) {
+                falseIndicesList.add(i);
+            }
+        }
+
+        // Перетворення List в int[]
+        int[] falseIndices = new int[falseIndicesList.size()];
+        for (int i = 0; i < falseIndicesList.size(); i++) {
+            falseIndices[i] = falseIndicesList.get(i);
+        }
+
+        return falseIndices;
+    }
+
+    public static void sortMatrixBySecondColumn(int[][] matrix) {
+        // Використовуємо Comparator для порівняння за значеннями другого стовпця
+        Arrays.sort(matrix, Comparator.comparingInt(arr -> arr[1]));
+    }
+
+    public static int[][] searchMatrix(int[][] matrix, int target) {
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        // Підрахунок кількості елементів, що відповідають умові
+        int count = 0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (matrix[i][j] == target) {
+                    count++;
+                }
+            }
+        }
+        // Створення матриці для зберігання координат
+        int[][] result = new int[count][2];
+
+        // Заповнення матриці координат
+        int index = 0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (matrix[i][j] == target) {
+                    result[index][0] = i;
+                    result[index][1] = j;
+                    index++;
+                }
+            }
+        }
+        return result.length > 0 ? result : null;
     }
 
 }

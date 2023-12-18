@@ -31,16 +31,14 @@ public class AbstraktSelection {
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 public static int[][] createElementCountMatrix(int[][] inputMatrix) {
-    if (inputMatrix == null || inputMatrix.length == 0 || inputMatrix[0].length == 0) {
-        throw new IllegalArgumentException("Invalid input matrix");
-    }
-
     Map<Integer, Integer> elementCountMap = new HashMap<>();
 
-    // Рахуємо кількість повторень для кожного елемента в матриці
+    // Рахуємо кількість повторень для кожного елемента в матриці (ігноруємо елемент 99)
     for (int[] row : inputMatrix) {
         for (int element : row) {
-            elementCountMap.put(element, elementCountMap.getOrDefault(element, 0) + 1);
+            if (element != 99) {
+                elementCountMap.put(element, elementCountMap.getOrDefault(element, 0) + 1);
+            }
         }
     }
 
@@ -54,8 +52,6 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
         resultMatrix[row][1] = entry.getValue();    // Кількість повторень
         row++;
     }
-
-
 
     return resultMatrix;
 }
@@ -225,12 +221,10 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
         int m = photoObject.getM();
         int[][] colorIndices = new int[n][m];
 
-        Color[] colorPalette = getColorScheme();
-
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 Color pixelColor = photoObject.getPixel(i, j);
-                int colorIndex = findColorIndex(pixelColor, colorPalette);
+                int colorIndex = findColorIndex(pixelColor);
                 colorIndices[i][j] = colorIndex;
             }
         }
@@ -238,7 +232,9 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
         return colorIndices;
     }
 
-    private static int findColorIndex(Color targetColor, Color[] colorPalette) {
+    public static int findColorIndex(Color targetColor) {
+        Color[] colorPalette = getColorScheme();
+
         for (int i = 0; i < colorPalette.length; i++) {
             if (targetColor.equals(colorPalette[i])) {
                 return i;
@@ -282,6 +278,23 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
         }
 
         return closestColor;
+    }
+
+    public static int findMostContrastingColorIndex(Color baseColor) {
+        Color[] array = getColorScheme();
+
+        int contrastIndex = 0;
+        double maxContrast = calculateColorDistance(baseColor, array[0]);
+
+        for (int i = 1; i < array.length; i++) {
+            double currentContrast = calculateColorDistance(baseColor, array[i]);
+            if (currentContrast > maxContrast) {
+                maxContrast = currentContrast;
+                contrastIndex = i;
+            }
+        }
+
+        return contrastIndex;
     }
 
     // Метод для обчислення відстані між двома кольорами в просторі RGB

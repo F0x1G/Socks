@@ -24,7 +24,7 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) throws IOException {
-        String inputImagePath = "Screenshot_98.png";
+        String inputImagePath = "445.jpg";
         String outputImagePath = "image.bmp";
         String outputImagePath1 = "out.bmp";
 
@@ -38,7 +38,9 @@ public class HelloApplication extends Application {
 
             photo image = photo.fromBufferedImage(img);
 
-            AbstraktSelection.main(image);
+            image = AbstraktSelection.main(image);
+
+            image = Stanok.main(image);
 
             BufferedImage img1 = image.toBufferedImage();
             PhotoEdit.saveImage(img1,outputImagePath1);
