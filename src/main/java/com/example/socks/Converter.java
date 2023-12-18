@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Converter {
 
@@ -88,4 +90,44 @@ public class Converter {
 
         return (newAlpha << 24) | (newRed << 16) | (newGreen << 8) | newBlue;
     }
+
+    public static photo StanokVision(photo image){
+        int[][] Colors = image.getStanokScheme();
+        Color[][] inStanok = AbstraktSelection.StanokSheme();
+        int[][] CordsColor = getIsExisten(Colors);
+        Color[] Schema = AbstraktSelection.getColorScheme();
+        for(int i=0;i<CordsColor.length;i++){
+            int[] cord = CordsColor[i];
+            int k = Colors[cord[0]][cord[1]];
+            Color color1 = Schema[k];
+            Color color2 = inStanok[cord[0]][cord[1]];
+            PhotoEdit.bucket(image, color1, color2);
+        }
+        return image;
+    }
+
+    public static int[][] getIsExisten(int[][] matrix) {
+        int numRows = matrix.length;
+        int numCols = matrix[0].length;
+
+        // Ліст для збереження координат елементів, які не є -1 або -2
+        List<int[]> nonNegativeCoordinates = new ArrayList<>();
+
+        // Знаходимо координати елементів, які не є -1 або -2
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
+                if (matrix[i][j] != -1 && matrix[i][j] != -2) {
+                    nonNegativeCoordinates.add(new int[]{i, j});
+                }
+            }
+        }
+        // Перетворюємо ліст в матрицю
+        int[][] resultMatrix = new int[nonNegativeCoordinates.size()][2];
+        for (int i = 0; i < nonNegativeCoordinates.size(); i++) {
+            resultMatrix[i] = nonNegativeCoordinates.get(i);
+        }
+
+        return resultMatrix;
+    }
+
 }

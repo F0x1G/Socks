@@ -33,12 +33,13 @@ public class PhotoEdit {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (red[i][j] == targetRed && green[i][j] == targetGreen && blue[i][j] == targetBlue) {
-                    red[i][j] = replacementRed;
-                    green[i][j] = replacementGreen;
-                    blue[i][j] = replacementBlue;
+                    Color repleysColor = new Color(replacementRed,replacementGreen,replacementBlue);
+                    photo.setPixel(i,j,repleysColor);
                 }
             }
         }
+
+
         return photo;
     }
 

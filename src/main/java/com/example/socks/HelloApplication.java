@@ -25,6 +25,7 @@ public class HelloApplication extends Application {
         String inputImagePath = "445.jpg";
         String outputImagePath = "image.bmp";
         String outputImagePath1 = "out.bmp";
+        String saveStanokVision ="StanokOut.bmp";
 
         String textureImagePath = "StitchTexture.jpg";
         String outputImagePathStitch = "outStitch.bmp";
@@ -41,8 +42,16 @@ public class HelloApplication extends Application {
 
             image = AbstraktSelection.main(image);
 
-            image = Stanok.main(image, true,3);
-            AbstraktSelection.printMatrix(image.getStanokScheme());
+            image = Stanok.main(image, true,1);
+
+            photo image1 = photo.fromBufferedImage(img);
+
+            image1.setPhoto(image);
+
+            photo stanokImg = Converter.StanokVision(image1);
+
+            BufferedImage img2 = stanokImg.toBufferedImage();
+            PhotoEdit.saveImage(img2,saveStanokVision);
 
             BufferedImage img1 = image.toBufferedImage();
             PhotoEdit.saveImage(img1,outputImagePath1);

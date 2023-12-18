@@ -2,7 +2,6 @@ package com.example.socks;
 
 import java.awt.*;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -348,6 +347,17 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
                 new Color(127, 127, 127),// 20
                 new Color(63, 63, 63),
                 new Color(0, 0, 0) // 21
+        };
+    }
+
+    public static Color[][] StanokSheme(){
+        return new Color[][]{
+                {new Color(255, 0, 0), new Color(0, 255, 0), new Color(0, 0, 0)},
+                {new Color(0, 0, 255), new Color(255, 255, 0), new Color(0, 0, 0)},
+                {new Color(0, 255, 255), new Color(255, 100, 226), new Color(127, 0, 0)},
+                {new Color(0, 127, 0), new Color(0, 0, 127), new Color(127, 127, 0)},
+                {new Color(0, 127, 127), new Color(127, 50, 113), new Color(127, 127, 127)},
+                {new Color(255, 255, 255), new Color(0, 0, 0), new Color(0, 0, 0)}
         };
     }
 }
