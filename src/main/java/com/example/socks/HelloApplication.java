@@ -48,12 +48,12 @@ public class HelloApplication extends Application {
 
             image1.setPhoto(image);
 
-            photo stanokImg = Converter.StanokVision(image1);
+            photo stanokImg = Converter.StanokVision(image);
 
             BufferedImage img2 = stanokImg.toBufferedImage();
             PhotoEdit.saveImage(img2,saveStanokVision);
 
-            BufferedImage img1 = image.toBufferedImage();
+            BufferedImage img1 = image1.toBufferedImage();
             PhotoEdit.saveImage(img1,outputImagePath1);
 
             // Накладання текстури

@@ -145,12 +145,6 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
     }
 
     public static int[] rowWithMinSecondElement(int[][] matrix) {
-        // Перевірка на null для матриці
-        if (matrix == null || matrix.length == 0 || matrix[0].length != 2) {
-            System.out.println("Некоректна матриця.");
-            return null;
-        }
-
         // Ініціалізація змінних для збереження рядка з найменшим другим елементом та його індексу
         int[] minRow = null;
         int minSecondElement = Integer.MAX_VALUE;

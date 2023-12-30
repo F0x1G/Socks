@@ -69,7 +69,7 @@ public class Stanok {
             ColorsIndex[g]=AbstraktSelection.findColorIndex(thisSchema[g]);
         }
         int res = calculateAverage(ColorsIndex);
-        System.out.println("контнрасний колір: "+res);
+        System.out.println(res);
         imageMat = AbstraktSelection.replaceValue(imageMat,99,res);
         return imageMat;
     }
@@ -148,9 +148,11 @@ public class Stanok {
                                 if (notWork != null) {
                                     for (int q = 0; q < notWork.length; q++) {
                                         int[] serchFool = Sta[g];
-                                        if (!isFool(serchFool)) {
+                                        if (isFool(serchFool)) {
                                             serchFool = replaceElement(serchFool,s);
                                             Sta[g] = serchFool;
+                                            WorkColor[g] = s;
+                                            StanokWork[g] = true;
                                             break;
                                         }else {
                                             StartImg[i][j] = 99;
@@ -167,7 +169,7 @@ public class Stanok {
                         }
                     }else {
                         boolean stop = false;
-                        for(int y=0;y<kordi.length-1;y++){
+                        for(int y=0;y<kordi.length;y++){
                             if(!isNowUsing(s,WorkColor,kordi, y)){
                                 if(WorkColor[kordi[0][0]] == -1){
                                     WorkColor[kordi[0][0]] = Sta[kordi[0][0]][kordi[0][1]];
@@ -177,6 +179,7 @@ public class Stanok {
                             }else {
                                 if(!StanokWork[kordi[0][0]]){
                                     StanokWork[kordi[0][0]] = true;
+                                    WorkColor[kordi[0][0]] = Sta[kordi[0][0]][kordi[0][1]];
                                     stop = true;
                                 }else {
                                     stop = true;
@@ -195,6 +198,8 @@ public class Stanok {
                                     if (isFool(serchFool)) {
                                         serchFool = replaceElement(serchFool,s);
                                         Sta[g] = serchFool;
+                                        WorkColor[g] = s;
+                                        StanokWork[g] = true;
                                         break;
                                     }else {
                                         StartImg[i][j] = 99;
@@ -214,6 +219,8 @@ public class Stanok {
                             if (isFool(serchFool)) {
                                 serchFool = replaceElement(serchFool,s);
                                 Sta[g] = serchFool;
+                                WorkColor[g] = s;
+                                StanokWork[g] = true;
                                 break;
                             }else {
                                 StartImg[i][j] = 99;
@@ -263,10 +270,13 @@ public class Stanok {
                                 int[] notWork = findFalseIndices(StanokWork);
                                 if (notWork != null) {
                                     for (int q = 0; q < notWork.length; q++) {
-                                        int[] serchFool = Sta[g];
-                                        if (!isFool(serchFool)) {
+                                        int u = notWork[g];
+                                        int[] serchFool = Sta[u];
+                                        if (isFool(serchFool)) {
                                             serchFool = replaceElement(serchFool,s);
-                                            Sta[g] = serchFool;
+                                            Sta[u] = serchFool;
+                                            WorkColor[u] = s;
+                                            StanokWork[u] = true;
                                             break;
                                         }else {
                                             StartImg[i][j] = 99;
@@ -283,7 +293,7 @@ public class Stanok {
                         }
                     }else {
                         boolean stop = false;
-                        for(int y=0;y<kordi.length-1;y++){
+                        for(int y=0;y<kordi.length;y++){
                             if(!isNowUsing(s,WorkColor,kordi, y)){
                                 if(WorkColor[kordi[0][0]] == -1){
                                     WorkColor[kordi[0][0]] = Sta[kordi[0][0]][kordi[0][1]];
@@ -307,10 +317,13 @@ public class Stanok {
                             int[] notWork = findFalseIndices(StanokWork);
                             if (notWork != null) {
                                 for (int g = 0; g < notWork.length; g++) {
-                                    int[] serchFool = Sta[g];
+                                    int h = notWork[g];
+                                    int[] serchFool = Sta[h];
                                     if (isFool(serchFool)) {
                                         serchFool = replaceElement(serchFool,s);
-                                        Sta[g] = serchFool;
+                                        Sta[h] = serchFool;
+                                        WorkColor[h] = s;
+                                        StanokWork[h] = true;
                                         break;
                                     }else {
                                         StartImg[i][j] = 99;
@@ -326,10 +339,13 @@ public class Stanok {
                     int[] notWork = findFalseIndices(StanokWork);
                     if (notWork != null) {
                         for (int g = 0; g < notWork.length; g++) {
-                            int[] serchFool = Sta[g];
+                            int k = notWork[g];
+                            int[] serchFool = Sta[k];
                             if (isFool(serchFool)) {
                                 serchFool = replaceElement(serchFool,s);
-                                Sta[g] = serchFool;
+                                Sta[k] = serchFool;
+                                WorkColor[k] = s;
+                                StanokWork[k] = true;
                                 break;
                             }else {
                                 StartImg[i][j] = 99;
@@ -342,6 +358,20 @@ public class Stanok {
             }
         }
         return Sta;
+    }
+
+    public static void printBooleanArray(boolean[] array) {
+        System.out.print("Значення масиву boolean: ");
+        for (boolean value : array) {
+            System.out.print(value + " ");
+        }
+    }
+
+    public static void printIntArray(int[] array) {
+        System.out.print("Значення масиву int: ");
+        for (int value : array) {
+            System.out.print(value + " ");
+        }
     }
 
     public static int[] replaceElement(int[] array, int replacementValue){

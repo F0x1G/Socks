@@ -116,7 +116,7 @@ public class Converter {
         // Знаходимо координати елементів, які не є -1 або -2
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
-                if (matrix[i][j] != -1 && matrix[i][j] != -2) {
+                if (matrix[i][j] > 0) {
                     nonNegativeCoordinates.add(new int[]{i, j});
                 }
             }
