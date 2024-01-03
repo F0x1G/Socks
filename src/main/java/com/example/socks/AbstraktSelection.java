@@ -9,16 +9,16 @@ public class AbstraktSelection {
 
     public static photo main(photo image){
         image = ReplaceColor(image);
-        image = EasySimplifier(image);
+        image = EasySimplifier(image, 2);
         return image;
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public static photo EasySimplifier(photo image){
+    public static photo EasySimplifier(photo image, int target){
         int[][] indexmatrix = convertToColorIndices(image);
         int[][] cout = createElementCountMatrix(indexmatrix);
         double[] percentages = PercentageVisualization(cout);
-        int repid = notOptimal(percentages, 2);
+        int repid = notOptimal(percentages, target);
         for(int i=0;i<repid;i++){
             cout = createElementCountMatrix(indexmatrix);
             int[] mincout =  rowWithMinSecondElement(cout);
@@ -201,8 +201,6 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
                 if (colorIndex >= 0 && colorIndex < colorPalette.length) {
                     photo.setPixel(i, j, colorPalette[colorIndex]);
                 } else {
-                    // Обробка випадку, коли індекс виходить за межі палітри
-                    // Здесь можна встановити якийсь стандартний колір або інші дії за замовчуванням
                     photo.setPixel(i, j, Color.BLACK);
                 }
             }
