@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.HBox?>
-<HBox alignment="BOTTOM_CENTER" spacing="5.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.socks.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-    <Button text="Завантажити" onAction="#"
-</HBox>
+<?import javafx.scene.image.ImageView?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.socks.HelloController">
+    <Button fx:id="Load" text="Select Photos" onAction="#handleButtonClick"/>
+    <Label fx:id="fileNameLabel" text=""/>
+    <ImageView fx:id="imageView"/>
+</VBox>
