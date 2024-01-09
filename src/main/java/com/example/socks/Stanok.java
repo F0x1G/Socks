@@ -34,17 +34,14 @@ public class Stanok {
     }
 
     public static photo main(photo image,boolean optimathe,int rejim) {
-        int[][] imageMat = AbstraktSelection.convertToColorIndices(image);
-        int m = image.getM();
-        int n = image.getN();
-
         int[][] Sta = ThisRejim(rejim);
 
         if(optimathe){
-            imageMat=MatrixOptimither(imageMat,m,n,Sta);
-            image = AbstraktSelection.fromIntMatrix(imageMat);
-            image.setStanokScheme(StanokSchemeCheck(imageMat,m,n,Sta));
+            image = PhotoOptimither(image,Sta);
         }else {
+            int[][] imageMat = AbstraktSelection.convertToColorIndices(image);
+            int m = image.getM();
+            int n = image.getN();
             imageMat = MatrixCheck(imageMat, m, n,Sta);
             imageMat = FindContrast(imageMat);
             image = AbstraktSelection.fromIntMatrix(imageMat);
@@ -81,14 +78,22 @@ public class Stanok {
         return sum / array.length;
     }
 
-    public static int[][] MatrixOptimither(int[][] Image, int m,int n,int[][] Sta){
-        boolean selection = true;
-        while (selection) {
-            selection = contains99(Image);
-            Image = MatrixCheck(Image, m, n,Sta);
-            Image = replace99WithLeftElement(Image);
+    public static photo PhotoOptimither(photo image,int[][] Sta){
+        boolean work = true;
+        int a =2;
+        while (work) {
+            a++;
+            int[][] matImage = AbstraktSelection.convertToColorIndices(image);
+            matImage = MatrixCheck(matImage, matImage.length, matImage[0].length, Sta);
+            if (contains99(matImage)) {
+                image = AbstraktSelection.EasySimplifier(image,a);
+            }else {
+                work = false;
+            }
         }
-        return Image;
+        int[][] matImage = AbstraktSelection.convertToColorIndices(image);
+        image.setStanokScheme(StanokSchemeCheck(matImage, matImage.length, matImage[0].length, Sta));
+        return image;
     }
 
 
@@ -101,16 +106,6 @@ public class Stanok {
             }
         }
         return false;
-    }
-    public static int[][] replace99WithLeftElement(int[][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 1; j < matrix[i].length; j++) {
-                if (matrix[i][j] == 99) {
-                    matrix[i][j] = matrix[i][j - 1];
-                }
-            }
-        }
-        return matrix;
     }
 
     public static int[][] MatrixCheck(int[][] StartImg, int m, int n,int[][] Sta) {
@@ -407,7 +402,6 @@ public class Stanok {
     public static int backGround(int[][] image){
         int[][] procent = AbstraktSelection.createElementCountMatrix(image);
         sortMatrixBySecondColumn(procent);
-        AbstraktSelection.printMatrix(procent);
         int b = procent[procent.length-1][0];
         return b;
     }

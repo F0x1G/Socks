@@ -132,14 +132,11 @@ public class photo {
     }
 
     public void setPhoto(photo otherPhoto) {
-        // Проверка на совпадение размеров
-        if (this.n != otherPhoto.getN() || this.m != otherPhoto.getM()) {
-            throw new IllegalArgumentException("Размеры фото не совпадают");
-        }
 
         // Копирование значений цвета
         for (int i = 0; i < this.n; i++) {
             for (int j = 0; j < this.m; j++) {
+
                 this.setPixel(i, j, otherPhoto.getPixel(i, j));
             }
         }

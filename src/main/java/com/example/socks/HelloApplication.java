@@ -18,7 +18,6 @@ public class HelloApplication extends Application {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
-        System.out.println("ura?");
     }
 
     public static void main(String[] args) throws IOException {
@@ -32,8 +31,11 @@ public class HelloApplication extends Application {
 
         try {
             int originalBitDepth = Converter.getBitDepth(inputImagePath);
+
             System.out.println("Original Bit Depth: " + originalBitDepth + " bits");
             Converter.convertTo16BitBMP(inputImagePath, outputImagePath);//knopka pererobotku
+
+            Converter.convertTo16BitBMP(inputImagePath, outputImagePath);
 
             BufferedImage img = ImageIO.read(new File(outputImagePath));//dlya zagryzku
             img = PhotoEdit.resize(img,200,200);//2 text field
