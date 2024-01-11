@@ -8,9 +8,27 @@ import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
+
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
-import javax.swing.*;
+import javafx.application.Application;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class HelloController {
     @FXML
@@ -25,6 +43,78 @@ public class HelloController {
         openFileChooser();
     }
 
+    @FXML
+    private TextField LabelM;
+    @FXML
+    private TextField LabelN;
+    @FXML
+    private void onStartClick(ActionEvent event){
+
+    }
+    @FXML
+    private  void onRes30Click(ActionEvent event){
+        Image image = imageView.getImage();
+        BufferedImage img = SwingFXUtils.fromFXImage(image,null);
+        try {
+            int m = Integer.parseInt(LabelM.getText());
+            int n = Integer.parseInt(LabelN.getText());
+            double con =1.3;
+            m= (int) (m*con);
+            img = PhotoEdit.resize(img,n,m);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        Image newImage = SwingFXUtils.toFXImage(img,null);
+        imageView.setImage(newImage);
+
+        int width = (int) imageView.getImage().getWidth();
+        int height = (int) imageView.getImage().getHeight();
+
+        LabelM.setText(String.valueOf(width));
+        LabelN.setText(String.valueOf(height));
+    }
+    @FXML
+    private  void onRes60Click(ActionEvent event){
+        Image image = imageView.getImage();
+        BufferedImage img = SwingFXUtils.fromFXImage(image,null);
+        try {
+            int m = Integer.parseInt(LabelM.getText());
+            int n = Integer.parseInt(LabelN.getText());
+            double con =1.6;
+            m= (int) (m*con);
+            img = PhotoEdit.resize(img,n,m);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        Image newImage = SwingFXUtils.toFXImage(img,null);
+        imageView.setImage(newImage);
+
+        int width = (int) imageView.getImage().getWidth();
+        int height = (int) imageView.getImage().getHeight();
+
+        LabelM.setText(String.valueOf(width));
+        LabelN.setText(String.valueOf(height));
+    }
+    @FXML
+    private void onResClick(ActionEvent event){
+        Image image = imageView.getImage();
+        BufferedImage img = SwingFXUtils.fromFXImage(image,null);
+        try {
+            int n = Integer.parseInt(LabelM.getText());
+            int m = Integer.parseInt(LabelN.getText());
+            img = PhotoEdit.resize(img,n,m);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        Image newImage = SwingFXUtils.toFXImage(img,null);
+        imageView.setImage(newImage);
+
+        int width = (int) imageView.getImage().getWidth();
+        int height = (int) imageView.getImage().getHeight();
+
+        LabelM.setText(String.valueOf(width));
+        LabelN.setText(String.valueOf(height));
+    }
     private void openFileChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Photos");
@@ -51,7 +141,8 @@ public class HelloController {
                     // Get and display image dimensions
                     int width = photoLoader.getImageWidth();
                     int height = photoLoader.getImageHeight();
-                    System.out.println("Image Dimensions: " + width + "x" + height);
+                    LabelM.setText(String.valueOf(width));
+                    LabelN.setText(String.valueOf(height));
                 } else {
                     // Handle photo loading error
                     System.out.println("Error loading photo.");

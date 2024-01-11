@@ -5,8 +5,17 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.TextField?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.socks.HelloController">
     <Button fx:id="Load" text="Select Photos" onAction="#handleButtonClick"/>
     <Label fx:id="fileNameLabel" text=""/>
     <ImageView fx:id="imageView"/>
+    <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick"/>
+    <TextField fx:id="LabelM" text="Висота"/>
+    <TextField fx:id="LabelN" text="Висота"/>
+    <Button fx:id="Resithe13" text="збільшити на 30%" onAction="#onRes30Click"/>
+    <Button fx:id="Resithe16" text="збільшити на 60%" onAction="#onRes60Click"/>
+    <Button fx:id="ResitheCastom" text="Змінити за заданими значеннями" onAction="#onResClick"/>
+
 </VBox>

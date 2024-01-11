@@ -7,7 +7,7 @@ import java.io.File;
 
 public class Save {
 
-    public void chooseSaveDirectory() {
+   /* public void chooseSaveDirectory() {
         // Create a DirectoryChooser
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Choose Save Directory");
@@ -34,5 +34,5 @@ public class Save {
             // Directory selection was canceled
             System.out.println("Directory selection canceled.");
         }
-    }
+    }*/
 }
