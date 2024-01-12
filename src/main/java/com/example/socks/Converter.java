@@ -15,9 +15,7 @@ public class Converter {
         return image.getColorModel().getPixelSize();
     }
 
-    public static void convertTo16BitBMP(String inputImagePath, String outputImagePath) throws IOException {
-        BufferedImage inputImage = ImageIO.read(new File(inputImagePath));
-
+    public static void convertTo16BitBMP(BufferedImage inputImage, String outputImagePath) throws IOException {
         // Create a new BufferedImage with 16-bit color model
         BufferedImage outputImage = new BufferedImage(inputImage.getWidth(), inputImage.getHeight(),
                 BufferedImage.TYPE_USHORT_565_RGB);

@@ -1,10 +1,10 @@
 package com.example.socks;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
@@ -29,6 +29,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class HelloController {
     @FXML
@@ -38,6 +39,9 @@ public class HelloController {
     @FXML
     private ImageView imageView;
     private PhotoLoader photoLoader = new PhotoLoader();
+
+    @FXML
+    private ComboBox comboBox;
     @FXML
     private void handleButtonClick(ActionEvent event) {
         openFileChooser();
@@ -48,8 +52,47 @@ public class HelloController {
     @FXML
     private TextField LabelN;
     @FXML
-    private void onStartClick(ActionEvent event){
+    private void onStartClick(ActionEvent event) throws IOException {
+        String outputImagePath = "image.bmp";
+        String outputImagePath1 = "out.bmp";
+        String saveStanokVision ="StanokOut.bmp";
 
+        String outputImagePathStitch = "outStitch.bmp";
+
+        Image imge = imageView.getImage();
+        BufferedImage inputImagePath = SwingFXUtils.fromFXImage(imge,null);
+
+        Converter.convertTo16BitBMP(inputImagePath, outputImagePath);
+
+        BufferedImage img = ImageIO.read(new File(outputImagePath));
+
+        photo image = photo.fromBufferedImage(img);
+
+        image = AbstraktSelection.main(image);
+
+        int rejim = 1;
+        String select = (String) comboBox.getValue();
+        if(Objects.equals(select, "без C1")){
+            rejim =2;
+        } else if (Objects.equals(select, "без C1 і C2")) {
+            rejim =3;
+        }
+        System.out.println(rejim+" "+select);
+        image = Stanok.main(image, true,rejim);//pislya Abstrakt, pislya vyboru rejima(pislya zagryzku)(3 flaga)
+
+        photo image1 = photo.fromBufferedImage(img);//pislya stanka yaksho true, bez knopky
+
+        image1.setPhoto(image);//pislya stanka yaksho true
+
+        photo stanokImg = Converter.StanokVision(image);//pislya stanka yaksho true
+
+        BufferedImage img2 = stanokImg.toBufferedImage();//
+        PhotoEdit.saveImage(img2,saveStanokVision);//
+
+        BufferedImage img1 = image1.toBufferedImage();//
+        PhotoEdit.saveImage(img1,outputImagePath1);//
+
+        PhotoEdit.saveImage(img, outputImagePathStitch);
     }
     @FXML
     private  void onRes30Click(ActionEvent event){
