@@ -13,9 +13,10 @@
 <VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.socks.HelloController">
     <Button fx:id="Load" text="Select Photos" onAction="#handleButtonClick"/>
     <Label fx:id="fileNameLabel" text=""/>
-    <ImageView fx:id="imageView"/>
+    <Button fx:id="Save" text="Зберегти у..." onAction="#initialize"/>
     <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick"/>
-    <TextField fx:id="LabelM" text="Висота"/>
+    <ImageView fx:id="imageView"/>
+    <TextField fx:id="LabelM" text="Ширина"/>
     <TextField fx:id="LabelN" text="Висота"/>
     <Button fx:id="Resithe13" text="збільшити на 30%" onAction="#onRes30Click"/>
     <Button fx:id="Resithe16" text="збільшити на 60%" onAction="#onRes60Click"/>
