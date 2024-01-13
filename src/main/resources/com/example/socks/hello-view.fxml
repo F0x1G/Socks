@@ -13,7 +13,6 @@
 <VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.socks.HelloController">
     <Button fx:id="Load" text="Select Photos" onAction="#handleButtonClick"/>
     <Label fx:id="fileNameLabel" text=""/>
-    <Button fx:id="Save" text="Зберегти у..." onAction="#initialize"/>
     <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick"/>
     <ImageView fx:id="imageView"/>
     <ImageView fx:id="ImageStanok"/>

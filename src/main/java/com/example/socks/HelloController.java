@@ -1,10 +1,12 @@
 package com.example.socks;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
@@ -66,17 +68,25 @@ public class HelloController {
         Image newImage = SwingFXUtils.toFXImage(img,null);
         Zakathchick.setImage(newImage);
     }
-    @FXML
-    private void initialize() {
-        Save save = new Save();
-        save.chooseSaveDirectory();
-    }
 
     @FXML
     private void onStartClick(ActionEvent event) throws IOException {
-        String outputImagePath = "image.bmp";
-        String outputImagePath1 = "out.bmp";
-        String saveStanokVision ="StanokOut.bmp";
+        // Get the stage from the action event
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Prompt user to choose a directory
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Choose Save Directory");
+        File selectedDirectory = directoryChooser.showDialog(stage);
+
+        if (selectedDirectory == null) {
+            System.out.println("No directory selected. Files not saved.");
+            return;
+        }
+
+        String outputImagePath = selectedDirectory.getAbsolutePath() + File.separator + "image.bmp";
+        String outputImagePath1 = selectedDirectory.getAbsolutePath() + File.separator + "out.bmp";
+        String saveStanokVision = selectedDirectory.getAbsolutePath() + File.separator + "StanokOut.bmp";
 
         Image imge = imageView.getImage();
         BufferedImage inputImagePath = SwingFXUtils.fromFXImage(imge,null);

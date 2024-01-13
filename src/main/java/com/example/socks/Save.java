@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class Save {
-    @FXML
+   /* @FXML
     public void chooseSaveDirectory() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Select a folder to save files");
@@ -25,5 +25,5 @@ public class Save {
             System.out.println("The output image path1 is: " + outputImagePath1);
             System.out.println("The save stanok vision path is: " + saveStanokVision);
         }
-    }
+    }*/
 }
