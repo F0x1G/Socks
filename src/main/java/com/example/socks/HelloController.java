@@ -57,17 +57,6 @@ public class HelloController {
     private TextField LabelM;
     @FXML
     private TextField LabelN;
-
-    @FXML
-    private void onConForZak(ActionEvent event) throws IOException{
-        Image imge = imageView.getImage();
-        BufferedImage inputImagePath = SwingFXUtils.fromFXImage(imge,null);
-
-        BufferedImage img = Converter.PhotoDlaZak(inputImagePath);
-
-        Image newImage = SwingFXUtils.toFXImage(img,null);
-        Zakathchick.setImage(newImage);
-    }
     @FXML
     private void onStartClick(ActionEvent event) throws IOException {
         // Get the stage from the action event
@@ -86,6 +75,7 @@ public class HelloController {
         String outputImagePath = selectedDirectory.getAbsolutePath() + File.separator + "image.bmp";
         String outputImagePath1 = selectedDirectory.getAbsolutePath() + File.separator + "out.bmp";
         String saveStanokVision = selectedDirectory.getAbsolutePath() + File.separator + "StanokOut.bmp";
+        String ZakajchikcOut = selectedDirectory.getAbsolutePath() + File.separator + "ZakajchikcOut.bmp";
 
         Image imge = imageView.getImage();
         BufferedImage inputImagePath = SwingFXUtils.fromFXImage(imge,null);
@@ -125,6 +115,15 @@ public class HelloController {
         Image newImage1 = SwingFXUtils.toFXImage(img2,null);
         ImageStanok.setImage(newImage1);
 
+        Image imge1 = imageView.getImage();
+        BufferedImage inputImagePath1 = SwingFXUtils.fromFXImage(imge1,null);
+
+        BufferedImage img3 = Converter.PhotoDlaZak(inputImagePath1);
+
+        Image newImage2 = SwingFXUtils.toFXImage(img3,null);
+        Zakathchick.setImage(newImage2);
+
+        PhotoEdit.saveImage(img3,ZakajchikcOut);
     }
     @FXML
     private  void onRes30Click(ActionEvent event){

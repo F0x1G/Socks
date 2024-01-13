@@ -14,7 +14,6 @@
     <Button fx:id="Load" text="Select Photos" onAction="#handleButtonClick"/>
     <Label fx:id="fileNameLabel" text=""/>
     <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick"/>
-    <Button fx:id="Zakajchick" text="Фото для закажчика" onAction="#onConForZak"/>
     <ImageView fx:id="imageView"/>
     <ImageView fx:id="ImageStanok"/>
     <ImageView fx:id="Zakathchick"/>
