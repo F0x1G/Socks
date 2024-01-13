@@ -38,6 +38,10 @@ public class HelloController {
     private Label fileNameLabel;
     @FXML
     private ImageView imageView;
+    @FXML
+    private ImageView ImageStanok;
+    @FXML
+    private ImageView Zakathchick;
     private PhotoLoader photoLoader = new PhotoLoader();
 
     @FXML
@@ -51,6 +55,17 @@ public class HelloController {
     private TextField LabelM;
     @FXML
     private TextField LabelN;
+
+    @FXML
+    private void onConForZak(ActionEvent event) throws IOException{
+        Image imge = imageView.getImage();
+        BufferedImage inputImagePath = SwingFXUtils.fromFXImage(imge,null);
+
+        BufferedImage img = Converter.PhotoDlaZak(inputImagePath);
+
+        Image newImage = SwingFXUtils.toFXImage(img,null);
+        Zakathchick.setImage(newImage);
+    }
     @FXML
     private void onStartClick(ActionEvent event) throws IOException {
         String outputImagePath = "image.bmp";

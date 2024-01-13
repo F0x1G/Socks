@@ -128,4 +128,40 @@ public class Converter {
         return resultMatrix;
     }
 
+    public static BufferedImage PhotoDlaZak(BufferedImage photo) throws IOException {
+        photo image = com.example.socks.photo.fromBufferedImage(photo);
+        image = AbstraktSelection.ReplaceColor(image);
+        int[][] colorsheme = AbstraktSelection.convertToColorIndices(image);
+        int[][] newColorSheme = intFromZak(colorsheme);
+        photo newImage=AbstraktSelection.fromIntMatrix(newColorSheme);
+        BufferedImage Finish = newImage.toBufferedImage();
+        String a="zakajchick.bmp";
+        PhotoEdit.saveImage(Finish,a);
+        return Finish;
+    }
+
+    public static int[][] intFromZak (int[][] Start) {
+        int rows = 1+Start.length * 3;
+        int cols = Start[0].length * 3;
+        int[][] Finish = new int[rows][cols];
+        for (int i = 0; i < Start.length; i++) {
+            for (int j = 0; j < Start[0].length; j++) {
+                int x = 1 + (3 * j);
+                int y = 2 + (3 * i);
+                Finish[y][x] = Start[i][j];
+                Finish[y][x-1] = Start[i][j];
+                Finish[y-1][x-1] = Start[i][j];
+                Finish[y-2][x-1] = Start[i][j];
+
+                Finish[y-1][x] = Start[i][j];
+                Finish[y+1][x] = Start[i][j];
+
+                Finish[y][x+1] = Start[i][j];
+                Finish[y-1][x+1] = Start[i][j];
+                Finish[y-2][x+1] = Start[i][j];
+            }
+        }
+        return Finish;
+    }
+
 }
