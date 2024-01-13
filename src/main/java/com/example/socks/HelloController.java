@@ -67,12 +67,16 @@ public class HelloController {
         Zakathchick.setImage(newImage);
     }
     @FXML
+    private void initialize() {
+        Save save = new Save();
+        save.chooseSaveDirectory();
+    }
+
+    @FXML
     private void onStartClick(ActionEvent event) throws IOException {
         String outputImagePath = "image.bmp";
         String outputImagePath1 = "out.bmp";
         String saveStanokVision ="StanokOut.bmp";
-
-        String outputImagePathStitch = "outStitch.bmp";
 
         Image imge = imageView.getImage();
         BufferedImage inputImagePath = SwingFXUtils.fromFXImage(imge,null);
@@ -107,7 +111,6 @@ public class HelloController {
         BufferedImage img1 = image1.toBufferedImage();//
         PhotoEdit.saveImage(img1,outputImagePath1);//
 
-        PhotoEdit.saveImage(img, outputImagePathStitch);
     }
     @FXML
     private  void onRes30Click(ActionEvent event){

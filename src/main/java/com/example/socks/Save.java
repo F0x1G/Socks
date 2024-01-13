@@ -1,38 +1,29 @@
 package com.example.socks;
 
+import javafx.fxml.FXML;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class Save {
-
-   /* public void chooseSaveDirectory() {
-        // Create a DirectoryChooser
+    @FXML
+    public void chooseSaveDirectory() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setTitle("Choose Save Directory");
-
-        // Show the directory chooser
-        File selectedDirectory = directoryChooser.showDialog(new Stage());
-
+        directoryChooser.setTitle("Select a folder to save files");
+        File selectedDirectory = directoryChooser.showDialog(null);
         if (selectedDirectory != null) {
-            // Directory was chosen, now construct file paths using predefined names
-            String outputImagePath = "image.bmp";
-            String outputImagePath1 = "out.bmp";
-            String saveStanokVision ="StanokOut.bmp";
-
-            File file1 = new File(selectedDirectory, fileName1);
-            File file2 = new File(selectedDirectory, fileName2);
-
-            // You can now use file1 and file2 to perform your save operations
-            System.out.println("File 1 path: " + file1.getAbsolutePath());
-            System.out.println("File 2 path: " + file2.getAbsolutePath());
-
-            // Perform your save operations using the selected directory and file names
-            // For example: Save data to file1 and file2
-        } else {
-            // Directory selection was canceled
-            System.out.println("Directory selection canceled.");
+            String directoryPath = selectedDirectory.getAbsolutePath();
+            String outputImagePath = directoryPath + "/image.bmp";
+            String outputImagePath1 = directoryPath + "/out.bmp";
+            String saveStanokVision = directoryPath + "/StanokOut.bmp";
+            System.out.println("The directory path is: " + directoryPath);
+            System.out.println("The output image path is: " + outputImagePath);
+            System.out.println("The output image path1 is: " + outputImagePath1);
+            System.out.println("The save stanok vision path is: " + saveStanokVision);
         }
-    }*/
+    }
 }

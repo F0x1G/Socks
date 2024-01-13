@@ -17,7 +17,8 @@
     <ImageView fx:id="ImageStanok"/>
     <ImageView fx:id="Zakathchick"/>
     <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick"/>
-    <TextField fx:id="LabelM" text="Висота"/>
+    <Button fx:id="Save" text="Зберегти у..." onAction="#initialize"/>
+    <TextField fx:id="LabelM" text="Ширина"/>
     <TextField fx:id="LabelN" text="Висота"/>
     <Button fx:id="ConverZak" text="Конвертувати для заказчика" onAction="#onConForZak"/>
     <Button fx:id="Resithe13" text="збільшити на 30%" onAction="#onRes30Click"/>
