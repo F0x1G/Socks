@@ -68,7 +68,6 @@ public class HelloController {
         Image newImage = SwingFXUtils.toFXImage(img,null);
         Zakathchick.setImage(newImage);
     }
-
     @FXML
     private void onStartClick(ActionEvent event) throws IOException {
         // Get the stage from the action event
