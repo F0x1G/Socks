@@ -120,6 +120,11 @@ public class HelloController {
         BufferedImage img1 = image1.toBufferedImage();//
         PhotoEdit.saveImage(img1,outputImagePath1);//
 
+        Image newImage = SwingFXUtils.toFXImage(img1,null);
+        imageView.setImage(newImage);
+        Image newImage1 = SwingFXUtils.toFXImage(img2,null);
+        ImageStanok.setImage(newImage1);
+
     }
     @FXML
     private  void onRes30Click(ActionEvent event){
