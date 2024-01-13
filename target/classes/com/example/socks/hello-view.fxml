@@ -13,14 +13,14 @@
 <VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.socks.HelloController">
     <Button fx:id="Load" text="Select Photos" onAction="#handleButtonClick"/>
     <Label fx:id="fileNameLabel" text=""/>
+    <Button fx:id="Save" text="Зберегти у..." onAction="#initialize"/>
+    <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick"/>
+    <Button fx:id="Zakajchick" text="Фото для закажчика" onAction="#onConForZak"/>
     <ImageView fx:id="imageView"/>
     <ImageView fx:id="ImageStanok"/>
     <ImageView fx:id="Zakathchick"/>
-    <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick"/>
-    <Button fx:id="Save" text="Зберегти у..." onAction="#initialize"/>
     <TextField fx:id="LabelM" text="Ширина"/>
     <TextField fx:id="LabelN" text="Висота"/>
-    <Button fx:id="ConverZak" text="Конвертувати для заказчика" onAction="#onConForZak"/>
     <Button fx:id="Resithe13" text="збільшити на 30%" onAction="#onRes30Click"/>
     <Button fx:id="Resithe16" text="збільшити на 60%" onAction="#onRes60Click"/>
     <Button fx:id="ResitheCastom" text="Змінити за заданими значеннями" onAction="#onResClick"/>

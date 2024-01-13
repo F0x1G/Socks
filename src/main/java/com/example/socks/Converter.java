@@ -135,8 +135,6 @@ public class Converter {
         int[][] newColorSheme = intFromZak(colorsheme);
         photo newImage=AbstraktSelection.fromIntMatrix(newColorSheme);
         BufferedImage Finish = newImage.toBufferedImage();
-        String a="zakajchick.bmp";
-        PhotoEdit.saveImage(Finish,a);
         return Finish;
     }
 
