@@ -13,7 +13,6 @@
 <VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.socks.HelloController" spacing="10">
     <Button fx:id="Load" text="Оберіть фото" onAction="#handleButtonClick" style="-fx-translate-x: 10; -fx-translate-y: 5;"/>
     <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick" style="-fx-translate-x: 10; -fx-translate-y: 5;"/>
-    <Button fx:id="Zakajchick" text="Фото для замовника" onAction="#onConForZak" style="-fx-translate-x: 10; -fx-translate-y: 5;"/>
 
     <HBox spacing="10">
         <TextField fx:id="LabelM" text="Ширина"/>
