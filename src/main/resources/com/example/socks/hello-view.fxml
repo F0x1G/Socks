@@ -5,40 +5,30 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.Text?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
-<?import javafx.scene.layout.HBox?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.socks.HelloController" spacing="10">
-    <Button fx:id="Load" text="Оберіть фото" onAction="#handleButtonClick" style="-fx-translate-x: 10; -fx-translate-y: 5;"/>
-    <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick" style="-fx-translate-x: 10; -fx-translate-y: 5;"/>
-    <Button fx:id="Zakajchick" text="Фото для замовника" onAction="#onConForZak" style="-fx-translate-x: 10; -fx-translate-y: 5;"/>
-
-    <HBox spacing="10">
-        <TextField fx:id="LabelM" text="Ширина"/>
-        <TextField fx:id="LabelN" text="Висота"/>
-        <Button fx:id="ResitheCastom" text="Змінити за заданими значеннями" onAction="#onResClick"/>
-        <Button fx:id="Resithe13" text="збільшити на 30%" onAction="#onRes30Click"/>
-        <Button fx:id="Resithe16" text="збільшити на 60%" onAction="#onRes60Click"/>
-        <ComboBox fx:id="comboBox" promptText="Вибір режима">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Всі нитководи"/>
-                    <String fx:value="без C1"/>
-                    <String fx:value="без C1 і C2"/>
-                </FXCollections>
-            </items>
-        </ComboBox>
-    </HBox>
-
-    <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-translate-x: 10;">
-        <ImageView fx:id="imageView"/>
-        <ImageView fx:id="ImageStanok"/>
-    </HBox>
-    <HBox alignment="CENTER_RIGHT" style="-fx-translate-x: 10;">
-        <ImageView fx:id="Zakathchick"/>
-    </HBox>
-
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.socks.HelloController">
+    <Button fx:id="Load" text="Select Photos" onAction="#handleButtonClick"/>
     <Label fx:id="fileNameLabel" text=""/>
+    <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick"/>
+    <ImageView fx:id="imageView"/>
+    <ImageView fx:id="ImageStanok"/>
+    <ImageView fx:id="Zakathchick"/>
+    <TextField fx:id="LabelM" text="Ширина"/>
+    <TextField fx:id="LabelN" text="Висота"/>
+    <Button fx:id="Resithe13" text="збільшити на 30%" onAction="#onRes30Click"/>
+    <Button fx:id="Resithe16" text="збільшити на 60%" onAction="#onRes60Click"/>
+    <Button fx:id="ResitheCastom" text="Змінити за заданими значеннями" onAction="#onResClick"/>
+    <ComboBox fx:id="comboBox" layoutX="50.0" layoutY="50.0" promptText="Вибір режима">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Всі нитководи"/>
+                <String fx:value="без C1"/>
+                <String fx:value="без C1 і C2"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
 </VBox>
