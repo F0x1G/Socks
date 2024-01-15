@@ -139,24 +139,43 @@ public class Converter {
     }
 
     public static int[][] intFromZak (int[][] Start) {
-        int rows = 1+Start.length * 3;
-        int cols = Start[0].length * 3;
+        int rows = 2+Start.length * 5;
+        int cols = Start[0].length * 5;
         int[][] Finish = new int[rows][cols];
         for (int i = 0; i < Start.length; i++) {
             for (int j = 0; j < Start[0].length; j++) {
-                int x = 1 + (3 * j);
-                int y = 2 + (3 * i);
-                Finish[y][x] = Start[i][j];
+                int x = 2 + (5 * j);
+                int y = 4 + (5 * i);
+
+                Finish[y][x-2] = Start[i][j];
+                Finish[y-1][x-2] = Start[i][j];
+                Finish[y-2][x-2] = Start[i][j];
+                Finish[y-3][x-2] = Start[i][j];
+                Finish[y-4][x-2] = Start[i][j];
+
+                Finish[y+1][x-1] = Start[i][j];
                 Finish[y][x-1] = Start[i][j];
                 Finish[y-1][x-1] = Start[i][j];
                 Finish[y-2][x-1] = Start[i][j];
+                Finish[y-3][x-1] = Start[i][j];
 
+                Finish[y-2][x] = Start[i][j];
                 Finish[y-1][x] = Start[i][j];
+                Finish[y][x] = Start[i][j];
                 Finish[y+1][x] = Start[i][j];
+                Finish[y+2][x] = Start[i][j];
 
+                Finish[y+1][x+1] = Start[i][j];
                 Finish[y][x+1] = Start[i][j];
                 Finish[y-1][x+1] = Start[i][j];
                 Finish[y-2][x+1] = Start[i][j];
+                Finish[y-3][x+1] = Start[i][j];
+
+                Finish[y][x+2] = Start[i][j];
+                Finish[y-1][x+2] = Start[i][j];
+                Finish[y-2][x+2] = Start[i][j];
+                Finish[y-3][x+2] = Start[i][j];
+                Finish[y-4][x+2] = Start[i][j];
             }
         }
         return Finish;

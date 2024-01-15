@@ -6,10 +6,14 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
@@ -44,6 +48,10 @@ public class HelloController {
     private TextField LabelM;
     @FXML
     private TextField LabelN;
+
+    @FXML
+    private VBox RightPanel;
+
     @FXML
     private void onStartClick(ActionEvent event) throws IOException {
         // Get the stage from the action event
@@ -85,6 +93,10 @@ public class HelloController {
         System.out.println(rejim+" "+select);
         image = Stanok.main(image, true,rejim);//pislya Abstrakt, pislya vyboru rejima(pislya zagryzku)(3 flaga)
 
+
+        setcolorSheme(image);
+        RightPanel.setVisible(true);
+
         photo image1 = photo.fromBufferedImage(img);//pislya stanka yaksho true, bez knopky
 
         image1.setPhoto(image);//pislya stanka yaksho true
@@ -106,11 +118,140 @@ public class HelloController {
         BufferedImage inputImagePath1 = SwingFXUtils.fromFXImage(imge1,null);
 
         BufferedImage img3 = Converter.PhotoDlaZak(inputImagePath1);
+        PhotoEdit.saveImage(img3,ZakajchikcOut);
+
+        int m = img3.getHeight()/2;
+        int n = img3.getWidth()/2;
+        img3 = PhotoEdit.resize(img3,n,m );
 
         Image newImage2 = SwingFXUtils.toFXImage(img3,null);
         Zakathchick.setImage(newImage2);
+    }
 
-        PhotoEdit.saveImage(img3,ZakajchikcOut);
+    @FXML
+    private ImageView Oc1;
+    @FXML
+    private ImageView Dc1;
+    @FXML
+    private ImageView Oc2;
+    @FXML
+    private ImageView Dc2;
+    @FXML
+    private ImageView Oc3;
+    @FXML
+    private ImageView Dc3;
+    @FXML
+    private ImageView Tc3;
+    @FXML
+    private ImageView Oc4;
+    @FXML
+    private ImageView Dc4;
+    @FXML
+    private ImageView Tc4;
+    @FXML
+    private ImageView Oc5;
+    @FXML
+    private ImageView Dc5;
+    @FXML
+    private ImageView Tc5;
+    @FXML
+    private ImageView BackGraund;
+
+    private void setcolorSheme(photo Image){
+        int[][] arr = Image.getStanokScheme();
+        Color[] col = AbstraktSelection.getColorScheme();
+
+        try {
+        BufferedImage BufOc1 = createImage(col[arr[0][0]]);
+        Image ImgOc1 = SwingFXUtils.toFXImage(BufOc1,null);
+        Oc1.setImage(ImgOc1);
+        } catch (Exception e) {}
+        try {
+            BufferedImage BufDc1 = createImage(col[arr[0][1]]);
+            Image ImgDc1 = SwingFXUtils.toFXImage(BufDc1, null);
+            Dc1.setImage(ImgDc1);
+        } catch (Exception e) {}
+
+        try {
+        BufferedImage BufOc2 = createImage(col[arr[1][0]]);
+        Image ImgOc2 = SwingFXUtils.toFXImage(BufOc2,null);
+        Oc2.setImage(ImgOc2);
+        } catch (Exception e) {}
+        try {
+        BufferedImage BufDc2 = createImage(col[arr[1][1]]);
+        Image ImgDc2 = SwingFXUtils.toFXImage(BufDc2,null);
+        Dc2.setImage(ImgDc2);
+        } catch (Exception e) {}
+
+        try {
+            BufferedImage BufOc3 = createImage(col[arr[2][0]]);
+            Image ImgOc3 = SwingFXUtils.toFXImage(BufOc3,null);
+            Oc3.setImage(ImgOc3);
+        } catch (Exception e) {}
+        try {
+            BufferedImage BufDc3 = createImage(col[arr[2][1]]);
+            Image ImgDc3 = SwingFXUtils.toFXImage(BufDc3,null);
+            Dc3.setImage(ImgDc3);
+        } catch (Exception e) {}
+        try {
+            BufferedImage BufTc3 = createImage(col[arr[2][2]]);
+            Image ImgTc3 = SwingFXUtils.toFXImage(BufTc3,null);
+            Tc3.setImage(ImgTc3);
+        } catch (Exception e) {}
+
+        try {
+            BufferedImage BufOc4 = createImage(col[arr[3][0]]);
+            Image ImgOc4 = SwingFXUtils.toFXImage(BufOc4,null);
+            Oc4.setImage(ImgOc4);
+        } catch (Exception e) {}
+        try {
+            BufferedImage BufDc4 = createImage(col[arr[3][1]]);
+            Image ImgDc4 = SwingFXUtils.toFXImage(BufDc4,null);
+            Dc4.setImage(ImgDc4);
+        } catch (Exception e) {}
+        try {
+            BufferedImage BufTc4 = createImage(col[arr[3][2]]);
+            Image ImgTc4 = SwingFXUtils.toFXImage(BufTc4,null);
+            Tc4.setImage(ImgTc4);
+        } catch (Exception e) {}
+
+        try {
+            BufferedImage BufOc5 = createImage(col[arr[4][0]]);
+            Image ImgOc5 = SwingFXUtils.toFXImage(BufOc5,null);
+            Oc5.setImage(ImgOc5);
+        } catch (Exception e) {}
+        try {
+            BufferedImage BufDc5 = createImage(col[arr[4][1]]);
+            Image ImgDc5 = SwingFXUtils.toFXImage(BufDc5,null);
+            Dc5.setImage(ImgDc5);
+        } catch (Exception e) {}
+        try {
+            BufferedImage BufTc5 = createImage(col[arr[4][2]]);
+            Image ImgTc5 = SwingFXUtils.toFXImage(BufTc5,null);
+            Tc5.setImage(ImgTc5);
+        } catch (Exception e) {}
+
+        try {
+            BufferedImage BufBackGraund = createImage(col[arr[5][0]]);
+            Image ImgBackGraund = SwingFXUtils.toFXImage(BufBackGraund,null);
+            BackGraund.setImage(ImgBackGraund);
+        } catch (Exception e) {}
+    }
+
+    public static BufferedImage createImage(Color color) {
+        int width = 10;
+        int height = 10;
+
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics g = image.getGraphics();
+
+        // Заповнення зображення вказаним кольором
+        g.setColor(color);
+        g.fillRect(0, 0, width, height);
+
+        // Завершення графічного контексту
+        g.dispose();
+        return image;
     }
     @FXML
     private  void onRes30Click(ActionEvent event){

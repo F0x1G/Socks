@@ -9,12 +9,12 @@ public class AbstraktSelection {
 
     public static photo main(photo image){
         image = ReplaceColor(image);
-        image = EasySimplifier(image, 2);
+        image = EasySimplifier(image, 1);
         return image;
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public static photo EasySimplifier(photo image, int target){
+    public static photo EasySimplifier(photo image, double target){
         int[][] indexmatrix = convertToColorIndices(image);
         int[][] cout = createElementCountMatrix(indexmatrix);
         double[] percentages = PercentageVisualization(cout);
@@ -97,9 +97,8 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
         }
     }
 
-    public static int notOptimal(double[] array,int target) {
+    public static int notOptimal(double[] array,double target) {
         int count = 0;
-        // Рахуємо кількість елементів менше 10
         for (double value : array) {
             if (value < target) {
                 count++;
@@ -334,11 +333,11 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
                 new Color(138,43,226), // 16
                 new Color(255,100,226), // 17
                 new Color(255, 160, 200), // 18
-                new Color(255,255,255),
-                new Color(190,190,190),// 19
-                new Color(127, 127, 127),// 20
-                new Color(63, 63, 63),
-                new Color(0, 0, 0) // 21
+                new Color(255,255,255),// 19
+                new Color(190,190,190),// 20
+                new Color(127, 127, 127),//21
+                new Color(63, 63, 63),//22
+                new Color(0, 0, 0) // 23
         };
     }
 

@@ -42,7 +42,7 @@ public class Stanok {
             int[][] imageMat = AbstraktSelection.convertToColorIndices(image);
             int m = image.getM();
             int n = image.getN();
-            imageMat = MatrixCheck(imageMat, m, n,Sta);
+            imageMat = MatrixCheck(imageMat, n, m,Sta);
             imageMat = FindContrast(imageMat);
             image = AbstraktSelection.fromIntMatrix(imageMat);
         }
@@ -80,11 +80,11 @@ public class Stanok {
 
     public static photo PhotoOptimither(photo image,int[][] Sta){
         boolean work = true;
-        int a =2;
+        double a =1;
         while (work) {
-            a++;
+            a+=0.3;
             int[][] matImage = AbstraktSelection.convertToColorIndices(image);
-            matImage = MatrixCheck(matImage, matImage.length, matImage[0].length, Sta);
+            matImage = MatrixCheck(matImage, matImage[0].length, matImage.length, Sta);
             if (contains99(matImage)) {
                 image = AbstraktSelection.EasySimplifier(image,a);
             }else {
@@ -92,7 +92,7 @@ public class Stanok {
             }
         }
         int[][] matImage = AbstraktSelection.convertToColorIndices(image);
-        image.setStanokScheme(StanokSchemeCheck(matImage, matImage.length, matImage[0].length, Sta));
+        image.setStanokScheme(StanokSchemeCheck(matImage, matImage[0].length, matImage.length, Sta));
         return image;
     }
 
