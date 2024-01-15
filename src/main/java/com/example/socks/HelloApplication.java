@@ -4,10 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
@@ -16,7 +12,7 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1600, 900);
         stage.setMaximized(true);
-        stage.setTitle("Hello!");
+        stage.setTitle("Auto");
         stage.setScene(scene);
         stage.show();
     }

@@ -1,7 +1,6 @@
 package com.example.socks;
 
 import javafx.scene.image.Image;
-
 import java.io.File;
 
 public class PhotoLoader {

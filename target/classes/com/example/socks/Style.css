@@ -1,0 +1,94 @@
+#Start {
+    -fx-font-size: 14;
+    -fx-background-color: #8bc1fa;
+    -fx-text-fill: #000000;
+    -fx-border-color: #00ff84;
+    -fx-border-width: 1;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+#Load {
+    -fx-font-size: 14;
+    -fx-background-color: #8bc1fa;
+    -fx-text-fill: #000000;
+    -fx-border-color: #00ff84;
+    -fx-border-width: 1;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+#ResitheCastom {
+    -fx-font-size: 14;
+    -fx-background-color: #8bc1fa;
+    -fx-text-fill: #000000;
+    -fx-border-color: #00ff84;
+    -fx-border-width: 1;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+#Resithe13 {
+    -fx-font-size: 14;
+    -fx-background-color: #8bc1fa;
+    -fx-text-fill: #000000;
+    -fx-border-color: #00ff84;
+    -fx-border-width: 1;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+#Resithe16 {
+    -fx-font-size: 14;
+    -fx-background-color: #8bc1fa;
+    -fx-text-fill: #000000;
+    -fx-border-color: #00ff84;
+    -fx-border-width: 1;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+#comboBox {
+    -fx-font-size: 14;
+    -fx-background-color: #8bc1fa;
+    -fx-text-fill: #000000;
+    -fx-border-color: #00ff84;
+    -fx-border-width: 1;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+#LabelM {
+    -fx-pref-width: 300;
+    -fx-font-size: 14;
+    -fx-background-color: #ffffff;
+    -fx-prompt-text-fill: #000000;
+    -fx-opacity: 1.0;
+    -fx-border-color: #00ff84;
+    -fx-border-width: 1;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+#LabelN {
+    -fx-pref-width: 300;
+    -fx-font-size: 14;
+    -fx-background-color: #ffffff;
+    -fx-prompt-text-fill: #000000;
+    -fx-opacity: 1.0;
+    -fx-border-color: #00ff84;
+    -fx-border-width: 1;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+#main {
+    -fx-background-color: #5dc7bc;
+}
+#Buttons {
+    -fx-background-color: #5dc7bc;
+}
+#resize {
+    -fx-background-color: #5dc7bc;
+}
+#images {
+    -fx-background-color: #5dc7bc;
+}
+#stanok {
+    -fx-background-color: #5dc7bc;
+}
+#zamovnyk {
+    -fx-background-color: #5dc7bc;
+}

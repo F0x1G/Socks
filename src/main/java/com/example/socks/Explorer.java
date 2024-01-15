@@ -3,7 +3,6 @@ package com.example.socks;
 import javafx.application.Application;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.util.List;
 
