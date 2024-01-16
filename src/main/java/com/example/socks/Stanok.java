@@ -81,18 +81,21 @@ public class Stanok {
     public static photo PhotoOptimither(photo image,int[][] Sta){
         boolean work = true;
         double a =1;
+        int[][] Sta1 = Sta;
+        int[][] Sta2 = Sta;
         while (work) {
             a+=0.3;
             int[][] matImage = AbstraktSelection.convertToColorIndices(image);
-            matImage = MatrixCheck(matImage, matImage[0].length, matImage.length, Sta);
+            matImage = MatrixCheck(matImage, matImage[0].length, matImage.length, Sta1);
             if (contains99(matImage)) {
                 image = AbstraktSelection.EasySimplifier(image,a);
             }else {
                 work = false;
             }
         }
-        int[][] matImage = AbstraktSelection.convertToColorIndices(image);
-        image.setStanokScheme(StanokSchemeCheck(matImage, matImage[0].length, matImage.length, Sta));
+        AbstraktSelection.printMatrix(Sta2);
+        int[][] matImage1 = AbstraktSelection.convertToColorIndices(image);
+        image.setStanokScheme(StanokSchemeCheck(matImage1, matImage1[0].length, matImage1.length, Sta2));
         return image;
     }
 
