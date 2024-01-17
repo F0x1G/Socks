@@ -315,25 +315,31 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
     public static Color[] getColorScheme() {
         return new Color[]{
                 new Color(255, 127, 127), // 0
-                new Color(255, 0, 0), // 1
-                new Color(127, 0, 0), // 2
+                new Color(127, 0, 0),
+                new Color(200, 0, 0), // 1
+                new Color(200,60,0),
                 new Color(50,30,0), // 3
                 new Color(100,60,0), // 4
                 new Color(255,160,0), // 5
-                new Color(255,255,0), // 6
+                new Color(200,200,0), // 6
                 new Color(255,255,127), // 7
                 new Color(127, 255, 127), // 8
-                new Color(0, 255, 0), // 9
+                new Color(0, 200, 0),// 9
                 new Color(0, 127, 0), // 10
-                new Color(0, 127, 127), // 11
+                new Color(0, 200, 150),
+                new Color(0, 127, 127),
+                new Color(0, 170, 170),// 11
                 new Color(0, 255, 255), // 12
-                new Color(127, 127, 255), // 13
-                new Color(0, 0, 255), // 14
+                new Color(150, 255, 255),
+                new Color(127, 127, 255),
+                new Color(50, 127, 255),// 13
+                new Color(0, 0, 200), // 14
                 new Color(0, 0, 127), // 15
+                new Color(70,20,113),
                 new Color(138,43,226), // 16
                 new Color(255,100,226), // 17
                 new Color(255, 160, 200), // 18
-                new Color(255,255,255),// 19
+                new Color(225,225,225),// 19
                 new Color(190,190,190),// 20
                 new Color(127, 127, 127),//21
                 new Color(63, 63, 63),//22

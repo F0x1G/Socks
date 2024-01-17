@@ -82,7 +82,7 @@ public class Stanok {
         boolean work = true;
         double a =1;
         while (work) {
-            a+=0.3;
+            a+=0.1;
             int[][] Sta1 = ThisRejim(rez);
             int[][] matImage = AbstraktSelection.convertToColorIndices(image);
             matImage = MatrixCheck(matImage, matImage[0].length, matImage.length, Sta1);
