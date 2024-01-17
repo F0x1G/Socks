@@ -37,7 +37,7 @@ public class Stanok {
         int[][] Sta = ThisRejim(rejim);
 
         if(optimathe){
-            image = PhotoOptimither(image,Sta);
+            image = PhotoOptimither(image, rejim);
         }else {
             int[][] imageMat = AbstraktSelection.convertToColorIndices(image);
             int m = image.getM();
@@ -78,13 +78,12 @@ public class Stanok {
         return sum / array.length;
     }
 
-    public static photo PhotoOptimither(photo image,int[][] Sta){
+    public static photo PhotoOptimither(photo image,int rez){
         boolean work = true;
         double a =1;
-        int[][] Sta1 = Sta;
-        int[][] Sta2 = Sta;
         while (work) {
             a+=0.3;
+            int[][] Sta1 = ThisRejim(rez);
             int[][] matImage = AbstraktSelection.convertToColorIndices(image);
             matImage = MatrixCheck(matImage, matImage[0].length, matImage.length, Sta1);
             if (contains99(matImage)) {
@@ -93,7 +92,7 @@ public class Stanok {
                 work = false;
             }
         }
-        AbstraktSelection.printMatrix(Sta2);
+        int[][] Sta2 = ThisRejim(rez);
         int[][] matImage1 = AbstraktSelection.convertToColorIndices(image);
         image.setStanokScheme(StanokSchemeCheck(matImage1, matImage1[0].length, matImage1.length, Sta2));
         return image;
