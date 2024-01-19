@@ -90,7 +90,6 @@ public class HelloController {
         } else if (Objects.equals(select, "без C1 і C2")) {
             rejim =3;
         }
-        System.out.println(rejim+" "+select);
         image = Stanok.main(image, true,rejim);//pislya Abstrakt, pislya vyboru rejima(pislya zagryzku)(3 flaga)
 
 
@@ -329,8 +328,6 @@ public class HelloController {
         if (selectedFiles != null) {
             // Process the selected files
             for (File file : selectedFiles) {
-                // Add your logic to handle the selected files
-                System.out.println("Selected File: " + file.getAbsolutePath());
 
                 // Load photo using PhotoLoader
                 if (photoLoader.loadPhoto(file)) {

@@ -117,17 +117,21 @@ public class Stanok {
         for (int j = 0; j < WorkColor.length; j++) {
             WorkColor[j] = -1;
         }
+
         Sta[5][0] = backGround(StartImg);
         for (int i = 0; i < n; i++) {
 
             for (int q = 0; q < StanokWork.length; q++) {
-                StanokWork[q] = false;
+                if(Sta[q][0]!=-2) {
+                    StanokWork[q] = false;
+                }else {
+                    StanokWork[q] = true;
+                }
             }
 
             for (int j = 0; j < WorkColor.length; j++) {
                 WorkColor[j] = -1;
             }
-
             for (int j = 0; j < m; j++) {
                 int s = StartImg[i][j];
                 int[][] kordi = searchMatrix(Sta, s);
@@ -247,7 +251,11 @@ public class Stanok {
         for (int i = 0; i < n; i++) {
 
             for (int q = 0; q < StanokWork.length; q++) {
-                StanokWork[q] = false;
+                if(Sta[q][0]!=-2) {
+                    StanokWork[q] = false;
+                }else {
+                    StanokWork[q] = true;
+                }
             }
 
             for (int j = 0; j < WorkColor.length; j++) {
