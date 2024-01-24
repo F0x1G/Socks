@@ -67,10 +67,45 @@ public class HelloController {
             return;
         }
 
-        String outputImagePath = selectedDirectory.getAbsolutePath() + File.separator + "image.bmp";
-        String outputImagePath1 = selectedDirectory.getAbsolutePath() + File.separator + "out.bmp";
-        String saveStanokVision = selectedDirectory.getAbsolutePath() + File.separator + "StanokOut.bmp";
-        String ZakajchikcOut = selectedDirectory.getAbsolutePath() + File.separator + "ZakajchikcOut.bmp";
+        // Allow user to specify custom names for each file
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(selectedDirectory);
+
+        // Save image.bmp
+        fileChooser.setInitialFileName("image.bmp");
+        File outputImageFile = fileChooser.showSaveDialog(stage);
+        if (outputImageFile == null) {
+            System.out.println("Image file not saved.");
+            return;
+        }
+        String outputImagePath = outputImageFile.getAbsolutePath();
+
+        // Save out.bmp
+        fileChooser.setInitialFileName("out.bmp");
+        File outputImage1File = fileChooser.showSaveDialog(stage);
+        if (outputImage1File == null) {
+            System.out.println("Out file not saved.");
+            return;
+        }
+        String outputImagePath1 = outputImage1File.getAbsolutePath();
+
+        // Save StanokOut.bmp
+        fileChooser.setInitialFileName("Stanok.bmp");
+        File saveStanokVisionFile = fileChooser.showSaveDialog(stage);
+        if (saveStanokVisionFile == null) {
+            System.out.println("StanokOut file not saved.");
+            return;
+        }
+        String saveStanokVision = saveStanokVisionFile.getAbsolutePath();
+
+        // Save ZakajchikcOut.bmp
+        fileChooser.setInitialFileName("ZakajchikcOut.bmp");
+        File ZakajchikcOutFile = fileChooser.showSaveDialog(stage);
+        if (ZakajchikcOutFile == null) {
+            System.out.println("ZakajchikcOut file not saved.");
+            return;
+        }
+        String ZakajchikcOut = ZakajchikcOutFile.getAbsolutePath();
 
         Image imge = imageView.getImage();
         BufferedImage inputImagePath = SwingFXUtils.fromFXImage(imge,null);
