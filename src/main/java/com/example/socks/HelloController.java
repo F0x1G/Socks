@@ -99,10 +99,10 @@ public class HelloController {
         String saveStanokVision = saveStanokVisionFile.getAbsolutePath();
 
         // Save ZakajchikcOut.bmp
-        fileChooser.setInitialFileName("ZakajchikcOut.bmp");
+        fileChooser.setInitialFileName("Vizual.bmp");
         File ZakajchikcOutFile = fileChooser.showSaveDialog(stage);
         if (ZakajchikcOutFile == null) {
-            System.out.println("ZakajchikcOut file not saved.");
+            System.out.println("Vizual file not saved.");
             return;
         }
         String ZakajchikcOut = ZakajchikcOutFile.getAbsolutePath();

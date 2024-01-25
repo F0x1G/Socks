@@ -73,6 +73,9 @@
                 <Label text="f1:" style="-fx-translate-y: 0; -fx-translate-x: 0"/>
                 <ImageView fx:id="BackGraund" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
             </HBox>
+            <HBox>
+
+            </HBox>
         </VBox>
     </HBox>
 </VBox>
