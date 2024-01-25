@@ -92,19 +92,42 @@ public class Converter {
     public static photo StanokVision(photo image){
         int[][] Colors = image.getStanokScheme();
         Color[][] inStanok = AbstraktSelection.StanokSheme();
-        int[][] CordsColor = getIsExisten(Colors);
-        Color[] Schema = AbstraktSelection.getColorScheme();
-        for(int i=0;i<CordsColor.length;i++){
-            int[] cord = CordsColor[i];
-            int k = Colors[cord[0]][cord[1]];
-            Color color1 = Schema[k];
-            Color color2 = inStanok[cord[0]][cord[1]];
-            PhotoEdit.bucket(image, color1, color2);
+        int[][] CordsColor = getIsExisten(Colors,0);
+        Color[][] Schema = AbstraktSelection.StanokSheme();
+        int[][] intimage = AbstraktSelection.convertToColorIndices(image);
+
+        for(int j=0;j<CordsColor.length;j++) {
+            int[] cord = CordsColor[j];
+            int OLD = Colors[cord[0]][cord[1]];
+            int k = 120000 + ((cord[0] * 10) + cord[1]);
+            replaceValues(intimage, OLD, k);
         }
+
+        int[][] coutint = getIsExisten(intimage,119999);
+
+        for(int i=0;i<coutint.length;i++) {
+            int[] cord = coutint[i];
+            int cor = intimage[cord[0]][cord[1]];
+            int x = (int) (cor-120000)/10;
+            int y = (int) ((double)( (cor - 120000) /10)-x)*10;
+            Color newColor = Schema[x][y];
+            image.setPixel(cord[0],cord[1],newColor);
+        }
+
         return image;
     }
 
-    public static int[][] getIsExisten(int[][] matrix) {
+    public static void replaceValues(int[][] matrix, int oldVal, int newVal) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] == oldVal) {
+                    matrix[i][j] = newVal;
+                }
+            }
+        }
+    }
+
+    public static int[][] getIsExisten(int[][] matrix, int target) {
         int numRows = matrix.length;
         int numCols = matrix[0].length;
 
@@ -114,7 +137,7 @@ public class Converter {
         // Знаходимо координати елементів, які не є -1 або -2
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
-                if (matrix[i][j] > 0) {
+                if (matrix[i][j] > target) {
                     nonNegativeCoordinates.add(new int[]{i, j});
                 }
             }
