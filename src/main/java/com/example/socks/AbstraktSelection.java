@@ -314,18 +314,30 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
     // Приклад кольорової схеми
     public static Color[] getColorScheme() {
         return new Color[]{
+                new Color(255, 190, 190),
                 new Color(255, 127, 127), // 0
+                new Color(180, 60, 60),
+                new Color(255, 0, 0),
+                new Color(180, 0, 0),
                 new Color(127, 0, 0),
-                new Color(255, 0, 0), // 1
+                new Color(60, 0, 0),// 1
+                new Color(120, 60, 0),
+                new Color(255,120,0),
+                new Color(255,160,0),
                 new Color(200,60,0),
                 new Color(50,30,0), // 3
                 new Color(100,60,0), // 4
-                new Color(255,160,0), // 5
+                new Color(127,127,0),
+                new Color(180,180,0),
                 new Color(255,255,0), // 6
                 new Color(255,255,127), // 7
                 new Color(127, 255, 127), // 8
-                new Color(0, 200, 0),// 9
+                new Color(60, 200, 60),// 9
+                new Color(0, 255, 0),
+                new Color(0, 180, 0),
                 new Color(0, 127, 0), // 10
+                new Color(0, 60, 0),
+                new Color(0, 100, 75),
                 new Color(0, 200, 150),
                 new Color(0, 127, 127),
                 new Color(0, 170, 170),// 11
@@ -333,12 +345,21 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
                 new Color(150, 255, 255),
                 new Color(127, 127, 255),
                 new Color(50, 127, 255),// 13
+                new Color(0, 60, 255),
                 new Color(0, 0, 255), // 14
+                new Color(0, 0, 180),
                 new Color(0, 0, 127), // 15
+                new Color(0, 0, 60),
+                new Color(30,10,55),
                 new Color(70,20,113),
                 new Color(138,43,226), // 16
-                new Color(255,100,226), // 17
-                new Color(255, 160, 200), // 18
+                new Color(170,45,165),
+                new Color(200,50,110),
+                new Color(226,50,180),
+                new Color(255,80,226), // 17
+                new Color(255,120,255),
+                new Color(255, 180, 200),
+                new Color(255, 220, 200), // 18
                 new Color(255,255,255),// 19
                 new Color(190,190,190),// 20
                 new Color(127, 127, 127),//21
