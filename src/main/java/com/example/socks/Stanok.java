@@ -81,17 +81,24 @@ public class Stanok {
     public static photo PhotoOptimither(photo image,int rez){
         boolean work = true;
         double a =1;
+
         while (work) {
             a+=0.1;
             int[][] Sta1 = ThisRejim(rez);
             int[][] matImage = AbstraktSelection.convertToColorIndices(image);
             matImage = MatrixCheck(matImage, matImage[0].length, matImage.length, Sta1);
             if (contains99(matImage)) {
-                image = AbstraktSelection.EasySimplifier(image,a);
+                if(calculatePercentage(matImage)>8) {
+                    image = AbstraktSelection.EasySimplifier(image, a);
+                }else {
+                    matImage = replace99WithLeftNeighbor(matImage);
+                    image = AbstraktSelection.fromIntMatrix(matImage);
+                }
             }else {
                 work = false;
             }
         }
+
         int[][] Sta2 = ThisRejim(rez);
         int[][] matImage1 = AbstraktSelection.convertToColorIndices(image);
         image.setStanokScheme(StanokSchemeCheck(matImage1, matImage1[0].length, matImage1.length, Sta2));
@@ -110,6 +117,44 @@ public class Stanok {
         return false;
     }
 
+    public static int[][] replace99WithLeftNeighbor(int[][] matrix) {
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (matrix[i][j] == 99) {
+                    matrix[i][j] = matrix[i][j-1];
+                }
+            }
+        }
+        return matrix;
+    }
+
+    public static double calculatePercentage(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            throw new IllegalArgumentException("Invalid matrix");
+        }
+
+        int totalElements = 0;
+        int countOf99 = 0;
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                totalElements++;
+                if (matrix[i][j] == 99) {
+                    countOf99++;
+                }
+            }
+        }
+
+        if (totalElements == 0) {
+            throw new IllegalArgumentException("Empty matrix");
+        }
+
+        return ((double) countOf99 / totalElements) * 100.0;
+    }
+
     public static int[][] MatrixCheck(int[][] StartImg, int m, int n,int[][] Sta) {
         int[][] FinishImg = StartImg;
         boolean[] StanokWork = new boolean[6];
@@ -120,7 +165,6 @@ public class Stanok {
 
         Sta[5][0] = backGround(StartImg);
         for (int i = 0; i < n; i++) {
-
             for (int q = 0; q < StanokWork.length; q++) {
                 if(Sta[q][0]!=-2) {
                     StanokWork[q] = false;

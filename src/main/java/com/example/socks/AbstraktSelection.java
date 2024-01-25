@@ -309,6 +309,7 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
             }
             System.out.println();
         }
+        System.out.println("///////////////////////////////////////////////////////");
     }
 
     // Приклад кольорової схеми
@@ -317,26 +318,34 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
                 new Color(255, 190, 190),
                 new Color(255, 127, 127), // 0
                 new Color(180, 60, 60),
+                new Color(180, 0, 0),
                 new Color(255, 0, 0),
                 new Color(180, 0, 0),
                 new Color(127, 0, 0),
                 new Color(60, 0, 0),// 1
+                new Color(120, 40, 0),
+                new Color(200,120,0),
+                new Color(100,60,0),
+                new Color(50,30,0), // 3
                 new Color(120, 60, 0),
                 new Color(255,120,0),
                 new Color(255,160,0),
-                new Color(200,60,0),
-                new Color(50,30,0), // 3
-                new Color(100,60,0), // 4
+                new Color(255,160,30),
+                new Color(180,120,0),
                 new Color(127,127,0),
                 new Color(180,180,0),
                 new Color(255,255,0), // 6
+                new Color(255,255,60),
                 new Color(255,255,127), // 7
+                new Color(255,255,180),
+                new Color(180, 255, 160),
                 new Color(127, 255, 127), // 8
                 new Color(60, 200, 60),// 9
                 new Color(0, 255, 0),
                 new Color(0, 180, 0),
                 new Color(0, 127, 0), // 10
                 new Color(0, 60, 0),
+                new Color(0, 80, 30),
                 new Color(0, 100, 75),
                 new Color(0, 200, 150),
                 new Color(0, 127, 127),
@@ -370,12 +379,12 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
 
     public static Color[][] StanokSheme(){
         return new Color[][]{
-                {new Color(255, 0, 0), new Color(0, 255, 0), new Color(0, 0, 0)},
-                {new Color(0, 0, 255), new Color(255, 255, 0), new Color(0, 0, 0)},
-                {new Color(0, 255, 255), new Color(255, 100, 226), new Color(127, 0, 0)},
+                {new Color(255, 0, 0), new Color(0, 255, 0)},
+                {new Color(0, 0, 255), new Color(255, 255, 0)},
+                {new Color(0, 255, 255), new Color(255, 100, 226), new Color(100, 0, 0)},
                 {new Color(0, 127, 0), new Color(0, 0, 127), new Color(127, 127, 0)},
-                {new Color(0, 127, 127), new Color(110, 40, 105), new Color(127, 127, 127)},
-                {new Color(255, 255, 255), new Color(0, 0, 0), new Color(0, 0, 0)}
+                {new Color(110, 40, 105), new Color(0, 127, 127), new Color(127, 127, 127)},
+                {new Color(255, 255, 255)}
         };
     }
 }

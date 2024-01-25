@@ -91,7 +91,6 @@ public class Converter {
 
     public static photo StanokVision(photo image){
         int[][] Colors = image.getStanokScheme();
-        Color[][] inStanok = AbstraktSelection.StanokSheme();
         int[][] CordsColor = getIsExisten(Colors,0);
         Color[][] Schema = AbstraktSelection.StanokSheme();
         int[][] intimage = AbstraktSelection.convertToColorIndices(image);
@@ -131,10 +130,8 @@ public class Converter {
         int numRows = matrix.length;
         int numCols = matrix[0].length;
 
-        // Ліст для збереження координат елементів, які не є -1 або -2
         List<int[]> nonNegativeCoordinates = new ArrayList<>();
 
-        // Знаходимо координати елементів, які не є -1 або -2
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
                 if (matrix[i][j] > target) {
@@ -142,7 +139,6 @@ public class Converter {
                 }
             }
         }
-        // Перетворюємо ліст в матрицю
         int[][] resultMatrix = new int[nonNegativeCoordinates.size()][2];
         for (int i = 0; i < nonNegativeCoordinates.size(); i++) {
             resultMatrix[i] = nonNegativeCoordinates.get(i);
