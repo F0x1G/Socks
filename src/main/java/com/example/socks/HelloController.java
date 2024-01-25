@@ -72,13 +72,6 @@ public class HelloController {
         fileChooser.setInitialDirectory(selectedDirectory);
 
         // Save image.bmp
-        fileChooser.setInitialFileName("image.bmp");
-        File outputImageFile = fileChooser.showSaveDialog(stage);
-        if (outputImageFile == null) {
-            System.out.println("Image file not saved.");
-            return;
-        }
-        String outputImagePath = outputImageFile.getAbsolutePath();
 
         // Save out.bmp
         fileChooser.setInitialFileName("out.bmp");
@@ -110,9 +103,9 @@ public class HelloController {
         Image imge = imageView.getImage();
         BufferedImage inputImagePath = SwingFXUtils.fromFXImage(imge,null);
 
-        Converter.convertTo16BitBMP(inputImagePath, outputImagePath);
+        Converter.convertTo16BitBMP(inputImagePath);
 
-        BufferedImage img = ImageIO.read(new File(outputImagePath));
+        BufferedImage img = inputImagePath;
 
         photo image = photo.fromBufferedImage(img);
 

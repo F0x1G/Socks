@@ -15,7 +15,7 @@ public class Converter {
         return image.getColorModel().getPixelSize();
     }
 
-    public static void convertTo16BitBMP(BufferedImage inputImage, String outputImagePath) throws IOException {
+    public static void convertTo16BitBMP(BufferedImage inputImage) throws IOException {
         // Create a new BufferedImage with 16-bit color model
         BufferedImage outputImage = new BufferedImage(inputImage.getWidth(), inputImage.getHeight(),
                 BufferedImage.TYPE_USHORT_565_RGB);
@@ -39,7 +39,6 @@ public class Converter {
         }
 
         // Save the 16-bit BMP file
-        ImageIO.write(outputImage, "BMP", new File(outputImagePath));
     }
 
     public static void applyStitchTexture(BufferedImage baseImage, BufferedImage textureImage) {
