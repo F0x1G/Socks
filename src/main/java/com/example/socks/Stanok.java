@@ -88,7 +88,7 @@ public class Stanok {
             int[][] matImage = AbstraktSelection.convertToColorIndices(image);
             matImage = MatrixCheck(matImage, matImage[0].length, matImage.length, Sta1);
             if (contains99(matImage)) {
-                if(calculatePercentage(matImage)>10) {
+                if(calculatePercentage(matImage)>5) {
                     image = AbstraktSelection.EasySimplifier(image, a);
                 }else {
                     matImage = replace99WithLeftNeighbor(matImage);
@@ -570,7 +570,7 @@ public class Stanok {
                                         if (isFool(serchFool)) {
                                             serchFool = replaceElement(serchFool,s);
                                             int targetValue = -1;
-                                            int r =0;
+                                            int r;
                                             for (r=0;r<serchFool.length;r++){
                                                 if(serchFool[r]==targetValue){
                                                     serchFool[r] = s;
@@ -609,12 +609,14 @@ public class Stanok {
                                     StanokWork[kordi[y][0]] = true;
                                     StartImg[i][j] = 120000 + ((kordi[y][0] * 10) + kordi[y][1]);
                                     stop = true;
+                                }else {
+                                    stop = false;
                                 }
                             }else {
                                 if(!StanokWork[kordi[y][0]]){
                                     StanokWork[kordi[y][0]] = true;
                                     StartImg[i][j] = 120000 + ((kordi[y][0] * 10) + kordi[y][1]);
-                                    stop = true;;
+                                    stop = true;
                                 }else {
                                     StartImg[i][j] = 120000 + ((kordi[y][0] * 10) + kordi[y][1]);
                                     stop = true;
@@ -635,7 +637,7 @@ public class Stanok {
                                     if (isFool(serchFool)) {
                                         serchFool = replaceElement(serchFool,s);
                                         int targetValue = -1;
-                                        int r =0;
+                                        int r;
                                         for (r=0;r<serchFool.length;r++){
                                             if(serchFool[r]==targetValue){
                                                 serchFool[r] = s;
@@ -669,7 +671,7 @@ public class Stanok {
                             if (isFool(serchFool)) {
                                 serchFool = replaceElement(serchFool,s);
                                 int targetValue = -1;
-                                int r =0;
+                                int r;
                                 for (r=0;r<serchFool.length;r++){
                                     if(serchFool[r]==targetValue){
                                         serchFool[r] = s;
