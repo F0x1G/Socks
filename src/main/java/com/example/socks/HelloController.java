@@ -128,7 +128,7 @@ public class HelloController {
 
         image1.setPhoto(image);//pislya stanka yaksho true
 
-        photo stanokImg = Converter.StanokVision(image);//pislya stanka yaksho true
+        photo stanokImg = Stanok.trueStanock(image, rejim);//pislya stanka yaksho true
 
         BufferedImage img2 = stanokImg.toBufferedImage();//
         PhotoEdit.saveImage(img2,saveStanokVision);//
@@ -192,71 +192,71 @@ public class HelloController {
         BufferedImage BufOc1 = createImage(col[arr[0][0]]);
         Image ImgOc1 = SwingFXUtils.toFXImage(BufOc1,null);
         Oc1.setImage(ImgOc1);
-        } catch (Exception e) {}
+        } catch (Exception e) {Oc1.setImage(null);}
         try {
             BufferedImage BufDc1 = createImage(col[arr[0][1]]);
             Image ImgDc1 = SwingFXUtils.toFXImage(BufDc1, null);
             Dc1.setImage(ImgDc1);
-        } catch (Exception e) {}
+        } catch (Exception e) {Dc1.setImage(null);}
 
         try {
         BufferedImage BufOc2 = createImage(col[arr[1][0]]);
         Image ImgOc2 = SwingFXUtils.toFXImage(BufOc2,null);
         Oc2.setImage(ImgOc2);
-        } catch (Exception e) {}
+        } catch (Exception e) {Oc2.setImage(null);}
         try {
         BufferedImage BufDc2 = createImage(col[arr[1][1]]);
         Image ImgDc2 = SwingFXUtils.toFXImage(BufDc2,null);
         Dc2.setImage(ImgDc2);
-        } catch (Exception e) {}
+        } catch (Exception e) {Dc2.setImage(null);}
 
         try {
             BufferedImage BufOc3 = createImage(col[arr[2][0]]);
             Image ImgOc3 = SwingFXUtils.toFXImage(BufOc3,null);
             Oc3.setImage(ImgOc3);
-        } catch (Exception e) {}
+        } catch (Exception e) {Oc3.setImage(null);}
         try {
             BufferedImage BufDc3 = createImage(col[arr[2][1]]);
             Image ImgDc3 = SwingFXUtils.toFXImage(BufDc3,null);
             Dc3.setImage(ImgDc3);
-        } catch (Exception e) {}
+        } catch (Exception e) {Dc3.setImage(null);}
         try {
             BufferedImage BufTc3 = createImage(col[arr[2][2]]);
             Image ImgTc3 = SwingFXUtils.toFXImage(BufTc3,null);
             Tc3.setImage(ImgTc3);
-        } catch (Exception e) {}
+        } catch (Exception e) {Tc3.setImage(null);}
 
         try {
             BufferedImage BufOc4 = createImage(col[arr[3][0]]);
             Image ImgOc4 = SwingFXUtils.toFXImage(BufOc4,null);
             Oc4.setImage(ImgOc4);
-        } catch (Exception e) {}
+        } catch (Exception e) {Oc4.setImage(null);}
         try {
             BufferedImage BufDc4 = createImage(col[arr[3][1]]);
             Image ImgDc4 = SwingFXUtils.toFXImage(BufDc4,null);
             Dc4.setImage(ImgDc4);
-        } catch (Exception e) {}
+        } catch (Exception e) {Dc4.setImage(null);}
         try {
             BufferedImage BufTc4 = createImage(col[arr[3][2]]);
             Image ImgTc4 = SwingFXUtils.toFXImage(BufTc4,null);
             Tc4.setImage(ImgTc4);
-        } catch (Exception e) {}
+        } catch (Exception e) {Tc4.setImage(null);}
 
         try {
             BufferedImage BufOc5 = createImage(col[arr[4][0]]);
             Image ImgOc5 = SwingFXUtils.toFXImage(BufOc5,null);
             Oc5.setImage(ImgOc5);
-        } catch (Exception e) {}
+        } catch (Exception e) {Oc5.setImage(null);}
         try {
             BufferedImage BufDc5 = createImage(col[arr[4][1]]);
             Image ImgDc5 = SwingFXUtils.toFXImage(BufDc5,null);
             Dc5.setImage(ImgDc5);
-        } catch (Exception e) {}
+        } catch (Exception e) {Dc5.setImage(null);}
         try {
             BufferedImage BufTc5 = createImage(col[arr[4][2]]);
             Image ImgTc5 = SwingFXUtils.toFXImage(BufTc5,null);
             Tc5.setImage(ImgTc5);
-        } catch (Exception e) {}
+        } catch (Exception e) {Tc5.setImage(null);}
 
         try {
             BufferedImage BufBackGraund = createImage(col[arr[5][0]]);
