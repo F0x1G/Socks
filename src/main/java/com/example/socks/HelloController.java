@@ -121,14 +121,14 @@ public class HelloController {
         image = Stanok.main(image, true,rejim);//pislya Abstrakt, pislya vyboru rejima(pislya zagryzku)(3 flaga)
 
 
-        setcolorSheme(image);
-        RightPanel.setVisible(true);
-
         photo image1 = photo.fromBufferedImage(img);//pislya stanka yaksho true, bez knopky
 
         image1.setPhoto(image);//pislya stanka yaksho true
 
         photo stanokImg = Stanok.trueStanock(image, rejim);//pislya stanka yaksho true
+
+        setcolorSheme(stanokImg);
+        RightPanel.setVisible(true);
 
         BufferedImage img2 = stanokImg.toBufferedImage();//
         PhotoEdit.saveImage(img2,saveStanokVision);//

@@ -42,7 +42,7 @@ public class Stanok {
             int[][] imageMat = AbstraktSelection.convertToColorIndices(image);
             int m = image.getM();
             int n = image.getN();
-            imageMat = MatrixCheck(imageMat, n, m,Sta);
+            imageMat = MatrixCheck(imageMat,Sta);
             imageMat = FindContrast(imageMat);
             image = AbstraktSelection.fromIntMatrix(imageMat);
         }
@@ -86,7 +86,7 @@ public class Stanok {
             a+=0.2 ;
             int[][] Sta1 = ThisRejim(rez);
             int[][] matImage = AbstraktSelection.convertToColorIndices(image);
-            matImage = MatrixCheck(matImage, matImage[0].length, matImage.length, Sta1);
+            matImage = MatrixCheck(matImage, Sta1);
             if (contains99(matImage)) {
                 if(calculatePercentage(matImage)>5) {
                     image = AbstraktSelection.EasySimplifier(image, a);
@@ -156,13 +156,14 @@ public class Stanok {
         return ((double) countOf99 / totalElements) * 100.0;
     }
 
-    public static int[][] MatrixCheck(int[][] StartImg, int m, int n,int[][] Sta) {
+    public static int[][] MatrixCheck(int[][] StartImg,int[][] Sta) {
         int[][] FinishImg = StartImg;
         boolean[] StanokWork = new boolean[6];
         int[] WorkColor = new int[6];
 
+
         Sta[5][0] = backGround(StartImg);
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < StartImg.length; i++) {
             for (int q = 0; q < StanokWork.length; q++) {
                 if(Sta[q][0]!=-2) {
                     StanokWork[q] = false;
@@ -175,7 +176,7 @@ public class Stanok {
                 WorkColor[j] = -1;
             }
 
-            for (int j = 0; j < m; j++) {
+            for (int j = 0; j < StartImg[0].length; j++) {
                 int s = StartImg[i][j];
                 int[][] kordi = searchMatrix(Sta, s);
                 if (kordi != null) {
@@ -195,6 +196,14 @@ public class Stanok {
                                         int[] serchFool = Sta[u];
                                         if (isFool(serchFool)) {
                                             serchFool = replaceElement(serchFool,s);
+                                            int targetValue = -1;
+                                            int r;
+                                            for (r=0;r<serchFool.length;r++){
+                                                if(serchFool[r]==targetValue){
+                                                    serchFool[r] = s;
+                                                    break;
+                                                }
+                                            }
                                             Sta[u] = serchFool;
                                             WorkColor[u] = s;
                                             StanokWork[u] = true;
@@ -222,6 +231,8 @@ public class Stanok {
                                     WorkColor[kordi[y][0]] = Sta[kordi[y][0]][kordi[y][1]];
                                     StanokWork[kordi[y][0]] = true;
                                     stop = true;
+                                }else {
+                                    stop = false;
                                 }
                             }else {
                                 if(!StanokWork[kordi[y][0]]){
@@ -245,6 +256,14 @@ public class Stanok {
                                     int[] serchFool = Sta[u];
                                     if (isFool(serchFool)) {
                                         serchFool = replaceElement(serchFool,s);
+                                        int targetValue = -1;
+                                        int r;
+                                        for (r=0;r<serchFool.length;r++){
+                                            if(serchFool[r]==targetValue){
+                                                serchFool[r] = s;
+                                                break;
+                                            }
+                                        }
                                         Sta[u] = serchFool;
                                         WorkColor[u] = s;
                                         StanokWork[u] = true;
@@ -270,6 +289,14 @@ public class Stanok {
                             int[] serchFool = Sta[u];
                             if (isFool(serchFool)) {
                                 serchFool = replaceElement(serchFool,s);
+                                int targetValue = -1;
+                                int r;
+                                for (r=0;r<serchFool.length;r++){
+                                    if(serchFool[r]==targetValue){
+                                        serchFool[r] = s;
+                                        break;
+                                    }
+                                }
                                 Sta[u] = serchFool;
                                 WorkColor[u] = s;
                                 StanokWork[u] = true;
@@ -581,7 +608,7 @@ public class Stanok {
                                             WorkColor[u] = s;
                                             StanokWork[u] = true;
                                             find = true;
-                                            StartImg[i][j] = 120000 + ((u * 10) + r);
+                                            StartImg[i][j] = 120000 + ((u * 10) + (r-1));
                                             break;
                                         }
                                     }
@@ -648,7 +675,7 @@ public class Stanok {
                                         WorkColor[u] = s;
                                         StanokWork[u] = true;
                                         find = true;
-                                        StartImg[i][j] = 120000 + ((u * 10) + r);
+                                        StartImg[i][j] = 120000 + ((u * 10) + (r-1));
                                         break;
                                     }
                                 }
@@ -682,7 +709,7 @@ public class Stanok {
                                 WorkColor[u] = s;
                                 StanokWork[u] = true;
                                 find = true;
-                                StartImg[i][j] = 120000 + ((u * 10) + r);
+                                StartImg[i][j] = 120000 + ((u * 10) + (r-1));
                                 break;
                             }
                         }
@@ -696,6 +723,8 @@ public class Stanok {
             }
         }
         FinishImg = StartImg;
+        Image.setStanokScheme(Sta);
+        AbstraktSelection.printMatrix(FinishImg);
 
         int[][] coutint = Converter.getIsExisten(FinishImg,119999);
         Color[][] Schema = AbstraktSelection.StanokSheme();
@@ -703,8 +732,9 @@ public class Stanok {
         for(int i=0;i<coutint.length;i++) {
             int[] cord = coutint[i];
             int cor = FinishImg[cord[0]][cord[1]];
-            int x = (int) (cor-120000)/10;
-            int y = (int) ((double)( (cor - 120000) /10)-x)*10;
+            int x = (cor - 120000) / 10;
+            int y = (cor - 120000) % 10;
+            System.out.println(x+" "+y);
             Color newColor = Schema[x][y];
             Image.setPixel(cord[0],cord[1],newColor);
         }
