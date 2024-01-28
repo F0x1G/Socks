@@ -147,8 +147,8 @@ public class HelloController {
         BufferedImage img3 = Converter.PhotoDlaZak(inputImagePath1);
         PhotoEdit.saveImage(img3,ZakajchikcOut);
 
-        int m = img3.getHeight()/2;
-        int n = img3.getWidth()/2;
+        int m = (int) (img3.getHeight()/2.5);
+        int n = (int) (img3.getWidth()/2.5);
         img3 = PhotoEdit.resize(img3,n,m );
 
         Image newImage2 = SwingFXUtils.toFXImage(img3,null);
