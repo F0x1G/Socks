@@ -9,7 +9,7 @@ public class AbstraktSelection {
 
     public static photo main(photo image){
         image = ReplaceColor(image);
-        image = EasySimplifier(image, 1);
+        image = EasySimplifier(image, 1.5);
         return image;
     }
 
@@ -35,7 +35,7 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
     // Рахуємо кількість повторень для кожного елемента в матриці (ігноруємо елемент 99)
     for (int[] row : inputMatrix) {
         for (int element : row) {
-            if (element != 99) {
+            if (element != 9999) {
                 elementCountMap.put(element, elementCountMap.getOrDefault(element, 0) + 1);
             }
         }
@@ -323,21 +323,37 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
                 new Color(180, 0, 0),
                 new Color(127, 0, 0),
                 new Color(60, 0, 0),// 1
+                new Color(90, 20, 0),
                 new Color(120, 40, 0),
+                new Color(160, 80, 0),
                 new Color(200,120,0),
+                new Color(150,90,0),
                 new Color(100,60,0),
+                new Color(75,45,0),
                 new Color(50,30,0), // 3
+                new Color(80,45,0),
                 new Color(120, 60, 0),
+                new Color(150, 75, 0),
+                new Color(180, 90, 0),
+                new Color(215, 100, 0),
                 new Color(255,120,0),
+                new Color(255,140,0),
                 new Color(255,160,0),
                 new Color(255,160,30),
+                new Color(220,140,15),
                 new Color(180,120,0),
+                new Color(120,90,0),
+                new Color(60,60,0),
+                new Color(90,90,0),
                 new Color(127,127,0),
                 new Color(180,180,0),
+                new Color(215,215,0),
                 new Color(255,255,0), // 6
+                new Color(255,255,30),
                 new Color(255,255,60),
                 new Color(255,255,127), // 7
                 new Color(255,255,180),
+                new Color(215,255,170),
                 new Color(180, 255, 160),
                 new Color(127, 255, 127), // 8
                 new Color(60, 200, 60),// 9
@@ -347,32 +363,57 @@ public static int[][] createElementCountMatrix(int[][] inputMatrix) {
                 new Color(0, 60, 0),
                 new Color(0, 80, 30),
                 new Color(0, 100, 75),
+                new Color(0, 150, 115),
                 new Color(0, 200, 150),
+                new Color(0, 170, 135),
                 new Color(0, 127, 127),
+                new Color(0, 150, 150),
                 new Color(0, 170, 170),// 11
+                new Color(0, 215, 215),
                 new Color(0, 255, 255), // 12
                 new Color(150, 255, 255),
                 new Color(127, 127, 255),
+                new Color(85, 127, 255),
                 new Color(50, 127, 255),// 13
+                new Color(25, 90, 255),
                 new Color(0, 60, 255),
+                new Color(0, 30, 255),
                 new Color(0, 0, 255), // 14
+                new Color(0, 0, 215),
                 new Color(0, 0, 180),
+                new Color(0, 0, 150),
                 new Color(0, 0, 127), // 15
+                new Color(0, 0, 90),
                 new Color(0, 0, 60),
+                new Color(0, 0, 30),
                 new Color(30,10,55),
+                new Color(50,15,80),
                 new Color(70,20,113),
+                new Color(100,30,170),
                 new Color(138,43,226), // 16
+                new Color(155,44,190),
                 new Color(170,45,165),
+                new Color(185,47,140),
                 new Color(200,50,110),
+                new Color(213,50,145),
                 new Color(226,50,180),
+                new Color(240,65,200),
                 new Color(255,80,226), // 17
+                new Color(255,100,240),
                 new Color(255,120,255),
+                new Color(255,150,220),
                 new Color(255, 180, 200),
+                new Color(255,200,255),
                 new Color(255, 220, 200), // 18
+                new Color(255,255,230),
                 new Color(255,255,255),// 19
+                new Color(225,225,225),
                 new Color(190,190,190),// 20
+                new Color(150, 150, 150),
                 new Color(127, 127, 127),//21
+                new Color(96, 96, 96),
                 new Color(63, 63, 63),//22
+                new Color(32, 32, 32),
                 new Color(0, 0, 0) // 23
         };
     }

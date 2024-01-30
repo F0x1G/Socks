@@ -109,8 +109,6 @@ public class HelloController {
 
         photo image = photo.fromBufferedImage(img);
 
-        image = AbstraktSelection.main(image);
-
         int rejim = 1;
         String select = (String) comboBox.getValue();
         if(Objects.equals(select, "без C1")){
@@ -118,6 +116,7 @@ public class HelloController {
         } else if (Objects.equals(select, "без C1 і C2")) {
             rejim =3;
         }
+        image = AbstraktSelection.main(image);
         image = Stanok.main(image, true,rejim);//pislya Abstrakt, pislya vyboru rejima(pislya zagryzku)(3 flaga)
 
 

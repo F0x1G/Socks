@@ -1,6 +1,7 @@
 package com.example.socks;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
@@ -66,7 +67,7 @@ public class Stanok {
             ColorsIndex[g]=AbstraktSelection.findColorIndex(thisSchema[g]);
         }
         int res = calculateAverage(ColorsIndex);
-        imageMat = AbstraktSelection.replaceValue(imageMat,99,res);
+        imageMat = AbstraktSelection.replaceValue(imageMat,9999,res);
         return imageMat;
     }
 
@@ -80,18 +81,26 @@ public class Stanok {
 
     public static photo PhotoOptimither(photo image,int rez){
         boolean work = true;
-        double a =1;
+        int a =20;
+        double b = 1.8;
 
         while (work) {
-            a+=0.2 ;
+            image = AbstraktSelection.ReplaceColor(image);
             int[][] Sta1 = ThisRejim(rez);
             int[][] matImage = AbstraktSelection.convertToColorIndices(image);
             matImage = MatrixCheck(matImage, Sta1);
-            if (contains99(matImage)) {
-                if(calculatePercentage(matImage)>4) {
-                    image = AbstraktSelection.EasySimplifier(image, a);
-                }else {
-                    matImage = replace99WithLeftNeighbor(matImage);
+            if (contains9999(matImage)) {
+                if(calculatePercentage(matImage)>27) {
+                    b+=0.1;
+                    image = AbstraktSelection.EasySimplifier(image, b);
+                }else if (calculatePercentage(matImage)>5) {
+                    a -= 1;
+                    BufferedImage img = image.toBufferedImage();
+                    img = SimplifyColors.simplifyColors(img, a);
+                    image = photo.fromBufferedImage(img);
+                    image = AbstraktSelection.ReplaceColor(image);
+                } else{
+                    matImage = replace9999WithLeftNeighbor(matImage);
                     image = AbstraktSelection.fromIntMatrix(matImage);
                 }
 
@@ -103,10 +112,10 @@ public class Stanok {
     }
 
 
-    public static boolean contains99(int[][] matrix) {
+    public static boolean contains9999(int[][] matrix) {
         for (int[] row : matrix) {
             for (int value : row) {
-                if (value == 99) {
+                if (value == 9999) {
                     return true;
                 }
             }
@@ -114,13 +123,13 @@ public class Stanok {
         return false;
     }
 
-    public static int[][] replace99WithLeftNeighbor(int[][] matrix) {
+    public static int[][] replace9999WithLeftNeighbor(int[][] matrix) {
         int rows = matrix.length;
         int cols = matrix[0].length;
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if (matrix[i][j] == 99) {
+                if (matrix[i][j] == 9999) {
                     matrix[i][j] = matrix[i][j-1];
                 }
             }
@@ -139,7 +148,7 @@ public class Stanok {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 totalElements++;
-                if (matrix[i][j] == 99) {
+                if (matrix[i][j] == 9999) {
                     countOf99++;
                 }
             }
@@ -200,10 +209,10 @@ public class Stanok {
                                         }
                                     }
                                     if(!find){
-                                        StartImg[i][j] = 99;
+                                        StartImg[i][j] = 9999;
                                     }
                                 } else {
-                                    StartImg[i][j] = 99;
+                                    StartImg[i][j] = 9999;
                                 }
                             }
                         }else {
@@ -252,10 +261,10 @@ public class Stanok {
                                     }
                                 }
                                 if(!find){
-                                    StartImg[i][j] = 99;
+                                    StartImg[i][j] = 9999;
                                 }
                             } else {
-                                StartImg[i][j] = 99;
+                                StartImg[i][j] = 9999;
                             }
                         }
 
@@ -277,10 +286,10 @@ public class Stanok {
                             }
                         }
                         if(!find){
-                            StartImg[i][j] = 99;
+                            StartImg[i][j] = 9999;
                         }
                     } else {
-                        StartImg[i][j] = 99;
+                        StartImg[i][j] = 9999;
                     }
                 }
             }
@@ -401,6 +410,7 @@ public class Stanok {
     }
 
     public static photo trueStanock (photo Image, int rejim){
+        Image = AbstraktSelection.ReplaceColor(Image);
         int[][] StartImg = AbstraktSelection.convertToColorIndices(Image);
         int[][] FinishImg = StartImg;
         boolean[] StanokWork = new boolean[6];
@@ -454,10 +464,10 @@ public class Stanok {
                                         }
                                     }
                                     if(!find){
-                                        StartImg[i][j] = 99;
+                                        StartImg[i][j] = 9999;
                                     }
                                 } else {
-                                    StartImg[i][j] = 99;
+                                    StartImg[i][j] = 9999;
                                 }
                             }
                         }else {
@@ -515,10 +525,10 @@ public class Stanok {
                                     }
                                 }
                                 if(!find){
-                                    StartImg[i][j] = 99;
+                                    StartImg[i][j] = 9999;
                                 }
                             } else {
-                                StartImg[i][j] = 99;
+                                StartImg[i][j] = 9999;
                             }
                         }
 
@@ -543,10 +553,10 @@ public class Stanok {
                             }
                         }
                         if(!find){
-                            StartImg[i][j] = 99;
+                            StartImg[i][j] = 9999;
                         }
                     } else {
-                        StartImg[i][j] = 99;
+                        StartImg[i][j] = 9999;
                     }
                 }
             }
