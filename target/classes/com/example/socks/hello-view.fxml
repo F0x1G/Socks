@@ -14,7 +14,6 @@
     <HBox id="Buttons" spacing="10" alignment="BOTTOM_LEFT">
         <Button fx:id="Load" text="Оберіть фото" onAction="#handleButtonClick" style="-fx-translate-x: 10; -fx-translate-y: 5;"/>
         <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick" style="-fx-translate-x: 10; -fx-translate-y: 5;"/>
-        <Label fx:id="fileNameLabel" text="" style="-fx-translate-y: 30; -fx-translate-x: -225"/>
         <Button fx:id="seting" text="Показати/Приховати параметри" onAction="#onSettingClick" style="-fx-translate-x: 10; -fx-translate-y: 5;"/>
         <HBox fx:id="Settings" visible="false">
             <TextField fx:id="Q" text="27"/>
@@ -23,7 +22,8 @@
             <TextField fx:id="B" text="1.8"/>
         </HBox>
     </HBox>
-    <HBox id="resize" spacing="10" style="-fx-translate-y: 30">
+    <Label fx:id="fileNameLabel" text=""/>
+    <HBox id="resize" spacing="10">
         <TextField fx:id="LabelM" text="Ширина"/>
         <TextField fx:id="LabelN" text="Висота"/>
         <Button fx:id="ResitheCastom" text="Змінити за заданими значеннями" onAction="#onResClick"/>
