@@ -15,12 +15,16 @@ import javafx.scene.image.Image;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.io.IOException;
@@ -66,6 +70,19 @@ public class HelloController {
     private void initialize() {
         // Встановлення обробника події для ImageView
         Oc1.setOnMouseClicked(event -> {try {onOc1();} catch (IOException e) {throw new RuntimeException(e);}});
+        Dc1.setOnMouseClicked(event -> {try {onDc1();} catch (IOException e) {throw new RuntimeException(e);}});
+        Oc2.setOnMouseClicked(event -> {try {onOc2();} catch (IOException e) {throw new RuntimeException(e);}});
+        Dc2.setOnMouseClicked(event -> {try {onDc2();} catch (IOException e) {throw new RuntimeException(e);}});
+        Oc3.setOnMouseClicked(event -> {try {onOc3();} catch (IOException e) {throw new RuntimeException(e);}});
+        Dc3.setOnMouseClicked(event -> {try {onDc3();} catch (IOException e) {throw new RuntimeException(e);}});
+        Tc3.setOnMouseClicked(event -> {try {onTc3();} catch (IOException e) {throw new RuntimeException(e);}});
+        Oc4.setOnMouseClicked(event -> {try {onOc4();} catch (IOException e) {throw new RuntimeException(e);}});
+        Dc4.setOnMouseClicked(event -> {try {onDc4();} catch (IOException e) {throw new RuntimeException(e);}});
+        Tc4.setOnMouseClicked(event -> {try {onTc4();} catch (IOException e) {throw new RuntimeException(e);}});
+        Oc5.setOnMouseClicked(event -> {try {onOc5();} catch (IOException e) {throw new RuntimeException(e);}});
+        Dc5.setOnMouseClicked(event -> {try {onDc5();} catch (IOException e) {throw new RuntimeException(e);}});
+        Tc5.setOnMouseClicked(event -> {try {onTc5();} catch (IOException e) {throw new RuntimeException(e);}});
+        BackGraund.setOnMouseClicked(event -> {try {onBackGraund();} catch (IOException e) {throw new RuntimeException(e);}});
 
     }
     @FXML
@@ -190,7 +207,7 @@ public class HelloController {
     @FXML
     private ImageView Oc1;
     private void onOc1() throws IOException {
-        showColorChooserDialog();
+        showColorChooserDialog(selectedColor -> {
         Color color2 = selectedColor;
         Color[][] color1 =  AbstraktSelection.StanokSheme();
         Image imge = ImageStanok.getImage();
@@ -217,33 +234,484 @@ public class HelloController {
 
         Image newImage2 = SwingFXUtils.toFXImage(img3,null);
         Zakathchick.setImage(newImage2);
+    });
+
     }
     @FXML
     private ImageView Dc1;
+    private void onDc1() throws IOException {
+        try {
+        showColorChooserDialog(selectedColor -> {
+            Color color2 = selectedColor;
+            Color[][] color1 =  AbstraktSelection.StanokSheme();
+            Image imge = ImageStanok.getImage();
+            BufferedImage image1 = SwingFXUtils.fromFXImage(imge,null);
+            Image imge1 = imageView.getImage();
+            BufferedImage image2 = SwingFXUtils.fromFXImage(imge1,null);
+
+            BufferedImage finish = AdvancedReplaceColor(image1,image2,color1[0][1],color2);
+
+            try {
+                BufferedImage BufOc1 = createImage(color2);
+                Image ImgOc1 = SwingFXUtils.toFXImage(BufOc1,null);
+                Dc1.setImage(ImgOc1);
+            } catch (Exception e) {Dc1.setImage(null);}
+
+            Image newImage = SwingFXUtils.toFXImage(finish,null);
+            imageView.setImage(newImage);
+
+            BufferedImage img3 = Converter.PhotoDlaZak(finish);
+
+            int m = (int) (img3.getHeight()/2.5);
+            int n = (int) (img3.getWidth()/2.5);
+            img3 = PhotoEdit.resize(img3,n,m );
+
+            Image newImage2 = SwingFXUtils.toFXImage(img3,null);
+            Zakathchick.setImage(newImage2);
+        });
+    }catch (Exception e){
+
+    }
+    }
     @FXML
     private ImageView Oc2;
+    private void onOc2() throws IOException {
+        try {
+        showColorChooserDialog(selectedColor -> {
+            Color color2 = selectedColor;
+            Color[][] color1 =  AbstraktSelection.StanokSheme();
+            Image imge = ImageStanok.getImage();
+            BufferedImage image1 = SwingFXUtils.fromFXImage(imge,null);
+            Image imge1 = imageView.getImage();
+            BufferedImage image2 = SwingFXUtils.fromFXImage(imge1,null);
+
+            BufferedImage finish = AdvancedReplaceColor(image1,image2,color1[1][0],color2);
+
+            try {
+                BufferedImage BufOc1 = createImage(color2);
+                Image ImgOc1 = SwingFXUtils.toFXImage(BufOc1,null);
+                Oc2.setImage(ImgOc1);
+            } catch (Exception e) {Oc2.setImage(null);}
+
+            Image newImage = SwingFXUtils.toFXImage(finish,null);
+            imageView.setImage(newImage);
+
+            BufferedImage img3 = Converter.PhotoDlaZak(finish);
+
+            int m = (int) (img3.getHeight()/2.5);
+            int n = (int) (img3.getWidth()/2.5);
+            img3 = PhotoEdit.resize(img3,n,m );
+
+            Image newImage2 = SwingFXUtils.toFXImage(img3,null);
+            Zakathchick.setImage(newImage2);
+        });
+    }catch (Exception e){
+
+    }
+    }
+
     @FXML
     private ImageView Dc2;
+    private void onDc2() throws IOException {
+        try {
+        showColorChooserDialog(selectedColor -> {
+            Color color2 = selectedColor;
+            Color[][] color1 =  AbstraktSelection.StanokSheme();
+            Image imge = ImageStanok.getImage();
+            BufferedImage image1 = SwingFXUtils.fromFXImage(imge,null);
+            Image imge1 = imageView.getImage();
+            BufferedImage image2 = SwingFXUtils.fromFXImage(imge1,null);
+
+            BufferedImage finish = AdvancedReplaceColor(image1,image2,color1[1][1],color2);
+
+            try {
+                BufferedImage BufOc1 = createImage(color2);
+                Image ImgOc1 = SwingFXUtils.toFXImage(BufOc1,null);
+                Dc2.setImage(ImgOc1);
+            } catch (Exception e) {Dc2.setImage(null);}
+
+            Image newImage = SwingFXUtils.toFXImage(finish,null);
+            imageView.setImage(newImage);
+
+            BufferedImage img3 = Converter.PhotoDlaZak(finish);
+
+            int m = (int) (img3.getHeight()/2.5);
+            int n = (int) (img3.getWidth()/2.5);
+            img3 = PhotoEdit.resize(img3,n,m );
+
+            Image newImage2 = SwingFXUtils.toFXImage(img3,null);
+            Zakathchick.setImage(newImage2);
+        });
+    }catch (Exception e){
+
+    }
+    }
+
     @FXML
     private ImageView Oc3;
+
+    private void onOc3() throws IOException {
+        try {
+        showColorChooserDialog(selectedColor -> {
+            Color color2 = selectedColor;
+            Color[][] color1 =  AbstraktSelection.StanokSheme();
+            Image imge = ImageStanok.getImage();
+            BufferedImage image1 = SwingFXUtils.fromFXImage(imge,null);
+            Image imge1 = imageView.getImage();
+            BufferedImage image2 = SwingFXUtils.fromFXImage(imge1,null);
+
+            BufferedImage finish = AdvancedReplaceColor(image1,image2,color1[2][0],color2);
+
+            try {
+                BufferedImage BufOc1 = createImage(color2);
+                Image ImgOc1 = SwingFXUtils.toFXImage(BufOc1,null);
+                Oc3.setImage(ImgOc1);
+            } catch (Exception e) {Oc3.setImage(null);}
+
+            Image newImage = SwingFXUtils.toFXImage(finish,null);
+            imageView.setImage(newImage);
+
+            BufferedImage img3 = Converter.PhotoDlaZak(finish);
+
+            int m = (int) (img3.getHeight()/2.5);
+            int n = (int) (img3.getWidth()/2.5);
+            img3 = PhotoEdit.resize(img3,n,m );
+
+            Image newImage2 = SwingFXUtils.toFXImage(img3,null);
+            Zakathchick.setImage(newImage2);
+        });
+    }catch (Exception e){
+
+    }
+    }
+
     @FXML
     private ImageView Dc3;
+    private void onDc3() throws IOException {
+        try {
+        showColorChooserDialog(selectedColor -> {
+            Color color2 = selectedColor;
+            Color[][] color1 =  AbstraktSelection.StanokSheme();
+            Image imge = ImageStanok.getImage();
+            BufferedImage image1 = SwingFXUtils.fromFXImage(imge,null);
+            Image imge1 = imageView.getImage();
+            BufferedImage image2 = SwingFXUtils.fromFXImage(imge1,null);
+
+            BufferedImage finish = AdvancedReplaceColor(image1,image2,color1[2][1],color2);
+
+            try {
+                BufferedImage BufOc1 = createImage(color2);
+                Image ImgOc1 = SwingFXUtils.toFXImage(BufOc1,null);
+                Dc3.setImage(ImgOc1);
+            } catch (Exception e) {Dc3.setImage(null);}
+
+            Image newImage = SwingFXUtils.toFXImage(finish,null);
+            imageView.setImage(newImage);
+
+            BufferedImage img3 = Converter.PhotoDlaZak(finish);
+
+            int m = (int) (img3.getHeight()/2.5);
+            int n = (int) (img3.getWidth()/2.5);
+            img3 = PhotoEdit.resize(img3,n,m );
+
+            Image newImage2 = SwingFXUtils.toFXImage(img3,null);
+            Zakathchick.setImage(newImage2);
+        });
+    }catch (Exception e){
+
+    }
+    }
     @FXML
     private ImageView Tc3;
+    private void onTc3() throws IOException {
+        try {
+        showColorChooserDialog(selectedColor -> {
+            Color color2 = selectedColor;
+            Color[][] color1 =  AbstraktSelection.StanokSheme();
+            Image imge = ImageStanok.getImage();
+            BufferedImage image1 = SwingFXUtils.fromFXImage(imge,null);
+            Image imge1 = imageView.getImage();
+            BufferedImage image2 = SwingFXUtils.fromFXImage(imge1,null);
+
+            BufferedImage finish = AdvancedReplaceColor(image1,image2,color1[2][2],color2);
+
+            try {
+                BufferedImage BufOc1 = createImage(color2);
+                Image ImgOc1 = SwingFXUtils.toFXImage(BufOc1,null);
+                Tc3.setImage(ImgOc1);
+            } catch (Exception e) {Tc3.setImage(null);}
+
+            Image newImage = SwingFXUtils.toFXImage(finish,null);
+            imageView.setImage(newImage);
+
+            BufferedImage img3 = Converter.PhotoDlaZak(finish);
+
+            int m = (int) (img3.getHeight()/2.5);
+            int n = (int) (img3.getWidth()/2.5);
+            img3 = PhotoEdit.resize(img3,n,m );
+
+            Image newImage2 = SwingFXUtils.toFXImage(img3,null);
+            Zakathchick.setImage(newImage2);
+        });
+    }catch (Exception e){
+
+    }
+    }
     @FXML
     private ImageView Oc4;
+    private void onOc4() throws IOException {
+        try {
+        showColorChooserDialog(selectedColor -> {
+            Color color2 = selectedColor;
+            Color[][] color1 =  AbstraktSelection.StanokSheme();
+            Image imge = ImageStanok.getImage();
+            BufferedImage image1 = SwingFXUtils.fromFXImage(imge,null);
+            Image imge1 = imageView.getImage();
+            BufferedImage image2 = SwingFXUtils.fromFXImage(imge1,null);
+
+            BufferedImage finish = AdvancedReplaceColor(image1,image2,color1[3][0],color2);
+
+            try {
+                BufferedImage BufOc1 = createImage(color2);
+                Image ImgOc1 = SwingFXUtils.toFXImage(BufOc1,null);
+                Oc4.setImage(ImgOc1);
+            } catch (Exception e) {Oc4.setImage(null);}
+
+            Image newImage = SwingFXUtils.toFXImage(finish,null);
+            imageView.setImage(newImage);
+
+            BufferedImage img3 = Converter.PhotoDlaZak(finish);
+
+            int m = (int) (img3.getHeight()/2.5);
+            int n = (int) (img3.getWidth()/2.5);
+            img3 = PhotoEdit.resize(img3,n,m );
+
+            Image newImage2 = SwingFXUtils.toFXImage(img3,null);
+            Zakathchick.setImage(newImage2);
+        });
+    }catch (Exception e){
+
+    }
+    }
     @FXML
     private ImageView Dc4;
+    private void onDc4() throws IOException {
+        try {
+        showColorChooserDialog(selectedColor -> {
+            Color color2 = selectedColor;
+            Color[][] color1 =  AbstraktSelection.StanokSheme();
+            Image imge = ImageStanok.getImage();
+            BufferedImage image1 = SwingFXUtils.fromFXImage(imge,null);
+            Image imge1 = imageView.getImage();
+            BufferedImage image2 = SwingFXUtils.fromFXImage(imge1,null);
+
+            BufferedImage finish = AdvancedReplaceColor(image1,image2,color1[3][1],color2);
+
+            try {
+                BufferedImage BufOc1 = createImage(color2);
+                Image ImgOc1 = SwingFXUtils.toFXImage(BufOc1,null);
+                Dc4.setImage(ImgOc1);
+            } catch (Exception e) {Dc4.setImage(null);}
+
+            Image newImage = SwingFXUtils.toFXImage(finish,null);
+            imageView.setImage(newImage);
+
+            BufferedImage img3 = Converter.PhotoDlaZak(finish);
+
+            int m = (int) (img3.getHeight()/2.5);
+            int n = (int) (img3.getWidth()/2.5);
+            img3 = PhotoEdit.resize(img3,n,m );
+
+            Image newImage2 = SwingFXUtils.toFXImage(img3,null);
+            Zakathchick.setImage(newImage2);
+        });
+    }catch (Exception e){
+
+    }
+    }
     @FXML
     private ImageView Tc4;
+    private void onTc4() throws IOException {
+        try {
+        showColorChooserDialog(selectedColor -> {
+            Color color2 = selectedColor;
+            Color[][] color1 =  AbstraktSelection.StanokSheme();
+            Image imge = ImageStanok.getImage();
+            BufferedImage image1 = SwingFXUtils.fromFXImage(imge,null);
+            Image imge1 = imageView.getImage();
+            BufferedImage image2 = SwingFXUtils.fromFXImage(imge1,null);
+
+            BufferedImage finish = AdvancedReplaceColor(image1,image2,color1[3][2],color2);
+
+            try {
+                BufferedImage BufOc1 = createImage(color2);
+                Image ImgOc1 = SwingFXUtils.toFXImage(BufOc1,null);
+                Tc3.setImage(ImgOc1);
+            } catch (Exception e) {Tc3.setImage(null);}
+
+            Image newImage = SwingFXUtils.toFXImage(finish,null);
+            imageView.setImage(newImage);
+
+            BufferedImage img3 = Converter.PhotoDlaZak(finish);
+
+            int m = (int) (img3.getHeight()/2.5);
+            int n = (int) (img3.getWidth()/2.5);
+            img3 = PhotoEdit.resize(img3,n,m );
+
+            Image newImage2 = SwingFXUtils.toFXImage(img3,null);
+            Zakathchick.setImage(newImage2);
+        });
+    }catch (Exception e){
+
+    }
+    }
+
     @FXML
     private ImageView Oc5;
+    private void onOc5() throws IOException {
+        try {
+        showColorChooserDialog(selectedColor -> {
+            Color color2 = selectedColor;
+            Color[][] color1 =  AbstraktSelection.StanokSheme();
+            Image imge = ImageStanok.getImage();
+            BufferedImage image1 = SwingFXUtils.fromFXImage(imge,null);
+            Image imge1 = imageView.getImage();
+            BufferedImage image2 = SwingFXUtils.fromFXImage(imge1,null);
+
+            BufferedImage finish = AdvancedReplaceColor(image1,image2,color1[4][0],color2);
+
+            try {
+                BufferedImage BufOc1 = createImage(color2);
+                Image ImgOc1 = SwingFXUtils.toFXImage(BufOc1,null);
+                Oc5.setImage(ImgOc1);
+            } catch (Exception e) {Oc5.setImage(null);}
+
+            Image newImage = SwingFXUtils.toFXImage(finish,null);
+            imageView.setImage(newImage);
+
+            BufferedImage img3 = Converter.PhotoDlaZak(finish);
+
+            int m = (int) (img3.getHeight()/2.5);
+            int n = (int) (img3.getWidth()/2.5);
+            img3 = PhotoEdit.resize(img3,n,m );
+
+            Image newImage2 = SwingFXUtils.toFXImage(img3,null);
+            Zakathchick.setImage(newImage2);
+        });
+    }catch (Exception e){
+
+    }
+    }
     @FXML
     private ImageView Dc5;
+    private void onDc5() throws IOException {
+        try {
+        showColorChooserDialog(selectedColor -> {
+            Color color2 = selectedColor;
+            Color[][] color1 =  AbstraktSelection.StanokSheme();
+            Image imge = ImageStanok.getImage();
+            BufferedImage image1 = SwingFXUtils.fromFXImage(imge,null);
+            Image imge1 = imageView.getImage();
+            BufferedImage image2 = SwingFXUtils.fromFXImage(imge1,null);
+
+            BufferedImage finish = AdvancedReplaceColor(image1,image2,color1[4][1],color2);
+
+            try {
+                BufferedImage BufOc1 = createImage(color2);
+                Image ImgOc1 = SwingFXUtils.toFXImage(BufOc1,null);
+                Dc5.setImage(ImgOc1);
+            } catch (Exception e) {Dc5.setImage(null);}
+
+            Image newImage = SwingFXUtils.toFXImage(finish,null);
+            imageView.setImage(newImage);
+
+            BufferedImage img3 = Converter.PhotoDlaZak(finish);
+
+            int m = (int) (img3.getHeight()/2.5);
+            int n = (int) (img3.getWidth()/2.5);
+            img3 = PhotoEdit.resize(img3,n,m );
+
+            Image newImage2 = SwingFXUtils.toFXImage(img3,null);
+            Zakathchick.setImage(newImage2);
+        });
+    }catch (Exception e){
+
+    }
+    }
     @FXML
     private ImageView Tc5;
+    private void onTc5() throws IOException {
+        try {
+        showColorChooserDialog(selectedColor -> {
+            Color color2 = selectedColor;
+            Color[][] color1 =  AbstraktSelection.StanokSheme();
+            Image imge = ImageStanok.getImage();
+            BufferedImage image1 = SwingFXUtils.fromFXImage(imge,null);
+            Image imge1 = imageView.getImage();
+            BufferedImage image2 = SwingFXUtils.fromFXImage(imge1,null);
+
+            BufferedImage finish = AdvancedReplaceColor(image1,image2,color1[4][2],color2);
+
+            try {
+                BufferedImage BufOc1 = createImage(color2);
+                Image ImgOc1 = SwingFXUtils.toFXImage(BufOc1,null);
+                Tc5.setImage(ImgOc1);
+            } catch (Exception e) {Tc5.setImage(null);}
+
+            Image newImage = SwingFXUtils.toFXImage(finish,null);
+            imageView.setImage(newImage);
+
+            BufferedImage img3 = Converter.PhotoDlaZak(finish);
+
+            int m = (int) (img3.getHeight()/2.5);
+            int n = (int) (img3.getWidth()/2.5);
+            img3 = PhotoEdit.resize(img3,n,m );
+
+            Image newImage2 = SwingFXUtils.toFXImage(img3,null);
+            Zakathchick.setImage(newImage2);
+        });
+    }catch (Exception e){
+
+    }
+    }
     @FXML
     private ImageView BackGraund;
+    private void onBackGraund() throws IOException {
+        try {
+            showColorChooserDialog(selectedColor -> {
+                Color color2 = selectedColor;
+                Color[][] color1 = AbstraktSelection.StanokSheme();
+                Image imge = ImageStanok.getImage();
+                BufferedImage image1 = SwingFXUtils.fromFXImage(imge, null);
+                Image imge1 = imageView.getImage();
+                BufferedImage image2 = SwingFXUtils.fromFXImage(imge1, null);
+
+                BufferedImage finish = AdvancedReplaceColor(image1, image2, color1[5][0], color2);
+
+                try {
+                    BufferedImage BufOc1 = createImage(color2);
+                    Image ImgOc1 = SwingFXUtils.toFXImage(BufOc1, null);
+                    BackGraund.setImage(ImgOc1);
+                } catch (Exception e) {
+                    BackGraund.setImage(null);
+                }
+
+                Image newImage = SwingFXUtils.toFXImage(finish, null);
+                imageView.setImage(newImage);
+
+                BufferedImage img3 = Converter.PhotoDlaZak(finish);
+
+                int m = (int) (img3.getHeight() / 2.5);
+                int n = (int) (img3.getWidth() / 2.5);
+                img3 = PhotoEdit.resize(img3, n, m);
+
+                Image newImage2 = SwingFXUtils.toFXImage(img3, null);
+                Zakathchick.setImage(newImage2);
+            });
+        }catch (Exception e){
+
+        }
+    }
 
 
     private void setcolorSheme(photo Image){
@@ -407,61 +875,87 @@ public class HelloController {
         LabelN.setText(String.valueOf(height));
     }
 
-    public static void showColorChooserDialog() {
-        // Створюємо об'єкт JFrame (можна використовувати існуючий вікно)
-        JFrame frame = new JFrame("Color Chooser Example");
+    public interface Callback<T> {
+            void call (T result) throws IOException;
+    }
 
-        // Створюємо JButton, який викличе вікно палітри
-        JButton chooseColorButton = new JButton("Choose Color");
+    public static void showColorChooserDialog(Callback<Color> callback) {
+        try {
+            // Створюємо об'єкт JFrame (можна використовувати існуючий вікно)
+            JFrame frame = new JFrame("Color Chooser Example");
 
-        // Додаємо слухача подій до кнопки
-        chooseColorButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                try {
-                    // Відображаємо вікно палітри та зберігаємо вибраний колір
-                    selectedColor = JColorChooser.showDialog(frame, "Choose a Color", Color.BLACK);
+            // Створюємо JButton, який викличе вікно палітри
+            JButton chooseColorButton = new JButton("Choose Color");
 
-                    // Перевіряємо, чи колір не є null (користувач скасував вибір)
-                    if (selectedColor != null) {
-                        // Викликаємо додаткові дії з вибраним кольором, якщо потрібно
-                        // Наприклад, можна викликати інший метод з обраним колором
+            // Додаємо слухача подій до кнопки
+            chooseColorButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                    try {
+                        // Відображаємо вікно палітри та зберігаємо вибраний колір
+                        selectedColor = JColorChooser.showDialog(frame, "Choose a Color", Color.BLACK);
 
-                        // Закриваємо вікно палітри
-                        frame.dispose();
+                        // Перевіряємо, чи колір не є null (користувач скасував вибір)
+                        if (selectedColor != null) {
+                            // Викликаємо додаткові дії з вибраним кольором, якщо потрібно
+                            // Наприклад, можна викликати інший метод з обраним колором
+
+                            // Закриваємо вікно палітри
+                            frame.dispose();
+
+                        }
+                        callback.call(selectedColor);
+                    } catch (Exception t) {
+
                     }
-                }catch (Exception t){
-
                 }
-            }
-        });
+            });
+            frame.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    // Викликаємо callback та закриваємо вікно
+                    try {
+                        callback.call(selectedColor);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    frame.dispose();
+                }
+            });
 
-        // Додаємо кнопку до вікна
-        frame.add(chooseColorButton);
+            // Додаємо кнопку до вікна
+            frame.add(chooseColorButton);
 
-        // Налаштовуємо параметри вікна
-        frame.setSize(300, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new FlowLayout());
-        frame.setAlwaysOnTop(true);
-        frame.setVisible(true);
+            // Налаштовуємо параметри вікна
+            frame.setSize(300, 200);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setLayout(new FlowLayout());
+            frame.setAlwaysOnTop(true);
+            frame.setVisible(true);
+        }catch (Exception e){
+
+        }
     }
 
     public static BufferedImage AdvancedReplaceColor(BufferedImage image1, BufferedImage image2, Color color1, Color color2) {
-        int width = image1.getWidth();
-        int height = image1.getHeight();
+        try {
+            int width = image1.getWidth();
+            int height = image1.getHeight();
 
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                // Отримуємо колір пікселя з першого зображення
-                Color currentColor = new Color(image1.getRGB(x, y));
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    // Отримуємо колір пікселя з першого зображення
+                    Color currentColor = new Color(image1.getRGB(x, y));
 
-                // Порівнюємо колір пікселя з першого зображення з переданим колором
-                if (currentColor.equals(color1)) {
-                    // Якщо колір співпадає, то замінюємо піксель на відповідний колір з другого зображення
-                    image2.setRGB(x, y, color2.getRGB());
+                    // Порівнюємо колір пікселя з першого зображення з переданим колором
+                    if (currentColor.equals(color1)) {
+                        // Якщо колір співпадає, то замінюємо піксель на відповідний колір з другого зображення
+                        image2.setRGB(x, y, color2.getRGB());
+                    }
                 }
             }
+        }catch (Exception e){
+
         }
         return image2;
     }
