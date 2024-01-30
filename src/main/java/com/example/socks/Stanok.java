@@ -34,11 +34,11 @@ public class Stanok {
         return Sta;
     }
 
-    public static photo main(photo image,boolean optimathe,int rejim) {
+    public static photo main(photo image,boolean optimathe,int rejim, int Q, double T, int S, double B) {
         int[][] Sta = ThisRejim(rejim);
 
         if(optimathe){
-            image = PhotoOptimither(image, rejim);
+            image = PhotoOptimither(image, rejim, Q,T,S,B);
         }else {
             int[][] imageMat = AbstraktSelection.convertToColorIndices(image);
             int m = image.getM();
@@ -79,10 +79,10 @@ public class Stanok {
         return sum / array.length;
     }
 
-    public static photo PhotoOptimither(photo image,int rez){
+    public static photo PhotoOptimither(photo image,int rez, int Q, double T, int S, double b){
         boolean work = true;
         int a =20;
-        double b = 1.8;
+        //b = 1.8;
 
         while (work) {
             image = AbstraktSelection.ReplaceColor(image);
@@ -90,10 +90,10 @@ public class Stanok {
             int[][] matImage = AbstraktSelection.convertToColorIndices(image);
             matImage = MatrixCheck(matImage, Sta1);
             if (contains9999(matImage)) {
-                if(calculatePercentage(matImage)>27) {
-                    b+=0.1;
+                if(calculatePercentage(matImage)>Q) {//27
+                    b+=T;//0.2-0.1
                     image = AbstraktSelection.EasySimplifier(image, b);
-                }else if (calculatePercentage(matImage)>5) {
+                }else if (calculatePercentage(matImage)>S) {//5
                     a -= 1;
                     BufferedImage img = image.toBufferedImage();
                     img = SimplifyColors.simplifyColors(img, a);

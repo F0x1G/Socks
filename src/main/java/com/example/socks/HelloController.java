@@ -53,6 +53,25 @@ public class HelloController {
     private VBox RightPanel;
 
     @FXML
+    private HBox Settings;
+    @FXML
+    private TextField Q;
+    @FXML
+    private TextField T;
+    @FXML
+    private TextField S;
+    @FXML
+    private TextField B;
+    @FXML
+    private void onSettingClick(ActionEvent event) throws IOException{
+        Q.setText("27");
+        T.setText("0.2");
+        S.setText("5");
+        B.setText("1.8");
+        Settings.setVisible(!Settings.isVisible());
+    }
+
+    @FXML
     private void onStartClick(ActionEvent event) throws IOException {
         // Get the stage from the action event
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -117,7 +136,15 @@ public class HelloController {
             rejim =3;
         }
         image = AbstraktSelection.main(image);
-        image = Stanok.main(image, true,rejim);//pislya Abstrakt, pislya vyboru rejima(pislya zagryzku)(3 flaga)
+
+
+        int q = Integer.parseInt(Q.getText());
+        double t = Double.parseDouble(T.getText());
+        int s = Integer.parseInt(S.getText());
+        double b = Double.parseDouble(B.getText());
+
+
+        image = Stanok.main(image, true,rejim,q,t,s,b);
 
 
         photo image1 = photo.fromBufferedImage(img);//pislya stanka yaksho true, bez knopky
