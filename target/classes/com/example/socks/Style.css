@@ -92,3 +92,12 @@
 #zamovnyk {
     -fx-background-color: #5dc7bc;
 }
+#setting{
+    -fx-font-size: 14;
+    -fx-background-color: #8bc1fa;
+    -fx-text-fill: #000000;
+    -fx-border-color: #00ff84;
+    -fx-border-width: 1;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}

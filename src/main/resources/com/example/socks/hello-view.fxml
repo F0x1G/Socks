@@ -10,17 +10,25 @@
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
 <?import javafx.scene.layout.HBox?>
-<VBox id="main" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.socks.HelloController" spacing="15" stylesheets="@Style.css">
-    <HBox id="Buttons" spacing="10" alignment="BOTTOM_LEFT">
-        <Button fx:id="Load" text="Оберіть фото" onAction="#handleButtonClick" style="-fx-translate-x: 10; -fx-translate-y: 5;"/>
-        <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick" style="-fx-translate-x: 10; -fx-translate-y: 5;"/>
-        <Button fx:id="seting" text="Показати/Приховати параметри" onAction="#onSettingClick" style="-fx-translate-x: 10; -fx-translate-y: 5;"/>
-        <HBox fx:id="Settings" visible="false">
-            <TextField fx:id="Q" text="27"/>
-            <TextField fx:id="T" text="0.2"/>
-            <TextField fx:id="S" text="5"/>
-            <TextField fx:id="B" text="1.8"/>
-        </HBox>
+<VBox id="main" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.socks.HelloController" spacing="10" stylesheets="@Style.css">
+    <HBox id="Buttons" spacing="10">
+        <Button fx:id="Load" text="Оберіть фото" onAction="#handleButtonClick" style="-fx-translate-x: 10; -fx-translate-y: 20;"/>
+        <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick" style="-fx-translate-x: 10; -fx-translate-y: 20;"/>
+        <Button fx:id="setting" text="Показати/Приховати параметри" onAction="#onSettingClick" style="-fx-translate-x: 10; -fx-translate-y: 20;"/>
+        <VBox fx:id="Settings" visible="false" style="-fx-translate-y: 20;">
+            <HBox>
+                <TextField fx:id="Q" text="27" style="-fx-translate-x: 6;"/>
+                <TextField fx:id="T" text="0.2" style="-fx-translate-x: 30;"/>
+                <TextField fx:id="S" text="5" style="-fx-translate-x: 53;"/>
+                <TextField fx:id="B" text="1.8" style="-fx-translate-x: 63;"/>
+            </HBox>
+            <HBox>
+                    <Label fx:id="Qlabel" text="Межа глобального підбору" style="-fx-translate-x: 3;"/>
+                    <Label fx:id="Tlabel" text="Крок глобального спрощення" style="-fx-translate-x: 18;"/>
+                    <Label fx:id="Slabel" text="Нижня межа закін. підбору" style="-fx-translate-x: 30;"/>
+                    <Label fx:id="Blabel" text="Нач. спрощення глоб. підбору" style="-fx-translate-x: 40;"/>
+            </HBox>
+        </VBox>
     </HBox>
     <Label fx:id="fileNameLabel" text=""/>
     <HBox id="resize" spacing="10">
@@ -49,7 +57,7 @@
         </HBox>
         <VBox id="RightPanel" visible="false" fx:id="RightPanel">
             <HBox>
-                <Label text="c1:" style="-fx-translate-y: 0; -fx-translate-x: 0" />
+                <Label text="c1:" style="-fx-translate-y: 0; -fx-translate-x: 0"/>
                 <ImageView fx:id="Oc1" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
                 <ImageView fx:id="Dc1" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
             </HBox>
