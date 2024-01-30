@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
@@ -21,10 +22,12 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.io.IOException;
 import java.util.Objects;
 
 public class HelloController {
+    private static Color selectedColor;
     @FXML
     private Button Load;
     @FXML
@@ -43,15 +46,12 @@ public class HelloController {
     private void handleButtonClick(ActionEvent event) {
         openFileChooser();
     }
-
     @FXML
     private TextField LabelM;
     @FXML
     private TextField LabelN;
-
     @FXML
     private VBox RightPanel;
-
     @FXML
     private HBox Settings;
     @FXML
@@ -62,6 +62,12 @@ public class HelloController {
     private TextField S;
     @FXML
     private TextField B;
+    @FXML
+    private void initialize() {
+        // Встановлення обробника події для ImageView
+        Oc1.setOnMouseClicked(event -> {try {onOc1();} catch (IOException e) {throw new RuntimeException(e);}});
+
+    }
     @FXML
     private void onSettingClick(ActionEvent event) throws IOException{
         Q.setText("27");
@@ -183,6 +189,35 @@ public class HelloController {
 
     @FXML
     private ImageView Oc1;
+    private void onOc1() throws IOException {
+        showColorChooserDialog();
+        Color color2 = selectedColor;
+        Color[][] color1 =  AbstraktSelection.StanokSheme();
+        Image imge = ImageStanok.getImage();
+        BufferedImage image1 = SwingFXUtils.fromFXImage(imge,null);
+        Image imge1 = imageView.getImage();
+        BufferedImage image2 = SwingFXUtils.fromFXImage(imge1,null);
+
+        BufferedImage finish = AdvancedReplaceColor(image1,image2,color1[0][0],color2);
+
+        try {
+            BufferedImage BufOc1 = createImage(color2);
+            Image ImgOc1 = SwingFXUtils.toFXImage(BufOc1,null);
+            Oc1.setImage(ImgOc1);
+        } catch (Exception e) {Oc1.setImage(null);}
+
+        Image newImage = SwingFXUtils.toFXImage(finish,null);
+        imageView.setImage(newImage);
+
+        BufferedImage img3 = Converter.PhotoDlaZak(finish);
+
+        int m = (int) (img3.getHeight()/2.5);
+        int n = (int) (img3.getWidth()/2.5);
+        img3 = PhotoEdit.resize(img3,n,m );
+
+        Image newImage2 = SwingFXUtils.toFXImage(img3,null);
+        Zakathchick.setImage(newImage2);
+    }
     @FXML
     private ImageView Dc1;
     @FXML
@@ -209,6 +244,7 @@ public class HelloController {
     private ImageView Tc5;
     @FXML
     private ImageView BackGraund;
+
 
     private void setcolorSheme(photo Image){
         int[][] arr = Image.getStanokScheme();
@@ -370,6 +406,66 @@ public class HelloController {
         LabelM.setText(String.valueOf(width));
         LabelN.setText(String.valueOf(height));
     }
+
+    public static void showColorChooserDialog() {
+        // Створюємо об'єкт JFrame (можна використовувати існуючий вікно)
+        JFrame frame = new JFrame("Color Chooser Example");
+
+        // Створюємо JButton, який викличе вікно палітри
+        JButton chooseColorButton = new JButton("Choose Color");
+
+        // Додаємо слухача подій до кнопки
+        chooseColorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                try {
+                    // Відображаємо вікно палітри та зберігаємо вибраний колір
+                    selectedColor = JColorChooser.showDialog(frame, "Choose a Color", Color.BLACK);
+
+                    // Перевіряємо, чи колір не є null (користувач скасував вибір)
+                    if (selectedColor != null) {
+                        // Викликаємо додаткові дії з вибраним кольором, якщо потрібно
+                        // Наприклад, можна викликати інший метод з обраним колором
+
+                        // Закриваємо вікно палітри
+                        frame.dispose();
+                    }
+                }catch (Exception t){
+
+                }
+            }
+        });
+
+        // Додаємо кнопку до вікна
+        frame.add(chooseColorButton);
+
+        // Налаштовуємо параметри вікна
+        frame.setSize(300, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new FlowLayout());
+        frame.setAlwaysOnTop(true);
+        frame.setVisible(true);
+    }
+
+    public static BufferedImage AdvancedReplaceColor(BufferedImage image1, BufferedImage image2, Color color1, Color color2) {
+        int width = image1.getWidth();
+        int height = image1.getHeight();
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                // Отримуємо колір пікселя з першого зображення
+                Color currentColor = new Color(image1.getRGB(x, y));
+
+                // Порівнюємо колір пікселя з першого зображення з переданим колором
+                if (currentColor.equals(color1)) {
+                    // Якщо колір співпадає, то замінюємо піксель на відповідний колір з другого зображення
+                    image2.setRGB(x, y, color2.getRGB());
+                }
+            }
+        }
+        return image2;
+    }
+
     private void openFileChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Photos");

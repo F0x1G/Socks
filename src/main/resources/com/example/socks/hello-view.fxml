@@ -49,7 +49,7 @@
         </HBox>
         <VBox id="RightPanel" visible="false" fx:id="RightPanel">
             <HBox>
-                <Label text="c1:" style="-fx-translate-y: 0; -fx-translate-x: 0"/>
+                <Label text="c1:" style="-fx-translate-y: 0; -fx-translate-x: 0" />
                 <ImageView fx:id="Oc1" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
                 <ImageView fx:id="Dc1" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
             </HBox>
