@@ -57,7 +57,7 @@ public class HelloController {
     @FXML
     private VBox RightPanel;
     @FXML
-    private HBox Settings;
+    private VBox Settings;
     @FXML
     private TextField Q;
     @FXML
