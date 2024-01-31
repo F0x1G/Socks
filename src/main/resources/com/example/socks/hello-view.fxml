@@ -74,36 +74,36 @@
         </HBox>
         <VBox id="RightPanel" visible="false" fx:id="RightPanel">
             <HBox>
-                <Label text="c1:" style="-fx-translate-y: 0; -fx-translate-x: 0"/>
-                <ImageView fx:id="Oc1" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
-                <ImageView fx:id="Dc1" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
+                <Label text="c1:" style="-fx-translate-y: 0; -fx-translate-x: 10"/>
+                <ImageView fx:id="Oc1" style="-fx-translate-x: 15; -fx-translate-y: 3"/>
+                <ImageView fx:id="Dc1" style="-fx-translate-x: 15; -fx-translate-y: 3"/>
             </HBox>
             <HBox>
-                <Label text="c2:" style="-fx-translate-y: 0; -fx-translate-x: 0"/>
-                <ImageView fx:id="Oc2" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
-                <ImageView fx:id="Dc2" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
+                <Label text="c2:" style="-fx-translate-y: 0; -fx-translate-x: 10"/>
+                <ImageView fx:id="Oc2" style="-fx-translate-x: 15; -fx-translate-y: 3"/>
+                <ImageView fx:id="Dc2" style="-fx-translate-x: 15; -fx-translate-y: 3"/>
             </HBox>
             <HBox>
-                <Label text="c3:" style="-fx-translate-y: 0; -fx-translate-x: 0"/>
-                <ImageView fx:id="Oc3" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
-                <ImageView fx:id="Dc3" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
-                <ImageView fx:id="Tc3" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
+                <Label text="c3:" style="-fx-translate-y: 0; -fx-translate-x: 10"/>
+                <ImageView fx:id="Oc3" style="-fx-translate-x: 15; -fx-translate-y: 3"/>
+                <ImageView fx:id="Dc3" style="-fx-translate-x: 15; -fx-translate-y: 3"/>
+                <ImageView fx:id="Tc3" style="-fx-translate-x: 15; -fx-translate-y: 3"/>
             </HBox>
             <HBox>
-                <Label text="c4:" style="-fx-translate-y: 0; -fx-translate-x: 0"/>
-                <ImageView fx:id="Oc4" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
-                <ImageView fx:id="Dc4" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
-                <ImageView fx:id="Tc4" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
+                <Label text="c4:" style="-fx-translate-y: 0; -fx-translate-x: 10"/>
+                <ImageView fx:id="Oc4" style="-fx-translate-x: 15; -fx-translate-y: 3"/>
+                <ImageView fx:id="Dc4" style="-fx-translate-x: 15; -fx-translate-y: 3"/>
+                <ImageView fx:id="Tc4" style="-fx-translate-x: 15; -fx-translate-y: 3"/>
             </HBox>
             <HBox>
-                <Label text="c5:" style="-fx-translate-y: 0; -fx-translate-x: 0"/>
-                <ImageView fx:id="Oc5" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
-                <ImageView fx:id="Dc5" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
-                <ImageView fx:id="Tc5" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
+                <Label text="c5:" style="-fx-translate-y: 0; -fx-translate-x: 10"/>
+                <ImageView fx:id="Oc5" style="-fx-translate-x: 15; -fx-translate-y: 3"/>
+                <ImageView fx:id="Dc5" style="-fx-translate-x: 15; -fx-translate-y: 3"/>
+                <ImageView fx:id="Tc5" style="-fx-translate-x: 15; -fx-translate-y: 3"/>
             </HBox>
             <HBox>
-                <Label text="f1:" style="-fx-translate-y: 0; -fx-translate-x: 0"/>
-                <ImageView fx:id="BackGraund" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
+                <Label text="f1:" style="-fx-translate-y: 0; -fx-translate-x: 10"/>
+                <ImageView fx:id="BackGraund" style="-fx-translate-x: 15; -fx-translate-y: 3"/>
             </HBox>
         </VBox>
     </HBox>
