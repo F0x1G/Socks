@@ -34,7 +34,7 @@
     <HBox id="resize" spacing="10">
         <TextField fx:id="LabelM" text="Ширина"/>
         <TextField fx:id="LabelN" text="Висота"/>
-        <TextField fx:id="LabelP" text="Висота"/>
+        <TextField fx:id="LabelP" text="Щільність"/>
         <Button fx:id="ResitheCastom" text="Змінити за заданими значеннями" onAction="#onResClick"/>
         <Button fx:id="Resithe13" text="збільшити на 30%" onAction="#onRes30Click"/>
         <Button fx:id="Resithe16" text="збільшити на 60%" onAction="#onRes60Click"/>
@@ -90,9 +90,6 @@
             <HBox>
                 <Label text="f1:" style="-fx-translate-y: 0; -fx-translate-x: 0"/>
                 <ImageView fx:id="BackGraund" style="-fx-translate-x: 5; -fx-translate-y: 3"/>
-            </HBox>
-            <HBox>
-
             </HBox>
         </VBox>
     </HBox>
