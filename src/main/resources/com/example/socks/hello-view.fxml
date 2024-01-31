@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.HBox?>
 <VBox id="main" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.socks.HelloController" spacing="5" stylesheets="@Style.css">
     <HBox id="Buttons" spacing="5">
-        <Button fx:id="Load" text="Оберіть фото" onAction="#handleButtonClick" style="-fx-translate-x: 10; -fx-translate-y: 20;"/>
-        <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick" style="-fx-translate-x: 10; -fx-translate-y: 20;"/>
-        <Button fx:id="Synk" text="Синхронізувати фото" onAction="#onSynk" style="-fx-translate-x: 10; -fx-translate-y: 20;"/>
-        <Button fx:id="Save" text="Зберегти" onAction="#onSaveClick" style="-fx-translate-x: 10; -fx-translate-y: 20;"/>
-        <Button fx:id="setting" text="Показати/Приховати параметри" onAction="#onSettingClick" style="-fx-translate-x: 10; -fx-translate-y: 20;"/>
+        <Button fx:id="Load" text="Оберіть фото" onAction="#handleButtonClick" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
+        <Button fx:id="Synk" text="Синхронізувати фото" onAction="#onSynk" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
+        <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
+        <Button fx:id="Save" text="Зберегти" onAction="#onSaveClick" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
+        <Button fx:id="setting" text="Показати/Приховати параметри" onAction="#onSettingClick" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
         <VBox fx:id="Settings" visible="false" style="-fx-translate-y: 20;">
             <HBox>
                 <TextField fx:id="Q" text="27" style="-fx-translate-x: 6;"/>
@@ -61,7 +61,7 @@
             </items>
         </ComboBox>
     </HBox>
-    <HBox id="images" spacing="5" alignment="CENTER" style="-fx-translate-y: 30">
+    <HBox id="images" spacing="5" alignment="CENTER" style="-fx-translate-y: 45">
         <VBox>
             <ImageView fx:id="startImage"/>
         </VBox>
