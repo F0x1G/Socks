@@ -32,6 +32,8 @@ import java.util.Objects;
 
 public class HelloController {
     private static Color selectedColor;
+    private static int Gheigh;
+    private static int Gweight;
     @FXML
     private Button Load;
     @FXML
@@ -818,8 +820,8 @@ public class HelloController {
             int m = Integer.parseInt(LabelM.getText());
             int n = Integer.parseInt(LabelN.getText());
             double con =1.3;
-            m= (int) (m*con);
-            img = PhotoEdit.resize(img,n,m);
+            n= (int) (n*con);
+            img = PhotoEdit.resize(img,m,n);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -840,8 +842,8 @@ public class HelloController {
             int m = Integer.parseInt(LabelM.getText());
             int n = Integer.parseInt(LabelN.getText());
             double con =1.6;
-            m= (int) (m*con);
-            img = PhotoEdit.resize(img,n,m);
+            n= (int) (n*con);
+            img = PhotoEdit.resize(img,m,n);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -863,6 +865,30 @@ public class HelloController {
             int m = Integer.parseInt(LabelN.getText());
             img = PhotoEdit.resize(img,n,m);
         }catch (Exception e){
+
+        }
+        Image newImage = SwingFXUtils.toFXImage(img,null);
+        imageView.setImage(newImage);
+
+        int width = (int) imageView.getImage().getWidth();
+        int height = (int) imageView.getImage().getHeight();
+
+        LabelM.setText(String.valueOf(width));
+        LabelN.setText(String.valueOf(height));
+    }
+    @FXML
+    private TextField LabelP;
+    @FXML
+    private void onResPClick(ActionEvent event){
+        Image image = imageView.getImage();
+        BufferedImage img = SwingFXUtils.fromFXImage(image,null);
+        try {
+            int m = Integer.parseInt(LabelM.getText());
+            int n = Integer.parseInt(LabelN.getText());
+            double con = Double.parseDouble(LabelP.getText())/10;
+            m= (int) (m*con);
+            img = PhotoEdit.resize(img,m,n);
+        }catch (Exception e){
             System.out.println(e.getMessage());
         }
         Image newImage = SwingFXUtils.toFXImage(img,null);
@@ -874,7 +900,26 @@ public class HelloController {
         LabelM.setText(String.valueOf(width));
         LabelN.setText(String.valueOf(height));
     }
+    @FXML
+    private void onRemuve(ActionEvent event){
+        Image image = imageView.getImage();
+        BufferedImage img = SwingFXUtils.fromFXImage(image,null);
+        try {
+            int m = Gheigh;
+            int n = Gweight;
+            img = PhotoEdit.resize(img,n,m);
+        }catch (Exception e){
 
+        }
+        Image newImage = SwingFXUtils.toFXImage(img,null);
+        imageView.setImage(newImage);
+
+        int width = (int) imageView.getImage().getWidth();
+        int height = (int) imageView.getImage().getHeight();
+
+        LabelM.setText(String.valueOf(width));
+        LabelN.setText(String.valueOf(height));
+    }
     public interface Callback<T> {
             void call (T result) throws IOException;
     }
@@ -986,6 +1031,9 @@ public class HelloController {
                     int height = photoLoader.getImageHeight();
                     LabelM.setText(String.valueOf(width));
                     LabelN.setText(String.valueOf(height));
+                    Gheigh = height;
+                    Gweight = width;
+
                 } else {
                     // Handle photo loading error
                     System.out.println("Error loading photo.");
