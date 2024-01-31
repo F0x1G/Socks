@@ -32,6 +32,7 @@ import java.util.Objects;
 
 public class HelloController {
     private static Color selectedColor;
+    private static BufferedImage Vizual;
     private static int Gheigh;
     private static int Gweight;
     @FXML
@@ -156,7 +157,7 @@ public class HelloController {
         BufferedImage inputImagePath1 = SwingFXUtils.fromFXImage(imge1,null);
 
         BufferedImage img3 = Converter.PhotoDlaZak(inputImagePath1);
-
+        Vizual = img3;
         int m = (int) (img3.getHeight()/2.5);
         int n = (int) (img3.getWidth()/2.5);
         img3 = PhotoEdit.resize(img3,n,m );
@@ -218,17 +219,16 @@ public class HelloController {
         }
         String ZakajchikcOut = ZakajchikcOutFile.getAbsolutePath();
 
-        Image imge = ImageStanok.getImage();
-        BufferedImage img2 = SwingFXUtils.fromFXImage(imge,null);
-        PhotoEdit.saveImage(img2,saveStanokVision);//
+        Image imge456 = imageView.getImage();
+        BufferedImage img2 = SwingFXUtils.fromFXImage(imge456,null);
+        PhotoEdit.saveImage(img2,outputImagePath1);//
 
-        Image imge1 = imageView.getImage();
-        BufferedImage img1 = SwingFXUtils.fromFXImage(imge1,null);
-        PhotoEdit.saveImage(img1,saveStanokVision);//
+        Image imge123 = ImageStanok.getImage();
+        BufferedImage img123 = SwingFXUtils.fromFXImage(imge123,null);
+        PhotoEdit.saveImage(img123,saveStanokVision);//
 
-        Image imge3 = Zakathchick.getImage();
-        BufferedImage img3 = SwingFXUtils.fromFXImage(imge3,null);
-        PhotoEdit.saveImage(img3,saveStanokVision);//
+        BufferedImage img3 = Vizual;
+        PhotoEdit.saveImage(img3,ZakajchikcOut);//
     }
 
     @FXML
@@ -258,6 +258,7 @@ public class HelloController {
         int m = (int) (img3.getHeight()/2.5);
         int n = (int) (img3.getWidth()/2.5);
         img3 = PhotoEdit.resize(img3,n,m );
+        Vizual = img3;
 
         Image newImage2 = SwingFXUtils.toFXImage(img3,null);
         Zakathchick.setImage(newImage2);
@@ -288,7 +289,7 @@ public class HelloController {
             imageView.setImage(newImage);
 
             BufferedImage img3 = Converter.PhotoDlaZak(finish);
-
+            Vizual = img3;
             int m = (int) (img3.getHeight()/2.5);
             int n = (int) (img3.getWidth()/2.5);
             img3 = PhotoEdit.resize(img3,n,m );
@@ -324,7 +325,7 @@ public class HelloController {
             imageView.setImage(newImage);
 
             BufferedImage img3 = Converter.PhotoDlaZak(finish);
-
+            Vizual = img3;
             int m = (int) (img3.getHeight()/2.5);
             int n = (int) (img3.getWidth()/2.5);
             img3 = PhotoEdit.resize(img3,n,m );
@@ -361,7 +362,7 @@ public class HelloController {
             imageView.setImage(newImage);
 
             BufferedImage img3 = Converter.PhotoDlaZak(finish);
-
+            Vizual = img3;
             int m = (int) (img3.getHeight()/2.5);
             int n = (int) (img3.getWidth()/2.5);
             img3 = PhotoEdit.resize(img3,n,m );
@@ -399,7 +400,7 @@ public class HelloController {
             imageView.setImage(newImage);
 
             BufferedImage img3 = Converter.PhotoDlaZak(finish);
-
+            Vizual = img3;
             int m = (int) (img3.getHeight()/2.5);
             int n = (int) (img3.getWidth()/2.5);
             img3 = PhotoEdit.resize(img3,n,m );
@@ -440,7 +441,7 @@ public class HelloController {
             int m = (int) (img3.getHeight()/2.5);
             int n = (int) (img3.getWidth()/2.5);
             img3 = PhotoEdit.resize(img3,n,m );
-
+            Vizual = img3;
             Image newImage2 = SwingFXUtils.toFXImage(img3,null);
             Zakathchick.setImage(newImage2);
         });
@@ -476,7 +477,7 @@ public class HelloController {
             int m = (int) (img3.getHeight()/2.5);
             int n = (int) (img3.getWidth()/2.5);
             img3 = PhotoEdit.resize(img3,n,m );
-
+            Vizual = img3;
             Image newImage2 = SwingFXUtils.toFXImage(img3,null);
             Zakathchick.setImage(newImage2);
         });
@@ -508,7 +509,7 @@ public class HelloController {
             imageView.setImage(newImage);
 
             BufferedImage img3 = Converter.PhotoDlaZak(finish);
-
+            Vizual = img3;
             int m = (int) (img3.getHeight()/2.5);
             int n = (int) (img3.getWidth()/2.5);
             img3 = PhotoEdit.resize(img3,n,m );
@@ -544,7 +545,7 @@ public class HelloController {
             imageView.setImage(newImage);
 
             BufferedImage img3 = Converter.PhotoDlaZak(finish);
-
+            Vizual = img3;
             int m = (int) (img3.getHeight()/2.5);
             int n = (int) (img3.getWidth()/2.5);
             img3 = PhotoEdit.resize(img3,n,m );
@@ -580,7 +581,7 @@ public class HelloController {
             imageView.setImage(newImage);
 
             BufferedImage img3 = Converter.PhotoDlaZak(finish);
-
+            Vizual = img3;
             int m = (int) (img3.getHeight()/2.5);
             int n = (int) (img3.getWidth()/2.5);
             img3 = PhotoEdit.resize(img3,n,m );
@@ -617,7 +618,7 @@ public class HelloController {
             imageView.setImage(newImage);
 
             BufferedImage img3 = Converter.PhotoDlaZak(finish);
-
+            Vizual = img3;
             int m = (int) (img3.getHeight()/2.5);
             int n = (int) (img3.getWidth()/2.5);
             img3 = PhotoEdit.resize(img3,n,m );
@@ -653,7 +654,7 @@ public class HelloController {
             imageView.setImage(newImage);
 
             BufferedImage img3 = Converter.PhotoDlaZak(finish);
-
+            Vizual = img3;
             int m = (int) (img3.getHeight()/2.5);
             int n = (int) (img3.getWidth()/2.5);
             img3 = PhotoEdit.resize(img3,n,m );
@@ -689,7 +690,7 @@ public class HelloController {
             imageView.setImage(newImage);
 
             BufferedImage img3 = Converter.PhotoDlaZak(finish);
-
+            Vizual = img3;
             int m = (int) (img3.getHeight()/2.5);
             int n = (int) (img3.getWidth()/2.5);
             img3 = PhotoEdit.resize(img3,n,m );
@@ -727,7 +728,7 @@ public class HelloController {
                 imageView.setImage(newImage);
 
                 BufferedImage img3 = Converter.PhotoDlaZak(finish);
-
+                Vizual = img3;
                 int m = (int) (img3.getHeight() / 2.5);
                 int n = (int) (img3.getWidth() / 2.5);
                 img3 = PhotoEdit.resize(img3, n, m);

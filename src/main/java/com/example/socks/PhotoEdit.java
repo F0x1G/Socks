@@ -45,7 +45,7 @@ public class PhotoEdit {
 
 
     public static void saveImage(BufferedImage image, String outputPath) throws IOException {
-        ImageIO.write(image, "bmp", new File(outputPath));
+        ImageIO.write(image, "png", new File(outputPath));
     }
 
 }
