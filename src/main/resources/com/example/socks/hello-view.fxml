@@ -14,6 +14,8 @@
     <HBox id="Buttons" spacing="10">
         <Button fx:id="Load" text="Оберіть фото" onAction="#handleButtonClick" style="-fx-translate-x: 10; -fx-translate-y: 20;"/>
         <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick" style="-fx-translate-x: 10; -fx-translate-y: 20;"/>
+        <Button fx:id="Synk" text="Почати підбір" onAction="#onSynk" style="-fx-translate-x: 10; -fx-translate-y: 20;"/>
+        <Button fx:id="Save" text="Почати підбір" onAction="#onSaveClick" style="-fx-translate-x: 10; -fx-translate-y: 20;"/>
         <Button fx:id="setting" text="Показати/Приховати параметри" onAction="#onSettingClick" style="-fx-translate-x: 10; -fx-translate-y: 20;"/>
         <VBox fx:id="Settings" visible="false" style="-fx-translate-y: 20;">
             <HBox>
@@ -51,6 +53,9 @@
         </ComboBox>
     </HBox>
     <HBox id="images" spacing="20" alignment="CENTER" style="-fx-translate-y: 30">
+        <VBox>
+            <ImageView fx:id="startImage"/>
+        </VBox>
         <VBox id="stanok" spacing="10" alignment="CENTER_LEFT" style="-fx-translate-x: 10;">
         <ImageView fx:id="imageView"/>
         <ImageView fx:id="ImageStanok"/>

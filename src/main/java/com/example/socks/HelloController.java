@@ -97,8 +97,82 @@ public class HelloController {
     }
 
     @FXML
+    private ImageView startImage;
+
+    @FXML
     private void onStartClick(ActionEvent event) throws IOException {
         // Get the stage from the action event
+        if(startImage.getImage()==null){
+            startImage.setImage(imageView.getImage());
+        }
+        Image imge = startImage.getImage();
+
+        BufferedImage inputImagePath = SwingFXUtils.fromFXImage(imge,null);
+
+        Converter.convertTo16BitBMP(inputImagePath);
+
+        BufferedImage img = inputImagePath;
+
+        photo image = photo.fromBufferedImage(img);
+
+        int rejim = 1;
+        String select = (String) comboBox.getValue();
+        if(Objects.equals(select, "без C1")){
+            rejim =2;
+        } else if (Objects.equals(select, "без C1 і C2")) {
+            rejim =3;
+        }
+        image = AbstraktSelection.main(image);
+
+
+        int q = Integer.parseInt(Q.getText());
+        double t = Double.parseDouble(T.getText());
+        int s = Integer.parseInt(S.getText());
+        double b = Double.parseDouble(B.getText());
+
+
+        image = Stanok.main(image, true,rejim,q,t,s,b);
+
+
+        photo image1 = photo.fromBufferedImage(img);//pislya stanka yaksho true, bez knopky
+
+        image1.setPhoto(image);//pislya stanka yaksho true
+
+        photo stanokImg = Stanok.trueStanock(image, rejim);//pislya stanka yaksho true
+
+        setcolorSheme(stanokImg);
+        RightPanel.setVisible(true);
+
+        BufferedImage img2 = stanokImg.toBufferedImage();//
+
+        BufferedImage img1 = image1.toBufferedImage();//
+
+        Image newImage = SwingFXUtils.toFXImage(img1,null);
+        imageView.setImage(newImage);
+        Image newImage1 = SwingFXUtils.toFXImage(img2,null);
+        ImageStanok.setImage(newImage1);
+
+        Image imge1 = imageView.getImage();
+        BufferedImage inputImagePath1 = SwingFXUtils.fromFXImage(imge1,null);
+
+        BufferedImage img3 = Converter.PhotoDlaZak(inputImagePath1);
+
+        int m = (int) (img3.getHeight()/2.5);
+        int n = (int) (img3.getWidth()/2.5);
+        img3 = PhotoEdit.resize(img3,n,m );
+
+        Image newImage2 = SwingFXUtils.toFXImage(img3,null);
+        Zakathchick.setImage(newImage2);
+    }
+
+    @FXML
+    private void onSynk(ActionEvent event){
+        Image m = imageView.getImage();
+        startImage.setImage(m);
+    }
+
+    @FXML
+    private void onSaveClick(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         // Prompt user to choose a directory
@@ -144,66 +218,17 @@ public class HelloController {
         }
         String ZakajchikcOut = ZakajchikcOutFile.getAbsolutePath();
 
-        Image imge = imageView.getImage();
-        BufferedImage inputImagePath = SwingFXUtils.fromFXImage(imge,null);
-
-        Converter.convertTo16BitBMP(inputImagePath);
-
-        BufferedImage img = inputImagePath;
-
-        photo image = photo.fromBufferedImage(img);
-
-        int rejim = 1;
-        String select = (String) comboBox.getValue();
-        if(Objects.equals(select, "без C1")){
-            rejim =2;
-        } else if (Objects.equals(select, "без C1 і C2")) {
-            rejim =3;
-        }
-        image = AbstraktSelection.main(image);
-
-
-        int q = Integer.parseInt(Q.getText());
-        double t = Double.parseDouble(T.getText());
-        int s = Integer.parseInt(S.getText());
-        double b = Double.parseDouble(B.getText());
-
-
-        image = Stanok.main(image, true,rejim,q,t,s,b);
-
-
-        photo image1 = photo.fromBufferedImage(img);//pislya stanka yaksho true, bez knopky
-
-        image1.setPhoto(image);//pislya stanka yaksho true
-
-        photo stanokImg = Stanok.trueStanock(image, rejim);//pislya stanka yaksho true
-
-        setcolorSheme(stanokImg);
-        RightPanel.setVisible(true);
-
-        BufferedImage img2 = stanokImg.toBufferedImage();//
+        Image imge = ImageStanok.getImage();
+        BufferedImage img2 = SwingFXUtils.fromFXImage(imge,null);
         PhotoEdit.saveImage(img2,saveStanokVision);//
 
-        BufferedImage img1 = image1.toBufferedImage();//
-        PhotoEdit.saveImage(img1,outputImagePath1);//
-
-        Image newImage = SwingFXUtils.toFXImage(img1,null);
-        imageView.setImage(newImage);
-        Image newImage1 = SwingFXUtils.toFXImage(img2,null);
-        ImageStanok.setImage(newImage1);
-
         Image imge1 = imageView.getImage();
-        BufferedImage inputImagePath1 = SwingFXUtils.fromFXImage(imge1,null);
+        BufferedImage img1 = SwingFXUtils.fromFXImage(imge1,null);
+        PhotoEdit.saveImage(img1,saveStanokVision);//
 
-        BufferedImage img3 = Converter.PhotoDlaZak(inputImagePath1);
-        PhotoEdit.saveImage(img3,ZakajchikcOut);
-
-        int m = (int) (img3.getHeight()/2.5);
-        int n = (int) (img3.getWidth()/2.5);
-        img3 = PhotoEdit.resize(img3,n,m );
-
-        Image newImage2 = SwingFXUtils.toFXImage(img3,null);
-        Zakathchick.setImage(newImage2);
+        Image imge3 = Zakathchick.getImage();
+        BufferedImage img3 = SwingFXUtils.fromFXImage(imge3,null);
+        PhotoEdit.saveImage(img3,saveStanokVision);//
     }
 
     @FXML
