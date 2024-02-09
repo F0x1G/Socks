@@ -34,6 +34,7 @@ public class HelloController {
     private static Color selectedColor;
     private static BufferedImage Vizual;
     private static int Gheigh;
+    private static int newGweight;
     private static int Gweight;
     @FXML
     private Button Load;
@@ -69,9 +70,29 @@ public class HelloController {
     private TextField S;
     @FXML
     private TextField B;
+
+    @FXML
+    private CheckBox autoResCheck;
     @FXML
     private void initialize() {
-        // Встановлення обробника події для ImageView
+
+        LabelM.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if(autoResCheck.isSelected()) {
+                if (!newValue) { // Перевіряємо, чи втратила елемент фокус
+                    String newValueText = LabelM.getText(); // Отримуємо нове значення з елементу
+                    try {
+                        int newNumber = Integer.parseInt(newValueText); // Перетворюємо рядок на ціле число
+                        onApdateRess(newNumber); // Викликаємо ваш метод, передаючи нове значення
+                    } catch (NumberFormatException e) {
+                        // Обробка винятку, якщо рядок не може бути перетворений на ціле число
+                        System.err.println("Неправильний формат числа: " + newValueText);
+                    } catch (IOException e) {
+
+                    }
+                }
+            }
+        });
+
         Oc1.setOnMouseClicked(event -> {try {onOc1();} catch (IOException e) {throw new RuntimeException(e);}});
         Dc1.setOnMouseClicked(event -> {try {onDc1();} catch (IOException e) {throw new RuntimeException(e);}});
         Oc2.setOnMouseClicked(event -> {try {onOc2();} catch (IOException e) {throw new RuntimeException(e);}});
@@ -88,6 +109,25 @@ public class HelloController {
         BackGraund.setOnMouseClicked(event -> {try {onBackGraund();} catch (IOException e) {throw new RuntimeException(e);}});
 
     }
+
+    private void onApdateRess(int newValue) throws IOException {
+        int oldValue = newGweight;
+        int oldN = Integer.parseInt(LabelN.getText());
+        int n = (newValue * oldN) / oldValue;
+
+
+        Image image = imageView.getImage();
+        BufferedImage img = SwingFXUtils.fromFXImage(image,null);
+
+        img = PhotoEdit.resize(img,n,newValue);
+
+        Image newImage = SwingFXUtils.toFXImage(img,null);
+        imageView.setImage(newImage);
+
+        LabelN.setText(String.valueOf(n));
+        newGweight = newValue;
+    }
+
     @FXML
     private void onSettingClick(ActionEvent event) throws IOException{
         Q.setText("27");
@@ -863,17 +903,23 @@ public class HelloController {
     @FXML
     private void onResPClick(ActionEvent event){
         Image image = imageView.getImage();
-        BufferedImage img = SwingFXUtils.fromFXImage(image,null);
+        BufferedImage img = SwingFXUtils.fromFXImage(image, null);
         try {
             int m = Integer.parseInt(LabelM.getText());
             int n = Integer.parseInt(LabelN.getText());
-            double con = Double.parseDouble(LabelP.getText())/10;
-            n = (int) (n*con);
-            img = PhotoEdit.resize(img,m,n);
-        }catch (Exception e){
+            double con;
+            String labelText = LabelP.getText();
+            if (labelText.endsWith("%")) {
+                con = Double.parseDouble(labelText.replace("%", "")) / 100 + 1.0;
+            } else {
+                con = Double.parseDouble(labelText) / 10;
+            }
+            n = (int) (n * con);
+            img = PhotoEdit.resize(img, m, n);
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        Image newImage = SwingFXUtils.toFXImage(img,null);
+        Image newImage = SwingFXUtils.toFXImage(img, null);
         imageView.setImage(newImage);
 
         int width = (int) imageView.getImage().getWidth();
@@ -1014,6 +1060,7 @@ public class HelloController {
                     LabelM.setText(String.valueOf(width));
                     LabelN.setText(String.valueOf(height));
                     Gheigh = height;
+                    newGweight = width;
                     Gweight = width;
 
                 } else {
