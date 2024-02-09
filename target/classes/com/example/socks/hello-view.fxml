@@ -48,6 +48,7 @@
             <Label fx:id="LabeP" text="Щільність"/>
         </VBox>
         <Button fx:id="ResitheCastom" text="Змінити за заданими значеннями" onAction="#onResClick"/>
+        <Button fx:id="SaveBase" text="Зміна щільності петель" onAction="#onBaseSave"/>
         <Button fx:id="ResitheP" text="Зміна щільності петель" onAction="#onResPClick"/>
         <Button fx:id="remuve" text="повернути розміри" onAction="#onRemuve"/>
         <ComboBox fx:id="comboBox" promptText="Вибір режима">
@@ -59,7 +60,7 @@
                 </FXCollections>
             </items>
         </ComboBox>
-        <CheckBox fx:id="autoResCheck" text="включити втомтичну зміну пропорцій:"/>
+        <CheckBox fx:id="autoResCheck" text=" - включити автомтичну зміну пропорцій"/>
     </HBox>
     <HBox id="images" spacing="5" alignment="CENTER" style="-fx-translate-y: 45">
         <VBox>

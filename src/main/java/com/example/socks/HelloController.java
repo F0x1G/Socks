@@ -73,6 +73,13 @@ public class HelloController {
 
     @FXML
     private CheckBox autoResCheck;
+
+    @FXML
+    private void onBaseSave(ActionEvent event){
+        Gheigh = Integer.parseInt(LabelN.getText());
+        Gweight = Integer.parseInt(LabelM.getText());
+    }
+
     @FXML
     private void initialize() {
 
@@ -114,7 +121,6 @@ public class HelloController {
         int oldValue = newGweight;
         int oldN = Integer.parseInt(LabelN.getText());
         int n = (newValue * oldN) / oldValue;
-
 
         Image image = imageView.getImage();
         BufferedImage img = SwingFXUtils.fromFXImage(image,null);
@@ -897,6 +903,7 @@ public class HelloController {
 
         LabelM.setText(String.valueOf(width));
         LabelN.setText(String.valueOf(height));
+        newGweight = width;
     }
     @FXML
     private TextField LabelP;
@@ -947,6 +954,7 @@ public class HelloController {
 
         LabelM.setText(String.valueOf(width));
         LabelN.setText(String.valueOf(height));
+        newGweight=width;
     }
     public interface Callback<T> {
             void call (T result) throws IOException;
