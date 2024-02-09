@@ -839,50 +839,6 @@ public class HelloController {
         return image;
     }
     @FXML
-    private  void onRes30Click(ActionEvent event){
-        Image image = imageView.getImage();
-        BufferedImage img = SwingFXUtils.fromFXImage(image,null);
-        try {
-            int m = Integer.parseInt(LabelM.getText());
-            int n = Integer.parseInt(LabelN.getText());
-            double con =1.3;
-            n= (int) (n*con);
-            img = PhotoEdit.resize(img,m,n);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-        Image newImage = SwingFXUtils.toFXImage(img,null);
-        imageView.setImage(newImage);
-
-        int width = (int) imageView.getImage().getWidth();
-        int height = (int) imageView.getImage().getHeight();
-
-        LabelM.setText(String.valueOf(width));
-        LabelN.setText(String.valueOf(height));
-    }
-    @FXML
-    private  void onRes60Click(ActionEvent event){
-        Image image = imageView.getImage();
-        BufferedImage img = SwingFXUtils.fromFXImage(image,null);
-        try {
-            int m = Integer.parseInt(LabelM.getText());
-            int n = Integer.parseInt(LabelN.getText());
-            double con =1.6;
-            n= (int) (n*con);
-            img = PhotoEdit.resize(img,m,n);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-        Image newImage = SwingFXUtils.toFXImage(img,null);
-        imageView.setImage(newImage);
-
-        int width = (int) imageView.getImage().getWidth();
-        int height = (int) imageView.getImage().getHeight();
-
-        LabelM.setText(String.valueOf(width));
-        LabelN.setText(String.valueOf(height));
-    }
-    @FXML
     private void onResClick(ActionEvent event){
         Image image = imageView.getImage();
         BufferedImage img = SwingFXUtils.fromFXImage(image,null);
@@ -912,7 +868,7 @@ public class HelloController {
             int m = Integer.parseInt(LabelM.getText());
             int n = Integer.parseInt(LabelN.getText());
             double con = Double.parseDouble(LabelP.getText())/10;
-            m= (int) (m*con);
+            n = (int) (n*con);
             img = PhotoEdit.resize(img,m,n);
         }catch (Exception e){
             System.out.println(e.getMessage());

@@ -47,8 +47,6 @@
             <Label fx:id="LabeP" text="Щільність"/>
         </VBox>
         <Button fx:id="ResitheCastom" text="Змінити за заданими значеннями" onAction="#onResClick"/>
-        <Button fx:id="Resithe13" text="збільшити на 30%" onAction="#onRes30Click"/>
-        <Button fx:id="Resithe16" text="збільшити на 60%" onAction="#onRes60Click"/>
         <Button fx:id="ResitheP" text="Зміна щільності петель" onAction="#onResPClick"/>
         <Button fx:id="remuve" text="повернути розміри" onAction="#onRemuve"/>
         <ComboBox fx:id="comboBox" promptText="Вибір режима">
