@@ -25,24 +25,6 @@
     -fx-background-radius: 5;
     -fx-border-radius: 5;
 }
-#Resithe13 {
-    -fx-font-size: 14;
-    -fx-background-color: #8bc1fa;
-    -fx-text-fill: #000000;
-    -fx-border-color: #00ff84;
-    -fx-border-width: 1;
-    -fx-background-radius: 5;
-    -fx-border-radius: 5;
-}
-#Resithe16 {
-    -fx-font-size: 14;
-    -fx-background-color: #8bc1fa;
-    -fx-text-fill: #000000;
-    -fx-border-color: #00ff84;
-    -fx-border-width: 1;
-    -fx-background-radius: 5;
-    -fx-border-radius: 5;
-}
 #comboBox {
     -fx-font-size: 14;
     -fx-background-color: #8bc1fa;
@@ -129,6 +111,15 @@
     -fx-border-radius: 5;
 }
 #Synk {
+    -fx-font-size: 14;
+    -fx-background-color: #8bc1fa;
+    -fx-text-fill: #000000;
+    -fx-border-color: #00ff84;
+    -fx-border-width: 1;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+#SaveBase {
     -fx-font-size: 14;
     -fx-background-color: #8bc1fa;
     -fx-text-fill: #000000;
