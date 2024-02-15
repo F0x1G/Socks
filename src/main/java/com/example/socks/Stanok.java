@@ -34,7 +34,7 @@ public class Stanok {
         return Sta;
     }
 
-    public static photo main(photo image,boolean optimathe,int rejim, int Q, double T, int S, double B) {
+    public static photo main(photo image,boolean optimathe,int rejim, int Q, double T, double S, double B) {
         int[][] Sta = ThisRejim(rejim);
 
         if(optimathe){
@@ -79,7 +79,7 @@ public class Stanok {
         return sum / array.length;
     }
 
-    public static photo PhotoOptimither(photo image,int rez, int Q, double T, int S, double b){
+    public static photo PhotoOptimither(photo image,int rez, int Q, double T, double S, double b){
         boolean work = true;
         int a =20;
         //b = 1.8;

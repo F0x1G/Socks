@@ -9,7 +9,6 @@ public class AbstraktSelection {
 
     public static photo main(photo image){
         image = ReplaceColor(image);
-        image = EasySimplifier(image, 1.5);
         return image;
     }
 

@@ -171,12 +171,10 @@ public class HelloController {
         }
         image = AbstraktSelection.main(image);
 
-
         int q = Integer.parseInt(Q.getText());
         double t = Double.parseDouble(T.getText());
-        int s = Integer.parseInt(S.getText());
+        double s = Double.parseDouble((S.getText()));
         double b = Double.parseDouble(B.getText());
-
 
         image = Stanok.main(image, true,rejim,q,t,s,b);
 
