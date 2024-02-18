@@ -74,12 +74,47 @@ public class HelloController {
     @FXML
     private CheckBox autoResCheck;
 
+    private int applyContrastToChannel(int channel, double contrast) {
+        double newValue = (((channel / 255.0) - 0.5) * contrast + 0.5) * 255.0;
+        return Math.min(Math.max((int) newValue, 0), 255);
+    }
+
+    private BufferedImage applyContrast(BufferedImage image, double contrast) {
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                int rgb = image.getRGB(x, y);
+                int alpha = (rgb >> 24) & 0xff;
+                int red = (rgb >> 16) & 0xff;
+                int green = (rgb >> 8) & 0xff;
+                int blue = (rgb) & 0xff;
+
+                red = applyContrastToChannel(red, contrast);
+                green = applyContrastToChannel(green, contrast);
+                blue = applyContrastToChannel(blue, contrast);
+
+                int newRGB = (alpha << 24) | (red << 16) | (green << 8) | blue;
+                image.setRGB(x, y, newRGB);
+            }
+        }
+        return image;
+    }
+
     @FXML
     private void onBaseSave(ActionEvent event){
         Gheigh = Integer.parseInt(LabelN.getText());
         Gweight = Integer.parseInt(LabelM.getText());
     }
 
+    @FXML
+    private void onRemeuveAll(ActionEvent event){
+       imageView.setImage(null);
+       ImageStanok.setImage(null);
+       Zakathchick.setImage(null);
+       startImage.setImage(null);
+       LabelM.setText("");
+       LabelN.setText("");
+       RightPanel.setVisible(false);
+    }
     @FXML
     private void initialize() {
 
@@ -125,7 +160,7 @@ public class HelloController {
         Image image = imageView.getImage();
         BufferedImage img = SwingFXUtils.fromFXImage(image,null);
 
-        img = PhotoEdit.resize(img,n,newValue);
+        img = PhotoEdit.resize(img,newValue,n);
 
         Image newImage = SwingFXUtils.toFXImage(img,null);
         imageView.setImage(newImage);
