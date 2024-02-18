@@ -15,7 +15,7 @@
     <HBox id="Buttons" spacing="5">
         <Button fx:id="Load" text="Оберіть фото" onAction="#handleButtonClick" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
         <Button fx:id="Synk" text="Синхронізувати фото" onAction="#onSynk" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
-        <Button fx:id="RemeuveAll" text="повернути" onAction="#onRemeuveAll"/>
+        <Button fx:id="RemeuveAll" text="повернути" onAction="#onRemeuveAll" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
         <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
         <Button fx:id="Save" text="Зберегти" onAction="#onSaveClick" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
         <Button fx:id="setting" text="Показати/Приховати параметри" onAction="#onSettingClick" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
