@@ -1,12 +1,17 @@
 package com.example.socks;
 
+import javafx.scene.image.Image;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.Graphics2D;
 
 public class Converter {
 
@@ -14,7 +19,26 @@ public class Converter {
         BufferedImage image = ImageIO.read(new File(imagePath));
         return image.getColorModel().getPixelSize();
     }
+    public static BufferedImage convertTo16Bit(BufferedImage image32Bit) {
+        // Створюємо нове 16-бітне зображення з тими ж розмірами, що й вхідне зображення
+        BufferedImage image16Bit = new BufferedImage(image32Bit.getWidth(), image32Bit.getHeight(), BufferedImage.TYPE_USHORT_555_RGB);
 
+        // Отримуємо графічний контекст для обох зображень
+        Graphics2D g2d16Bit = image16Bit.createGraphics();
+
+        // Масштабуємо зображення
+        AffineTransform transform = new AffineTransform();
+        AffineTransformOp scaleOp = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
+        BufferedImage scaledImage = scaleOp.filter(image32Bit, null);
+
+        // Відтворюємо масштабоване 32-бітне зображення на 16-бітне
+        g2d16Bit.drawImage(scaledImage, 0, 0, null);
+
+        // Вивільняємо ресурси
+        g2d16Bit.dispose();
+
+        return image16Bit;
+    }
     public static void convertTo16BitBMP(BufferedImage inputImage) throws IOException {
         // Create a new BufferedImage with 16-bit color model
         BufferedImage outputImage = new BufferedImage(inputImage.getWidth(), inputImage.getHeight(),
@@ -37,8 +61,6 @@ public class Converter {
                 outputImage.setRGB(x, y, rgb16);
             }
         }
-
-        // Save the 16-bit BMP file
     }
 
     public static void applyStitchTexture(BufferedImage baseImage, BufferedImage textureImage) {
@@ -86,33 +108,6 @@ public class Converter {
         int newBlue = (baseBlue * textureBlue) / 255;
 
         return (newAlpha << 24) | (newRed << 16) | (newGreen << 8) | newBlue;
-    }
-
-    public static photo StanokVision(photo image){
-        int[][] Colors = image.getStanokScheme();
-        int[][] CordsColor = getIsExisten(Colors,0);
-        Color[][] Schema = AbstraktSelection.StanokSheme();
-        int[][] intimage = AbstraktSelection.convertToColorIndices(image);
-
-        for(int j=0;j<CordsColor.length;j++) {
-            int[] cord = CordsColor[j];
-            int OLD = Colors[cord[0]][cord[1]];
-            int k = 120000 + ((cord[0] * 10) + cord[1]);
-            replaceValues(intimage, OLD, k);
-        }
-
-        int[][] coutint = getIsExisten(intimage,119999);
-
-        for(int i=0;i<coutint.length;i++) {
-            int[] cord = coutint[i];
-            int cor = intimage[cord[0]][cord[1]];
-            int x = (int) (cor-120000)/10;
-            int y = (int) ((double)( (cor - 120000) /10)-x)*10;
-            Color newColor = Schema[x][y];
-            image.setPixel(cord[0],cord[1],newColor);
-        }
-
-        return image;
     }
 
     public static void replaceValues(int[][] matrix, int oldVal, int newVal) {

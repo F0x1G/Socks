@@ -70,13 +70,54 @@ public class HelloController {
     private TextField S;
     @FXML
     private TextField B;
-
     @FXML
     private CheckBox autoResCheck;
+    @FXML
+    private Slider sliderContrast;
+    @FXML
+    private Slider sliderBrightness;
+    private Image resetImage;
+
+    private void adjustBrightness(double value) {
+        if (imageView.getImage() != null) {
+            Image image = applyBrightness(imageView.getImage(), value);
+            imageView.setImage(image);
+        }
+    }
+
+    private Image applyBrightness(Image originalImage, double value) {
+        javafx.scene.image.PixelReader pixelReader = originalImage.getPixelReader();
+        int width = (int) originalImage.getWidth();
+        int height = (int) originalImage.getHeight();
+        javafx.scene.image.WritableImage writableImage = new javafx.scene.image.WritableImage(width, height);
+        javafx.scene.image.PixelWriter pixelWriter = writableImage.getPixelWriter();
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                javafx.scene.paint.Color color = pixelReader.getColor(x, y);
+                double red = color.getRed() + value;
+                double green = color.getGreen() + value;
+                double blue = color.getBlue() + value;
+                red = Math.min(1.0, Math.max(0.0, red));
+                green = Math.min(1.0, Math.max(0.0, green));
+                blue = Math.min(1.0, Math.max(0.0, blue));
+                pixelWriter.setColor(x, y, javafx.scene.paint.Color.color(red, green, blue));
+            }
+        }
+        return writableImage;
+    }
 
     private int applyContrastToChannel(int channel, double contrast) {
         double newValue = (((channel / 255.0) - 0.5) * contrast + 0.5) * 255.0;
         return Math.min(Math.max((int) newValue, 0), 255);
+    }
+
+    private void updateContrast(double contrastValue) {
+        if (imageView.getImage() != null) {
+            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(imageView.getImage(), null);
+            applyContrast(bufferedImage, contrastValue);
+            Image updatedImage = SwingFXUtils.toFXImage(bufferedImage, null);
+            imageView.setImage(updatedImage);
+        }
     }
 
     private BufferedImage applyContrast(BufferedImage image, double contrast) {
@@ -118,6 +159,10 @@ public class HelloController {
     @FXML
     private void initialize() {
 
+        sliderContrast.valueProperty().addListener((observable, oldValue, newValue) -> {
+            updateContrast(newValue.doubleValue());
+        });
+        sliderBrightness.valueProperty().addListener((observable, oldValue, newValue) -> adjustBrightness(newValue.doubleValue()));
         LabelM.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if(autoResCheck.isSelected()) {
                 if (!newValue) { // Перевіряємо, чи втратила елемент фокус
@@ -152,6 +197,12 @@ public class HelloController {
 
     }
 
+    @FXML
+    private void onFRemuve (ActionEvent event) throws IOException{
+        imageView.setImage(resetImage);
+        sliderContrast.setValue(1);
+        sliderBrightness.setValue(0);
+    }
     private void onApdateRess(int newValue) throws IOException {
         int oldValue = newGweight;
         int oldN = Integer.parseInt(LabelN.getText());
@@ -248,6 +299,7 @@ public class HelloController {
     @FXML
     private void onSynk(ActionEvent event){
         Image m = imageView.getImage();
+        resetImage = m;
         startImage.setImage(m);
     }
 
@@ -304,6 +356,7 @@ public class HelloController {
 
         Image imge123 = ImageStanok.getImage();
         BufferedImage img123 = SwingFXUtils.fromFXImage(imge123,null);
+        img123 = Converter.convertTo16Bit(img123);
         PhotoEdit.saveImage(img123,saveStanokVision);//
 
         BufferedImage img3 = Vizual;
@@ -1094,7 +1147,7 @@ public class HelloController {
 
                     // Display the image in the ImageView
                     imageView.setImage(new Image(file.toURI().toString()));
-
+                    resetImage = new Image(file.toURI().toString());
                     // Get and display image dimensions
                     int width = photoLoader.getImageWidth();
                     int height = photoLoader.getImageHeight();
