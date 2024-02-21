@@ -16,7 +16,7 @@
     <HBox id="Buttons" spacing="5">
         <Button fx:id="Load" text="Оберіть фото" onAction="#handleButtonClick" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
         <Button fx:id="Synk" text="Синхронізувати фото" onAction="#onSynk" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
-        <Button fx:id="RemeuveAll" text="повернути" onAction="#onRemeuveAll" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
+        <Button fx:id="RemeuveAll" text="Скинути все" onAction="#onRemeuveAll" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
         <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
         <Button fx:id="Save" text="Зберегти" onAction="#onSaveClick" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
         <Button fx:id="setting" text="Показати/Приховати параметри" onAction="#onSettingClick" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
@@ -70,7 +70,7 @@
             <Slider fx:id="sliderContrast" min="0" max="2" value="1" majorTickUnit="0.01" showTickMarks="true"/>
             <Label fx:id="Brightness" text="Яскравість"/>
             <Slider fx:id="sliderBrightness" min="-0.7" max="0.7" value="0" majorTickUnit="0.01" showTickMarks="true"/>
-            <Button fx:id="filtersRemuve" text="Збросити налаштування" onAction="#onFRemuve"/>
+            <Button fx:id="filtersRemuve" text="Збросити яскравість та контраст" onAction="#onFRemuve"/>
         </VBox>
         <VBox>
             <ImageView fx:id="startImage"/>

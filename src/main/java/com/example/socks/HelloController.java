@@ -77,6 +77,7 @@ public class HelloController {
     @FXML
     private Slider sliderBrightness;
     private Image resetImage;
+    private Image fullResetImage;
 
     private void adjustBrightness(double value) {
         if (resetImage != null) {
@@ -159,11 +160,17 @@ public class HelloController {
     }
     @FXML
     private void initialize() {
-
         sliderContrast.valueProperty().addListener((observable, oldValue, newValue) -> {
             updateContrast(newValue.doubleValue());
         });
+        sliderContrast.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            saveAfterchange();
+        });
         sliderBrightness.valueProperty().addListener((observable, oldValue, newValue) -> adjustBrightness(newValue.doubleValue()));
+        sliderBrightness.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            saveAfterchange();
+        });
+
         LabelM.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if(autoResCheck.isSelected()) {
                 if (!newValue) { // Перевіряємо, чи втратила елемент фокус
@@ -198,11 +205,15 @@ public class HelloController {
 
     }
 
+    private void saveAfterchange(){
+       resetImage = imageView.getImage();
+    }
+
     @FXML
     private void onFRemuve (ActionEvent event) throws IOException{
-        imageView.setImage(resetImage);
         sliderContrast.setValue(1);
         sliderBrightness.setValue(0);
+        imageView.setImage(fullResetImage);
     }
     private void onApdateRess(int newValue) throws IOException {
         int oldValue = newGweight;
@@ -300,7 +311,7 @@ public class HelloController {
     @FXML
     private void onSynk(ActionEvent event){
         Image m = imageView.getImage();
-        resetImage = m;
+        fullResetImage = m;
         startImage.setImage(m);
     }
 
@@ -1148,6 +1159,7 @@ public class HelloController {
 
                     // Display the image in the ImageView
                     imageView.setImage(new Image(file.toURI().toString()));
+                    fullResetImage = new Image(file.toURI().toString());
                     resetImage = new Image(file.toURI().toString());
                     // Get and display image dimensions
                     int width = photoLoader.getImageWidth();
