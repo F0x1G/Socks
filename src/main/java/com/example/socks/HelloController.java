@@ -85,10 +85,11 @@ public class HelloController {
         }
     }
 
-    private Image applyBrightness(Image originalImage, double value) {
-        javafx.scene.image.PixelReader pixelReader = originalImage.getPixelReader();
-        int width = (int) originalImage.getWidth();
-        int height = (int) originalImage.getHeight();
+
+    private Image applyBrightness(Image imageView, double value) {
+        javafx.scene.image.PixelReader pixelReader = imageView.getPixelReader();
+        int width = (int) imageView.getWidth();
+        int height = (int) imageView.getHeight();
         javafx.scene.image.WritableImage writableImage = new javafx.scene.image.WritableImage(width, height);
         javafx.scene.image.PixelWriter pixelWriter = writableImage.getPixelWriter();
         for (int y = 0; y < height; y++) {

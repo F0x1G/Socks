@@ -66,9 +66,11 @@
     </HBox>
     <HBox id="images" spacing="5" alignment="CENTER" style="-fx-translate-y: 45">
         <VBox>
+            <Label fx:id="Contrast" text="Контраст"/>
             <Slider fx:id="sliderContrast" min="0.8" max="1.2" value="1" majorTickUnit="0.01" showTickMarks="true"/>
+            <Label fx:id="Brightness" text="Яскравість"/>
             <Slider fx:id="sliderBrightness" min="-0.05" max="0.05" value="0" majorTickUnit="0.005" showTickMarks="true"/>
-            <Button fx:id="filtersRemuve" text="повернути розміри" onAction="#onFRemuve"/>
+            <Button fx:id="filtersRemuve" text="Збросити налаштування" onAction="#onFRemuve"/>
         </VBox>
         <VBox>
             <ImageView fx:id="startImage"/>
