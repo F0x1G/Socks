@@ -79,8 +79,8 @@ public class HelloController {
     private Image resetImage;
 
     private void adjustBrightness(double value) {
-        if (imageView.getImage() != null) {
-            Image image = applyBrightness(imageView.getImage(), value);
+        if (resetImage != null) {
+            Image image = applyBrightness(resetImage, value);
             imageView.setImage(image);
         }
     }
@@ -113,8 +113,8 @@ public class HelloController {
     }
 
     private void updateContrast(double contrastValue) {
-        if (imageView.getImage() != null) {
-            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(imageView.getImage(), null);
+        if (resetImage != null) {
+            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(resetImage, null);
             applyContrast(bufferedImage, contrastValue);
             Image updatedImage = SwingFXUtils.toFXImage(bufferedImage, null);
             imageView.setImage(updatedImage);
