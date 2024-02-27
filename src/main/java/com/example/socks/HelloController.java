@@ -157,6 +157,8 @@ public class HelloController {
        LabelM.setText("");
        LabelN.setText("");
        RightPanel.setVisible(false);
+        EditBufer = null;
+        Vizual = null;
     }
     @FXML
     private void initialize() {
@@ -1163,8 +1165,6 @@ public class HelloController {
         LabelM.setText(String.valueOf(width));
         LabelN.setText(String.valueOf(height));
         newGweight=width;
-        EditBufer = null;
-        Vizual = null;
     }
     public interface Callback<T> {
             void call (T result) throws IOException;
