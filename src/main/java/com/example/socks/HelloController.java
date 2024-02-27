@@ -331,7 +331,6 @@ public class HelloController {
 
         photo phot1 = Stanok.trueStanock(phot, rejim);
         setcolorSheme(phot1);
-        image2 = phot1.toBufferedImage();
 
         BufferedImage img3 = Converter.PhotoDlaZak(image2);
         int m = (int) (img3.getHeight()/2.5);
