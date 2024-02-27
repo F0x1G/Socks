@@ -317,27 +317,32 @@ public class HelloController {
 
     @FXML
     private void onRemeuveVizual(ActionEvent event) throws IOException {
-        Image imge1 = imageView.getImage();
-        BufferedImage image2 = SwingFXUtils.fromFXImage(imge1,null);
-        photo phot = photo.fromBufferedImage(image2);
+        try {
+            Image imge1 = imageView.getImage();
+            BufferedImage image2 = SwingFXUtils.fromFXImage(imge1, null);
+            photo phot = photo.fromBufferedImage(image2);
 
-        int rejim = 1;
-        String select = (String) comboBox.getValue();
-        if(Objects.equals(select, "без C1")){
-            rejim =2;
-        } else if (Objects.equals(select, "без C1 і C2")) {
-            rejim =3;
+            int rejim = 1;
+            String select = (String) comboBox.getValue();
+            if (Objects.equals(select, "без C1")) {
+                rejim = 2;
+            } else if (Objects.equals(select, "без C1 і C2")) {
+                rejim = 3;
+            }
+
+            photo phot1 = Stanok.trueStanock(phot, rejim);
+            setcolorSheme(phot1);
+
+            BufferedImage img3 = Converter.PhotoDlaZak(image2);
+            int m = (int) (img3.getHeight() / 2.5);
+            int n = (int) (img3.getWidth() / 2.5);
+            img3 = PhotoEdit.resize(img3, n, m);
+            Image newImage = SwingFXUtils.toFXImage(img3, null);
+            Zakathchick.setImage(newImage);
+            EditBufer = null;
+        }catch (Exception e){
+
         }
-
-        photo phot1 = Stanok.trueStanock(phot, rejim);
-        setcolorSheme(phot1);
-
-        BufferedImage img3 = Converter.PhotoDlaZak(image2);
-        int m = (int) (img3.getHeight()/2.5);
-        int n = (int) (img3.getWidth()/2.5);
-        img3 = PhotoEdit.resize(img3,n,m );
-        Image newImage = SwingFXUtils.toFXImage(img3,null);
-        Zakathchick.setImage(newImage);
     }
 
     @FXML
