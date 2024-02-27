@@ -414,8 +414,13 @@ public class HelloController {
         Color[][] color1 =  AbstraktSelection.StanokSheme();
         Image imge = ImageStanok.getImage();
         BufferedImage image1 = SwingFXUtils.fromFXImage(imge,null);
-        Image imge1 = imageView.getImage();
-        BufferedImage image2 = SwingFXUtils.fromFXImage(imge1,null);
+            BufferedImage image2;
+            if(EditBufer==null){
+                Image imge1 = imageView.getImage();
+                image2 = SwingFXUtils.fromFXImage(imge1,null);
+            }else {
+                image2 = EditBufer;
+            }
 
         BufferedImage finish = AdvancedReplaceColor(image1,image2,color1[0][0],color2);
 
@@ -426,8 +431,8 @@ public class HelloController {
         } catch (Exception e) {Oc1.setImage(null);}
 
         //Image newImage = SwingFXUtils.toFXImage(finish,null);
-        //imageView.setImage(newImage);
-
+        //imageView.setImage(newImage)
+            EditBufer = finish;
         BufferedImage img3 = Converter.PhotoDlaZak(finish);
 
         int m = (int) (img3.getHeight()/2.5);
@@ -803,8 +808,8 @@ public class HelloController {
             try {
                 BufferedImage BufOc1 = createImage(color2);
                 Image ImgOc1 = SwingFXUtils.toFXImage(BufOc1,null);
-                Tc3.setImage(ImgOc1);
-            } catch (Exception e) {Tc3.setImage(null);}
+                Tc4.setImage(ImgOc1);
+            } catch (Exception e) {Tc4.setImage(null);}
             EditBufer = finish;
             //Image newImage = SwingFXUtils.toFXImage(finish,null);
             //imageView.setImage(newImage);
