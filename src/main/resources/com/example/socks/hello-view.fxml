@@ -14,14 +14,14 @@
 <?import javafx.scene.control.Slider?>
 <VBox id="main" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.socks.HelloController" spacing="5" stylesheets="@Style.css">
     <HBox id="Buttons" spacing="5">
-        <Button fx:id="Load" text="Оберіть фото" onAction="#handleButtonClick" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
-        <Button fx:id="Synk" text="Синхронізувати фото" onAction="#onSynk" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
-        <Button fx:id="RemeuveAll" text="Скинути все" onAction="#onRemeuveAll" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
-        <Button fx:id="RemeuveVizual" text="Скинути зміни кольорів" onAction="#onRemeuveVizual" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
-        <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
-        <Button fx:id="Save" text="Зберегти" onAction="#onSaveClick" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
-        <Button fx:id="setting" text="Показати/Приховати параметри" onAction="#onSettingClick" style="-fx-translate-x: 10; -fx-translate-y: 15;"/>
-        <VBox fx:id="Settings" visible="false" style="-fx-translate-y: 20;">
+        <Button fx:id="Load" text="Оберіть фото" onAction="#handleButtonClick" style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
+        <Button fx:id="Synk" text="Синхронізувати фото" onAction="#onSynk" style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
+        <Button fx:id="RemeuveAll" text="Скинути все" onAction="#onRemeuveAll" style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
+        <Button fx:id="RemeuveVizual" text="Скинути зміни кольорів" onAction="#onRemeuveVizual" style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
+        <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick" style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
+        <Button fx:id="Save" text="Зберегти" onAction="#onSaveClick" style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
+        <Button fx:id="setting" text="Показати/Приховати параметри" onAction="#onSettingClick" style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
+        <VBox fx:id="Settings" visible="false" style="-fx-translate-y: 15;">
             <HBox>
                 <TextField fx:id="Q" text="27" style="-fx-translate-x: 6;"/>
                 <TextField fx:id="T" text="0.2" style="-fx-translate-x: 30;"/>
@@ -35,6 +35,11 @@
                 <Label fx:id="Blabel" text="Нач. спрощення глоб. підбору" style="-fx-translate-x: 40;"/>
             </HBox>
         </VBox>
+    </HBox>
+    <HBox style="-fx-translate-y: 5; -fx-translate-x: 10;">
+        <CheckBox fx:id="saveImageCheckBox" text="Зберегти фото Out" />
+        <CheckBox fx:id="saveStanokCheckBox" text="Зберегти фото Stanok" />
+        <CheckBox fx:id="saveVizualCheckBox" text="Зберегти фото Visual" />
     </HBox>
     <Label fx:id="fileNameLabel" text=""/>
     <HBox id="resize" spacing="10">

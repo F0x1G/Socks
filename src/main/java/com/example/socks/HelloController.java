@@ -78,6 +78,12 @@ public class HelloController {
     private Slider sliderBrightness;
     private Image resetImage;
     private Image fullResetImage;
+    @FXML
+    private CheckBox saveImageCheckBox;
+    @FXML
+    private CheckBox saveStanokCheckBox;
+    @FXML
+    private CheckBox saveVizualCheckBox;
 
     private void adjustBrightness(double value) {
         if (resetImage != null) {
@@ -365,47 +371,48 @@ public class HelloController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(selectedDirectory);
 
-        // Save image.bmp
+        if (saveImageCheckBox.isSelected()) {
+            fileChooser.setInitialFileName("out.bmp");
+            File outputImage1File = fileChooser.showSaveDialog(stage);
+            if (outputImage1File == null) {
+                System.out.println("Out file not saved.");
+                return;
+            }
+            String outputImagePath1 = outputImage1File.getAbsolutePath();
 
-        // Save out.bmp
-        fileChooser.setInitialFileName("out.bmp");
-        File outputImage1File = fileChooser.showSaveDialog(stage);
-        if (outputImage1File == null) {
-            System.out.println("Out file not saved.");
-            return;
+            Image imge456 = imageView.getImage();
+            BufferedImage img2 = SwingFXUtils.fromFXImage(imge456, null);
+            img2 = Converter.convertTo16Bit(img2);
+            PhotoEdit.saveImage(img2, outputImagePath1);
         }
-        String outputImagePath1 = outputImage1File.getAbsolutePath();
 
-        // Save StanokOut.bmp
-        fileChooser.setInitialFileName("Stanok.bmp");
-        File saveStanokVisionFile = fileChooser.showSaveDialog(stage);
-        if (saveStanokVisionFile == null) {
-            System.out.println("StanokOut file not saved.");
-            return;
+        if (saveStanokCheckBox.isSelected()) {
+            fileChooser.setInitialFileName("Stanok.bmp");
+            File saveStanokVisionFile = fileChooser.showSaveDialog(stage);
+            if (saveStanokVisionFile == null) {
+                System.out.println("StanokOut file not saved.");
+                return;
+            }
+            String saveStanokVision = saveStanokVisionFile.getAbsolutePath();
+
+            Image imge123 = ImageStanok.getImage();
+            BufferedImage img123 = SwingFXUtils.fromFXImage(imge123, null);
+            img123 = Converter.convertTo16Bit(img123);
+            PhotoEdit.saveImage(img123, saveStanokVision);
         }
-        String saveStanokVision = saveStanokVisionFile.getAbsolutePath();
 
-        // Save ZakajchikcOut.bmp
-        fileChooser.setInitialFileName("Vizual.bmp");
-        File ZakajchikcOutFile = fileChooser.showSaveDialog(stage);
-        if (ZakajchikcOutFile == null) {
-            System.out.println("Vizual file not saved.");
-            return;
+        if (saveVizualCheckBox.isSelected()) {
+            fileChooser.setInitialFileName("Vizual.bmp");
+            File ZakajchikcOutFile = fileChooser.showSaveDialog(stage);
+            if (ZakajchikcOutFile == null) {
+                System.out.println("Vizual file not saved.");
+                return;
+            }
+            String ZakajchikcOut = ZakajchikcOutFile.getAbsolutePath();
+
+            BufferedImage img3 = Vizual;
+            PhotoEdit.saveImage(img3, ZakajchikcOut);
         }
-        String ZakajchikcOut = ZakajchikcOutFile.getAbsolutePath();
-
-        Image imge456 = imageView.getImage();
-        BufferedImage img2 = SwingFXUtils.fromFXImage(imge456,null);
-        img2 = Converter.convertTo16Bit(img2);
-        PhotoEdit.saveImage(img2,outputImagePath1);//
-
-        Image imge123 = ImageStanok.getImage();
-        BufferedImage img123 = SwingFXUtils.fromFXImage(imge123,null);
-        img123 = Converter.convertTo16Bit(img123);
-        PhotoEdit.saveImage(img123,saveStanokVision);//
-
-        BufferedImage img3 = Vizual;
-        PhotoEdit.saveImage(img3,ZakajchikcOut);//
     }
 
     @FXML
