@@ -382,7 +382,7 @@ public class HelloController {
 
             Image imge456 = imageView.getImage();
             BufferedImage img2 = SwingFXUtils.fromFXImage(imge456, null);
-            img2 = Converter.convertTo16Bit(img2);
+            img2 = Convert16bit.Convert(img2);
             PhotoEdit.saveImage(img2, outputImagePath1);
         }
 
