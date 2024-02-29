@@ -397,7 +397,7 @@ public class HelloController {
 
             Image imge123 = ImageStanok.getImage();
             BufferedImage img123 = SwingFXUtils.fromFXImage(imge123, null);
-            img123 = Converter.convertTo16Bit(img123);
+            img123 = Convert16bit.Convert(img123);
             PhotoEdit.saveImage(img123, saveStanokVision);
         }
 
