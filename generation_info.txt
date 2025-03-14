@@ -1,0 +1,7 @@
+Prompt: cat
+Negative prompt: 
+Seed: 2638439518
+Sampler: Euler a
+Steps: 28
+CFG Scale: 8.0
+Size: 524x524
