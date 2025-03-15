@@ -28,6 +28,12 @@ import org.controlsfx.control.ToggleSwitch;
 import javax.swing.*;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import javax.imageio.ImageIO;
+import org.json.JSONObject;
+
 
 public class HelloController {
     private static Color selectedColor;
@@ -115,10 +121,130 @@ public class HelloController {
     private ImageView Iimg;
 
 
-    public void sendMessage(ActionEvent event) {
-        System.out.println("1");
+    private String prompt = ""; // Ви можете додати TextField для prompt, якщо його немає в FXML
+    private String negativePrompt = ""; // Ви можете додати TextField для negativePrompt, якщо його немає в FXML
+
+    private ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private StableDiffusionClient client;
+
+    public void sendMessageToAI(ActionEvent event) {
+        // Відключення кнопки генерації, щоб запобігти багаторазовому натисканню
+        generate.setDisable(true);
+
+        // Асинхронне виконання запиту до API
+        executorService.submit(() -> {
+            try {
+                // Отримання значень з полів введення
+                int stepsValue = Integer.parseInt(steps.getText().trim());
+                double cfgScaleValue = Double.parseDouble(cfg_scale.getText().trim());
+                int widthValue = Integer.parseInt(width.getText().trim());
+                int heightValue = Integer.parseInt(height.getText().trim());
+                String samplerName = sample_name.getText().trim();
+                int batchSizeValue = Integer.parseInt(batch_size.getText().trim());
+                boolean enableHrValue = enable_hr.isSelected();
+                double hrScaleValue = Double.parseDouble(hr_scale.getText().trim());
+                double denoisingStrengthValue = Double.parseDouble(denoising_strength.getText().trim());
+                boolean restoreFacesValue = restore_faces.isSelected();
+                boolean isImg2Img = text2img2img.isSelected(); // Якщо true - img2img, якщо false - text2img
+
+                // Створення об'єкта параметрів
+                StableDiffusionClient.Parameters params = new StableDiffusionClient.Parameters()
+                        .setSteps(stepsValue)
+                        .setCfgScale(cfgScaleValue)
+                        .setWidth(widthValue)
+                        .setHeight(heightValue)
+                        .setSampler(samplerName)
+                        .setBatchSize(batchSizeValue)
+                        .setNegativePrompt(negativePrompt)
+                        .setDenoisingStrength(denoisingStrengthValue);
+
+                // Отримання зображення в залежності від вибраного режиму
+                java.awt.Image resultImage;
+
+                if (!isImg2Img) {
+                    // Генерація зображення з тексту (txt2img)
+                    resultImage = client.generateImage(prompt, params);
+                } else {
+                    // Обробка існуючого зображення зі startImage (img2img)
+                    if (startImage.getImage() == null) {
+                        showAlert("Помилка", "Для режиму img2img потрібно спочатку завантажити вхідне зображення в startImage.");
+                        return;
+                    }
+
+                    // Конвертація з JavaFX Image в java.awt.Image
+                    BufferedImage bufferedImage = SwingFXUtils.fromFXImage(startImage.getImage(), null);
+                    resultImage = client.processImage(bufferedImage, prompt, params);
+                }
+
+                // Конвертація результату в JavaFX Image
+                BufferedImage bufferedResultImage;
+                if (resultImage instanceof BufferedImage) {
+                    bufferedResultImage = (BufferedImage) resultImage;
+                } else {
+                    bufferedResultImage = new BufferedImage(
+                            resultImage.getWidth(null),
+                            resultImage.getHeight(null),
+                            BufferedImage.TYPE_INT_ARGB
+                    );
+                    java.awt.Graphics2D g2d = bufferedResultImage.createGraphics();
+                    g2d.drawImage(resultImage, 0, 0, null);
+                    g2d.dispose();
+                }
+
+                final Image fxImage = SwingFXUtils.toFXImage(bufferedResultImage, null);
+
+                // Оновлення UI в основному потоці JavaFX
+                Platform.runLater(() -> {
+                    // Вивід результату в Iimg
+                    Iimg.setImage(fxImage);
+                    Iimg.setFitWidth(widthValue);
+                    Iimg.setFitHeight(heightValue);
+
+                    // Повторне увімкнення кнопки генерації
+                    generate.setDisable(false);
+                });
+
+                // Збереження параметрів у JSON файл для подальшого використання
+                String jsonFilename = isImg2Img ? "last_img2img_params.json" : "last_txt2img_params.json";
+                client.saveParamsToJsonFile(jsonFilename, prompt, params, isImg2Img);
+
+            } catch (NumberFormatException e) {
+                showAlert("Помилка введення", "Перевірте правильність введених числових даних: " + e.getMessage());
+            } catch (IOException e) {
+                showAlert("Помилка з'єднання", "Неможливо з'єднатися з API Stable Diffusion: " + e.getMessage());
+            } catch (Exception e) {
+                showAlert("Непередбачена помилка", "Виникла помилка при обробці запиту: " + e.getMessage());
+            } finally {
+                // Обов'язково повертаємо кнопку в активний стан
+                Platform.runLater(() -> generate.setDisable(false));
+            }
+        });
     }
-    public void sendMessage1(ActionEvent event) {
+
+    // Допоміжний метод для відображення повідомлень про помилки
+    private void showAlert1(String title, String content) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(title);
+            alert.setHeaderText(null);
+            alert.setContentText(content);
+            alert.showAndWait();
+        });
+    }
+
+    // Допоміжний метод для відображення повідомлень про помилки
+    private void showAlert(String title, String content) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(title);
+            alert.setHeaderText(null);
+            alert.setContentText(content);
+            alert.showAndWait();
+        });
+    }
+
+    public void sendMessageToMain(ActionEvent event) {
+
         System.out.println("1");
     }
 
@@ -205,6 +331,21 @@ public class HelloController {
     }
     @FXML
     private void initialize() {
+
+        // Ініціалізація клієнта Stable Diffusion при завантаженні контролера
+        client = new StableDiffusionClient("http://127.0.0.1:7860", 180000);
+
+        // Встановлення значень за замовчуванням
+        steps.setText("20");
+        cfg_scale.setText("7.0");
+        width.setText("512");
+        height.setText("512");
+        sample_name.setText("Euler a");
+        batch_size.setText("1");
+        batch_count.setText("1");
+        hr_scale.setText("2.0");
+        denoising_strength.setText("0.7");
+
         sliderContrast.valueProperty().addListener((observable, oldValue, newValue) -> {
             updateContrast(newValue.doubleValue());
         });

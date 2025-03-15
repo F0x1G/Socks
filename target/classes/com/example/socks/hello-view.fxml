@@ -102,7 +102,7 @@
                             <Label text="img2img" style="-fx-translate-x: 180; -fx-translate-y: -30"/>
                         </VBox>
                         <VBox spacing="5">
-                            <Button fx:id="generate" text="Згенерувати" onAction="#sendMessage"/>
+                            <Button fx:id="generate" text="Згенерувати" onAction="#sendMessageToAI"/>
                             <TextField fx:id="steps"/>
                             <TextField fx:id="cfg_scale"/>
                             <TextField fx:id="width"/>
@@ -120,7 +120,7 @@
                 </VBox>
                 <ImageView fx:id="Iimg"/>
             </HBox>
-            <Button fx:id="send" text="Відправити" onAction="#sendMessage1" style="-fx-translate-y: 30"/>
+            <Button fx:id="send" text="Відправити" onAction="#sendMessageToMain" style="-fx-translate-y: 30"/>
         </VBox>
         <VBox>
             <Label fx:id="Contrast" text="Контраст"/>
