@@ -12,15 +12,23 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Slider?>
-<VBox id="main" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.socks.HelloController" spacing="5" stylesheets="@Style.css">
+<?import org.controlsfx.control.ToggleSwitch?>
+<VBox id="main" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.socks.HelloController" spacing="5"
+      stylesheets="@Style.css">
     <HBox id="Buttons" spacing="5">
-        <Button fx:id="Load" text="Оберіть фото" onAction="#handleButtonClick" style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
-        <Button fx:id="Synk" text="Синхронізувати фото" onAction="#onSynk" style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
-        <Button fx:id="RemeuveAll" text="Скинути все" onAction="#onRemeuveAll" style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
-        <Button fx:id="RemeuveVizual" text="Скинути зміни кольорів" onAction="#onRemeuveVizual" style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
-        <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick" style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
+        <Button fx:id="Load" text="Оберіть фото" onAction="#handleButtonClick"
+                style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
+        <Button fx:id="Synk" text="Синхронізувати фото" onAction="#onSynk"
+                style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
+        <Button fx:id="RemeuveAll" text="Скинути все" onAction="#onRemeuveAll"
+                style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
+        <Button fx:id="RemeuveVizual" text="Скинути зміни кольорів" onAction="#onRemeuveVizual"
+                style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
+        <Button fx:id="Start" text="Почати підбір" onAction="#onStartClick"
+                style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
         <Button fx:id="Save" text="Зберегти" onAction="#onSaveClick" style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
-        <Button fx:id="setting" text="Показати/Приховати параметри" onAction="#onSettingClick" style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
+        <Button fx:id="setting" text="Показати/Приховати параметри" onAction="#onSettingClick"
+                style="-fx-translate-x: 10; -fx-translate-y: 10;"/>
         <VBox fx:id="Settings" visible="false" style="-fx-translate-y: 15;">
             <HBox>
                 <TextField fx:id="Q" text="27" style="-fx-translate-x: 6;"/>
@@ -37,9 +45,9 @@
         </VBox>
     </HBox>
     <HBox style="-fx-translate-y: 5; -fx-translate-x: 10;">
-        <CheckBox fx:id="saveImageCheckBox" text="Зберегти фото Out" />
-        <CheckBox fx:id="saveStanokCheckBox" text="Зберегти фото Stanok" />
-        <CheckBox fx:id="saveVizualCheckBox" text="Зберегти фото Visual" />
+        <CheckBox fx:id="saveImageCheckBox" text="Зберегти фото Out"/>
+        <CheckBox fx:id="saveStanokCheckBox" text="Зберегти фото Stanok"/>
+        <CheckBox fx:id="saveVizualCheckBox" text="Зберегти фото Visual"/>
     </HBox>
     <Label fx:id="fileNameLabel" text=""/>
     <HBox id="resize" spacing="10">
@@ -71,6 +79,49 @@
         <CheckBox fx:id="autoResCheck" text=" - включити автомтичну зміну пропорцій"/>
     </HBox>
     <HBox id="images" spacing="5" alignment="CENTER" style="-fx-translate-y: 45">
+        <VBox spacing="5">
+            <HBox spacing="5">
+                <TextField fx:id=""/>
+            </HBox>
+            <HBox spacing="5">
+                <VBox spacing="5">
+                    <HBox spacing="5">
+                        <VBox spacing="13" style="-fx-translate-y: 30">
+                            <Label text="steps:"/>
+                            <Label text="cfg_scale:"/>
+                            <Label text="width:"/>
+                            <Label text="height:"/>
+                            <Label text="sample_name:"/>
+                            <Label text="batch_size:"/>
+                            <Label text="batch_count:"/>
+                            <Label text="enable_hr:"/>
+                            <Label text="hr_scale:"/>
+                            <Label text="denoising_strength:"/>
+                            <Label text="restore_faces:"/>
+                            <Label text="text2img"/>
+                            <Label text="img2img" style="-fx-translate-x: 180; -fx-translate-y: -30"/>
+                        </VBox>
+                        <VBox spacing="5">
+                            <Button fx:id="generate" text="Згенерувати" onAction="#sendMessage"/>
+                            <TextField fx:id="steps"/>
+                            <TextField fx:id="cfg_scale"/>
+                            <TextField fx:id="width"/>
+                            <TextField fx:id="height"/>
+                            <TextField fx:id="sample_name"/>
+                            <TextField fx:id="batch_size"/>
+                            <TextField fx:id="batch_count"/>
+                            <CheckBox fx:id="enable_hr"/>
+                            <TextField fx:id="hr_scale"/>
+                            <TextField fx:id="denoising_strength"/>
+                            <CheckBox fx:id="restore_faces" style="-fx-translate-y: 10"/>
+                            <ToggleSwitch fx:id="text2img2img" style="-fx-translate-x: -20; -fx-translate-y: 15"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+                <ImageView fx:id="Iimg"/>
+            </HBox>
+            <Button fx:id="send" text="Відправити" onAction="#sendMessage1" style="-fx-translate-y: 30"/>
+        </VBox>
         <VBox>
             <Label fx:id="Contrast" text="Контраст"/>
             <Slider fx:id="sliderContrast" min="0" max="2" value="1" majorTickUnit="0.01" showTickMarks="true"/>
@@ -82,11 +133,11 @@
             <ImageView fx:id="startImage"/>
         </VBox>
         <VBox id="stanok" spacing="5" alignment="CENTER_LEFT" style="-fx-translate-x: 10;">
-        <ImageView fx:id="imageView"/>
-        <ImageView fx:id="ImageStanok"/>
+            <ImageView fx:id="imageView"/>
+            <ImageView fx:id="ImageStanok"/>
         </VBox>
         <HBox id="zamovnyk" alignment="CENTER_RIGHT" style="-fx-translate-x: 10;">
-        <ImageView fx:id="Zakathchick"/>
+            <ImageView fx:id="Zakathchick"/>
         </HBox>
         <VBox id="RightPanel" visible="false" fx:id="RightPanel">
             <HBox>

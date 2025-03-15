@@ -1,12 +1,12 @@
 package com.example.socks;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -23,9 +23,8 @@ import java.util.List;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import javafx.util.Callback;
+import org.controlsfx.control.ToggleSwitch;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.io.IOException;
 import java.util.Objects;
@@ -84,6 +83,44 @@ public class HelloController {
     private CheckBox saveStanokCheckBox;
     @FXML
     private CheckBox saveVizualCheckBox;
+    @FXML
+    private Button generate;
+    @FXML
+    private Button send;
+    @FXML
+    private TextField steps;
+    @FXML
+    private TextField cfg_scale;
+    @FXML
+    private TextField width;
+    @FXML
+    private TextField height;
+    @FXML
+    private TextField sample_name;
+    @FXML
+    private TextField batch_size;
+    @FXML
+    private TextField batch_count;
+    @FXML
+    private CheckBox enable_hr;
+    @FXML
+    private TextField hr_scale;
+    @FXML
+    private TextField denoising_strength;
+    @FXML
+    private CheckBox restore_faces;
+    @FXML
+    private ToggleSwitch text2img2img;
+    @FXML
+    private ImageView Iimg;
+
+
+    public void sendMessage(ActionEvent event) {
+        System.out.println("1");
+    }
+    public void sendMessage1(ActionEvent event) {
+        System.out.println("1");
+    }
 
     private void adjustBrightness(double value) {
         if (resetImage != null) {
@@ -1173,6 +1210,7 @@ public class HelloController {
         LabelN.setText(String.valueOf(height));
         newGweight=width;
     }
+
     public interface Callback<T> {
             void call (T result) throws IOException;
     }
