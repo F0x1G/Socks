@@ -42,6 +42,10 @@ public class HelloController {
     private static int newGweight;
     private static int Gweight;
     @FXML
+    public TextField Aipromt;
+    @FXML
+    public  TextField negative_prompt;
+    @FXML
     private Button Load;
     @FXML
     private Label fileNameLabel;
@@ -135,6 +139,7 @@ public class HelloController {
         executorService.submit(() -> {
             try {
                 // Отримання значень з полів введення
+                String prompt = Aipromt.getText().trim(); // Виправлено: використовуємо getText() замість toString()
                 int stepsValue = Integer.parseInt(steps.getText().trim());
                 double cfgScaleValue = Double.parseDouble(cfg_scale.getText().trim());
                 int widthValue = Integer.parseInt(width.getText().trim());
@@ -147,8 +152,12 @@ public class HelloController {
                 boolean restoreFacesValue = restore_faces.isSelected();
                 boolean isImg2Img = text2img2img.isSelected(); // Якщо true - img2img, якщо false - text2img
 
-                // Створення об'єкта параметрів
+                // Отримання негативного промту
+                String negativePrompt = negative_prompt.getText().trim(); // Припускаю, що у вас є таке поле
+
+                // Створення об'єкта параметрів з правильними значеннями
                 StableDiffusionClient.Parameters params = new StableDiffusionClient.Parameters()
+                        .setPrompt(prompt) // Встановлюємо промт
                         .setSteps(stepsValue)
                         .setCfgScale(cfgScaleValue)
                         .setWidth(widthValue)
@@ -244,8 +253,8 @@ public class HelloController {
     }
 
     public void sendMessageToMain(ActionEvent event) {
-
-        System.out.println("1");
+        Image img = Iimg.getImage();
+        startImage.setImage(img);
     }
 
     private void adjustBrightness(double value) {
@@ -337,9 +346,9 @@ public class HelloController {
 
         // Встановлення значень за замовчуванням
         steps.setText("20");
-        cfg_scale.setText("7.0");
-        width.setText("512");
-        height.setText("512");
+        cfg_scale.setText("8.0");
+        width.setText("200");
+        height.setText("300");
         sample_name.setText("Euler a");
         batch_size.setText("1");
         batch_count.setText("1");

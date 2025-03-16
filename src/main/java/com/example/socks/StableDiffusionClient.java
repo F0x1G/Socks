@@ -192,6 +192,7 @@ public class StableDiffusionClient {
      * Внутрішній клас для параметрів генерації зображень в Stable Diffusion
      */
     public static class Parameters {
+        private String prompt = ""; // Доданий параметр prompt
         private String negativePrompt = "";
         private int steps = 20;
         private int width = 512;
@@ -203,6 +204,15 @@ public class StableDiffusionClient {
         private double denoisingStrength = 0.75; // Тільки для img2img
 
         // Гетери та сетери
+        public String getPrompt() {
+            return prompt;
+        }
+
+        public Parameters setPrompt(String prompt) {
+            this.prompt = prompt;
+            return this;
+        }
+
         public String getNegativePrompt() {
             return negativePrompt;
         }
@@ -290,9 +300,13 @@ public class StableDiffusionClient {
          * @return JSONObject з параметрами запиту
          */
         public JSONObject toTextToImageJson(String prompt) {
+            // Якщо prompt переданий як параметр, використовуємо його
+            // Якщо ні, використовуємо prompt з властивості класу
+            String finalPrompt = prompt != null && !prompt.isEmpty() ? prompt : this.prompt;
+
             JSONObject json = new JSONObject();
 
-            json.put("prompt", prompt);
+            json.put("prompt", finalPrompt);
             json.put("negative_prompt", this.negativePrompt);
             json.put("steps", this.steps);
             json.put("width", this.width);

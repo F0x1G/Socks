@@ -80,9 +80,10 @@
     </HBox>
     <HBox id="images" spacing="5" alignment="CENTER" style="-fx-translate-y: 45">
         <VBox spacing="5">
-            <HBox spacing="5">
-                <TextField fx:id=""/>
-            </HBox>
+            <VBox spacing="5">
+                <TextField fx:id="Aipromt"/>
+                <TextField fx:id="negative_prompt"/>
+            </VBox>
             <HBox spacing="5">
                 <VBox spacing="5">
                     <HBox spacing="5">
@@ -120,7 +121,7 @@
                 </VBox>
                 <ImageView fx:id="Iimg"/>
             </HBox>
-            <Button fx:id="send" text="Відправити" onAction="#sendMessageToMain" style="-fx-translate-y: 30"/>
+            <Button fx:id="send" text="Перейти до редагування" onAction="#sendMessageToMain" style="-fx-translate-y: 30"/>
         </VBox>
         <VBox>
             <Label fx:id="Contrast" text="Контраст"/>

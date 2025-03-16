@@ -3,11 +3,11 @@
   "seed": -1,
   "negative_prompt": "",
   "sampler_name": "Euler a",
-  "width": 300,
-  "prompt": "",
-  "steps": 40,
+  "width": 200,
+  "prompt": "cat",
+  "steps": 20,
   "height": 300,
   "cfg_scale": 8,
   "generation_type": "txt2img",
-  "timestamp": 1742047696423
+  "timestamp": 1742131469473
 }
