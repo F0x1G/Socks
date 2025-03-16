@@ -80,10 +80,16 @@
     </HBox>
     <HBox id="images" spacing="5" alignment="CENTER" style="-fx-translate-y: 45">
         <VBox spacing="5">
-            <VBox spacing="5">
-                <TextField fx:id="Aipromt"/>
-                <TextField fx:id="negative_prompt"/>
-            </VBox>
+            <HBox>
+                <VBox spacing="25">
+                    <Label text="Prompt"/>
+                    <Label text="Negative Prompt" style="-fx-translate-x: -20"/>
+                </VBox>
+                <VBox spacing="10">
+                    <TextField fx:id="Aipromt"/>
+                    <TextField fx:id="negative_prompt"/>
+                </VBox>
+            </HBox>
             <HBox spacing="5">
                 <VBox spacing="5">
                     <HBox spacing="5">
